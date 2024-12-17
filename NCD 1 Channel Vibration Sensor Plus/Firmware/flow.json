@@ -1116,7 +1116,7 @@
         "certname": "",
         "keyname": "",
         "caname": "ISRG_Root_X1.der",
-        "servername": "fra.blynk-qa.com",
+        "servername": "blynk.cloud",
         "verifyservercert": false,
         "alpnprotocol": ""
     }
