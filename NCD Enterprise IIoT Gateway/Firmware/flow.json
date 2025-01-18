@@ -548,7 +548,7 @@
         "certname": "",
         "keyname": "",
         "caname": "ISRG_Root_X1.der",
-        "servername": "whiting-turner.blynk.cc",
+        "servername": "blynk.cloud",
         "verifyservercert": false,
         "alpnprotocol": ""
     }
