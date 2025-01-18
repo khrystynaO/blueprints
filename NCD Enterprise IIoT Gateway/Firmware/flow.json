@@ -1,15 +1,15 @@
 [
     {
-        "id": "c12363994e8480aa",
+        "id": "817db795d5709bb9",
         "type": "tab",
         "label": "NCD Enterprise IIoT Gateway",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "5657066a078f398b",
+        "id": "4b6e83c530ba037d",
         "type": "inject",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "Every 5 minutes",
         "props": [
             {
@@ -24,42 +24,20 @@
         "payload": "",
         "payloadType": "str",
         "x": 230,
-        "y": 300,
+        "y": 180,
         "wires": [
             [
-                "09c88952b9816b0d"
+                "349eb0cf9562c50b"
             ]
         ]
     },
     {
-        "id": "09c88952b9816b0d",
-        "type": "exec",
-        "z": "c12363994e8480aa",
-        "command": "sh -c",
-        "addpay": "payload",
-        "append": "uptime && ip route | grep default | awk '{print \"inf: \"$5}' && free -m | grep Mem && df -h | grep '/$' && uname -a && cat /sys/class/thermal/thermal_zone0/temp && top -bn1 | grep '%Cpu(s)' && ip -s link show dev $(ip route | grep default | awk '{print $5}') && ip -4 addr show dev $(ip route | grep default | awk '{print $5}') | grep 'inet ' || echo 'IP not found' && mmcli -m 0 | grep -A 5 'SIM' || echo 'SIM1 not detected' && mmcli -m 1 | grep -A 5 'SIM' || echo 'SIM2 not detected'",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Get System Data",
-        "x": 230,
-        "y": 380,
-        "wires": [
-            [
-                "8803d6cfcb141870"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "8803d6cfcb141870",
+        "id": "b71c131412659f44",
         "type": "function",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "Format Data",
-        "func": "let uptime = \"Unknown\";\nlet ip = \"Unknown\";\nlet ramUsage = 0;\nlet ramStat = \"Unknown\";\nlet storage = 0;\nlet storageStat = \"Unknown\";\nlet systemInfo = \"Unknown\";\nlet cpuTemp = \"Unknown\";\nlet cpuUsage = \"Unknown\";\nlet activeLink = \"Unknown\";\nlet networkStatus = \"Unknown\";\nlet gateway_state = \"OFF\";\nlet sim1StatusLed = 0;\nlet sim2StatusLed = 0;\nlet sim1Status = \"Unknown\";\nlet sim2Status = \"Unknown\";\nlet cellularStatus = \"Unknown\";\n\n// Split the payload by newline\nlet data = msg.payload.split('\\n');\n\n// Debugging output\nnode.warn(`Data lines: ${data}`);\n\n// Uptime\nlet uptimeMatch = data.find(line => line.includes('up'));\nif (uptimeMatch) {\n    let uptimeResult = uptimeMatch.match(/up\\s+(.*),\\s+\\d+\\s+users?/);\n    if (uptimeResult) {\n        uptime = uptimeResult[1];\n    }\n}\n\n// RAM Usage\nlet ramLine = data.find(line => line.includes('Mem:'));\nif (ramLine) {\n    let ram = ramLine.match(/\\d+/g);\n    if (ram) {\n        ramUsage = Math.round((parseInt(ram[2]) / parseInt(ram[0])) * 100);\n        ramStat = `${ram[2]}M/${ram[0]}M`;\n    }\n}\n\n// Storage Usage\nlet storageLine = data.find(line => line.includes('overlayfs:overlay'));\nif (storageLine) {\n    let storageResult = storageLine.match(/(\\d+)%/);\n    if (storageResult) {\n        storage = storageResult[1];\n    }\n    let storageStatResult = storageLine.match(/(\\d+G)\\s+(\\d+M)\\s+(\\d+G)\\s+(\\d+%)/);\n    if (storageStatResult) {\n        storageStat = `${storageStatResult[2]}/${storageStatResult[1]}`;\n    }\n}\n\n// System Info\nlet systemInfoLine = data.find(line => line.includes('Linux'));\nif (systemInfoLine) {\n    systemInfo = systemInfoLine;\n}\n\n// CPU Temperature\nlet cpuTempLine = data.find(line => !isNaN(line.trim()));\nif (cpuTempLine) {\n    cpuTemp = (parseInt(cpuTempLine.trim()) / 1000).toFixed(1);\n}\n\n// CPU Usage\nlet cpuUsageLine = data.find(line => line.includes('%Cpu(s)'));\nif (cpuUsageLine) {\n    let cpuUsageResult = cpuUsageLine.match(/(\\d+\\.\\d+)\\s*us,/);\n    if (cpuUsageResult) {\n        cpuUsage = parseFloat(cpuUsageResult[1]).toFixed(1);\n    }\n}\n\n// Find the active Ethernet interface\nlet interfaceLine = data.find(line => line.includes('inf:'));\nif (interfaceLine) {\n    activeLink = interfaceLine.split('inf:')[1].trim();\n}\n\n// IP Address\nif (activeLink !== \"Unknown\") {\n    let ipLine = data.find(line => line.includes(`inet`) && !line.includes(`inet6`) && line.includes(`${activeLink}`));\n    if (ipLine) {\n        let ipMatch = ipLine.match(/inet\\s+(\\d+\\.\\d+\\.\\d+\\.\\d+)/);\n        if (ipMatch) {\n            ip = ipMatch[1];\n        }\n    }\n}\n\n// Network Status\nif (activeLink !== \"Unknown\") {\n    // Find the block for the active link\n    let linkBlockIndex = data.findIndex(line => line.includes(`${activeLink}:`));\n    if (linkBlockIndex !== -1) {\n        // Parse network statistics from the correct lines\n        let rxPacketsLine = data[linkBlockIndex + 3].trim();\n        let txPacketsLine = data[linkBlockIndex + 5].trim();\n\n        // Match numbers from the lines\n        let rxPacketsMatch = rxPacketsLine.match(/(\\d+)/g);\n        let txPacketsMatch = txPacketsLine.match(/(\\d+)/g);\n\n        if (rxPacketsMatch && txPacketsMatch) {\n            let rxPackets = rxPacketsMatch[0];\n            let txPackets = txPacketsMatch[0];\n            let rxBytes = rxPacketsMatch[1];\n            let txBytes = txPacketsMatch[1];\n\n            networkStatus = `RX: ${rxBytes} bytes, TX: ${txBytes} bytes`;\n        }\n    }\n}\n\n// SIM1 Status\nlet sim1StatusLine = data.find(line => line.includes('SIM1') && line.includes('not detected'));\nif (sim1StatusLine) {\n    sim1Status = \"SIM1 not detected\";\n    sim1StatusLed = 0;\n} else {\n    sim1Status = \"SIM1 detected\";\n    sim1StatusLed = 1;\n}\n\n// SIM2 Status\nlet sim2StatusLine = data.find(line => line.includes('SIM2') && line.includes('not detected'));\nif (sim2StatusLine) {\n    sim2Status = \"SIM2 not detected\";\n    sim2StatusLed = 0;\n} else {\n    sim2Status = \"SIM2 detected\";\n    sim2StatusLed = 1;\n}\n\ncellularStatus = `${sim1Status}, ${sim2Status}`;\n\ngateway_state = \"ON\";  // Assuming gateway is ON if all above data is fetched successfully\n\nreturn [\n    { payload: uptime },\n    { payload: ip },\n    { payload: ramUsage },\n    { payload: ramStat },\n    { payload: storage },\n    { payload: storageStat },\n    { payload: systemInfo },\n    { payload: cpuTemp },\n    { payload: cpuUsage },\n    { payload: activeLink },\n    { payload: networkStatus },\n    { payload: gateway_state },\n    { payload: cellularStatus },\n    { payload: sim1StatusLed },\n    { payload: sim2StatusLed },\n];\n",
-        "outputs": 15,
+        "func": "let uptime = \"Unknown\";\nlet ip = \"Unknown\";\nlet ramUsage = 0;\nlet ramStat = \"Unknown\";\nlet storage = 0;\nlet storageStat = \"Unknown\";\nlet systemInfo = \"Unknown\";\nlet cpuTemp = \"Unknown\";\nlet cpuUsage = \"Unknown\";\nlet activeLink = \"Unknown\";\nlet networkStatus = \"Unknown\";\nlet gateway_state = \"OFF\";\nlet sim1StatusLed = 0;\nlet sim2StatusLed = 0;\nlet sim1Status = \"Unknown\";\nlet sim2Status = \"Unknown\";\nlet cellularStatus = \"Unknown\";\n\n// Ensure msg.payload is a string\nlet payload = typeof msg.payload === 'string' ? msg.payload : msg.payload.toString();\n\n// Split the payload by newline characters\nlet data = payload.split('\\n');\n\n// Uptime\nlet uptimeMatch = data.find(line => line.includes('up'));\nif (uptimeMatch) {\n    let uptimeResult = uptimeMatch.match(/up\\s+(.*?),/);\n    if (uptimeResult) {\n        uptime = uptimeResult[1];\n    }\n}\n\n// RAM Usage\nlet ramLine = data.find(line => line.includes('Mem:'));\nif (ramLine) {\n    let ram = ramLine.match(/\\d+/g);\n    if (ram && ram.length >= 3) {\n        ramUsage = Math.round((parseInt(ram[2]) / parseInt(ram[0])) * 100);\n        ramStat = `${ram[2]}M/${ram[0]}M`;\n    }\n}\n\n// Storage Usage\nlet storageLine = data.find(line => line.includes('overlayfs:overlay'));\nif (storageLine) {\n    let storageResult = storageLine.match(/(\\d+)%/);\n    if (storageResult) {\n        storage = parseInt(storageResult[1]);\n    }\n    let storageStatResult = storageLine.match(/(\\d+G)\\s+(\\d+M)\\s+(\\d+G)/);\n    if (storageStatResult) {\n        storageStat = `${storageStatResult[2]}/${storageStatResult[1]}`;\n    }\n}\n\n// System Info\nlet systemInfoLine = data.find(line => line.includes('Linux'));\nif (systemInfoLine) {\n    systemInfo = systemInfoLine;\n}\n\n// CPU Temperature\nlet cpuTempLine = data.find(line => !isNaN(line.trim()));\nif (cpuTempLine) {\n    cpuTemp = (parseInt(cpuTempLine.trim()) / 1000).toFixed(1);\n}\n\n// CPU Usage\nlet cpuUsageLine = data.find(line => line.includes('%Cpu(s)'));\nif (cpuUsageLine) {\n    let cpuUsageResult = cpuUsageLine.match(/(\\d+\\.\\d+)\\s*us,/);\n    if (cpuUsageResult) {\n        cpuUsage = parseFloat(cpuUsageResult[1]).toFixed(1);\n    }\n}\n\n// Active Ethernet Interface\nlet interfaceLine = data.find(line => line.includes('inf:'));\nif (interfaceLine) {\n    activeLink = interfaceLine.split('inf:')[1].trim();\n}\n\n// IP Address\nif (activeLink !== \"Unknown\") {\n    let ipLine = data.find(line => line.includes(`inet`) && !line.includes(`inet6`) && line.includes(`${activeLink}`));\n    if (ipLine) {\n        let ipMatch = ipLine.match(/inet\\s+(\\d+\\.\\d+\\.\\d+\\.\\d+)/);\n        if (ipMatch) {\n            ip = ipMatch[1];\n        }\n    }\n}\n\n// Network Status\nif (activeLink !== \"Unknown\") {\n    let linkBlockIndex = data.findIndex(line => line.includes(`${activeLink}:`));\n    if (linkBlockIndex !== -1) {\n        let rxPacketsLine = data[linkBlockIndex + 3].trim();\n        let txPacketsLine = data[linkBlockIndex + 5].trim();\n\n        let rxPacketsMatch = rxPacketsLine.match(/(\\d+)/g);\n        let txPacketsMatch = txPacketsLine.match(/(\\d+)/g);\n\n        if (rxPacketsMatch && txPacketsMatch) {\n            let rxBytes = rxPacketsMatch[0];\n            let txBytes = txPacketsMatch[0];\n\n            networkStatus = `RX: ${rxBytes} bytes, TX: ${txBytes} bytes`;\n        }\n    }\n}\n\n// SIM1 Status\nif (data.some(line => line.includes('SIM1 not detected'))) {\n    sim1Status = \"SIM1 not detected\";\n    sim1StatusLed = 0;\n} else {\n    sim1Status = \"SIM1 detected\";\n    sim1StatusLed = 1;\n}\n\n// SIM2 Status\nif (data.some(line => line.includes('SIM2 not detected'))) {\n    sim2Status = \"SIM2 not detected\";\n    sim2StatusLed = 0;\n} else {\n    sim2Status = \"SIM2 detected\";\n    sim2StatusLed = 1;\n}\n\ncellularStatus = `${sim1Status}, ${sim2Status}`;\ngateway_state = \"ON\";  // Assuming gateway is ON if all above data is fetched successfully\nlet mac = global.get(\"modem_mac\");\n// Return results\nreturn [\n    { payload: uptime },\n    { payload: ip },\n    { payload: ramUsage },\n    { payload: ramStat },\n    { payload: storage },\n    { payload: storageStat },\n    { payload: systemInfo },\n    { payload: cpuTemp },\n    { payload: cpuUsage },\n    { payload: activeLink },\n    { payload: networkStatus },\n    { payload: gateway_state },\n    { payload: cellularStatus },\n    { payload: sim1StatusLed },\n    { payload: sim2StatusLed },\n    { payload: mac },\n];\n",
+        "outputs": 16,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
@@ -69,56 +47,59 @@
         "y": 260,
         "wires": [
             [
-                "8324fb7abd92b7a1"
+                "c3639300d934a5a8"
             ],
             [
-                "fb11064640c490f0"
+                "382b40cef2d273f2"
             ],
             [
-                "facd659778ca63ca"
+                "58f2f963aaeaa44e"
             ],
             [
-                "9bfe34a2dafca0ac"
+                "d50740282387d7cf"
             ],
             [
-                "ee3bc428e97bc72c"
+                "a2435af655d180fd"
             ],
             [
-                "481b4fa97b9f85c1"
+                "aae6fcb83d1b18c3"
             ],
             [
-                "a8b2f8973e72999c"
+                "1b502e54912a9f07"
             ],
             [
-                "40a085bed75d8fe3"
+                "ada38476d738a81a"
             ],
             [
-                "94c4888b6487f7b5"
+                "63921b8c1cecf1de"
             ],
             [
-                "63e1100c610f38e2"
+                "92eb0d2e7ce0d57b"
             ],
             [
-                "fe2fe33ebb01f185"
+                "4d32d161482d1361"
             ],
             [
-                "9828465a1247645f"
+                "993033ece2bb9dee"
             ],
             [
-                "2ffef987bc1563d3"
+                "f57b00b36b06ac34"
             ],
             [
-                "9523062b1e78cab6"
+                "37d25ffb9cd2a365"
             ],
             [
-                "3916ab3fcf1d463f"
+                "77e74793f856559d"
+            ],
+            [
+                "271ecc503fc76ad6"
             ]
         ]
     },
     {
-        "id": "facd659778ca63ca",
+        "id": "58f2f963aaeaa44e",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT RAM Usage",
         "topic": "ds/RAM",
         "qos": "0",
@@ -128,15 +109,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 770,
         "y": 220,
         "wires": []
     },
     {
-        "id": "9bfe34a2dafca0ac",
+        "id": "d50740282387d7cf",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT RAM Statistic",
         "topic": "ds/RAM Statistic",
         "qos": "0",
@@ -146,15 +127,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 780,
         "y": 280,
         "wires": []
     },
     {
-        "id": "ee3bc428e97bc72c",
+        "id": "a2435af655d180fd",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Storage",
         "topic": "ds/Storage",
         "qos": "0",
@@ -164,15 +145,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 760,
         "y": 340,
         "wires": []
     },
     {
-        "id": "8324fb7abd92b7a1",
+        "id": "c3639300d934a5a8",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Uptime",
         "topic": "ds/Uptime",
         "qos": "0",
@@ -182,15 +163,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 760,
         "y": 100,
         "wires": []
     },
     {
-        "id": "fb11064640c490f0",
+        "id": "382b40cef2d273f2",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT IP",
         "topic": "ds/IP",
         "qos": "0",
@@ -200,15 +181,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 740,
         "y": 160,
         "wires": []
     },
     {
-        "id": "481b4fa97b9f85c1",
+        "id": "aae6fcb83d1b18c3",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Storage Statistic",
         "topic": "ds/Storage Statistic",
         "qos": "0",
@@ -218,15 +199,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 790,
         "y": 400,
         "wires": []
     },
     {
-        "id": "a8b2f8973e72999c",
+        "id": "1b502e54912a9f07",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT System Info",
         "topic": "ds/System Info",
         "qos": "0",
@@ -236,15 +217,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 770,
         "y": 460,
         "wires": []
     },
     {
-        "id": "40a085bed75d8fe3",
+        "id": "ada38476d738a81a",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT CPU Temperature",
         "topic": "ds/CPU Temperature",
         "qos": "0",
@@ -254,15 +235,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 790,
         "y": 520,
         "wires": []
     },
     {
-        "id": "94c4888b6487f7b5",
+        "id": "63921b8c1cecf1de",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT CPU Quad Core",
         "topic": "ds/CPU Quad Core",
         "qos": "0",
@@ -272,15 +253,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 790,
         "y": 580,
         "wires": []
     },
     {
-        "id": "fe2fe33ebb01f185",
+        "id": "4d32d161482d1361",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Ethernet Status",
         "topic": "ds/Ethernet Status",
         "qos": "0",
@@ -290,15 +271,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 780,
         "y": 700,
         "wires": []
     },
     {
-        "id": "63e1100c610f38e2",
+        "id": "92eb0d2e7ce0d57b",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Active Link",
         "topic": "ds/Active Link",
         "qos": "0",
@@ -308,49 +289,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 770,
         "y": 640,
         "wires": []
     },
     {
-        "id": "84a13d90912efd46",
-        "type": "ncd-gateway-node",
-        "z": "c12363994e8480aa",
-        "name": "",
-        "connection": "3a158777559a1790",
-        "unknown_devices": 0,
-        "outputs": 1,
-        "x": 230,
-        "y": 160,
-        "wires": [
-            [
-                "8803d6cfcb141870",
-                "f815fe88a3df5a82"
-            ]
-        ]
-    },
-    {
-        "id": "f815fe88a3df5a82",
-        "type": "debug",
-        "z": "c12363994e8480aa",
-        "name": "Debug Gateway",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 220,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "9828465a1247645f",
+        "id": "993033ece2bb9dee",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Gateway Status",
         "topic": "ds/Status",
         "qos": "0",
@@ -360,35 +307,25 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 780,
         "y": 760,
         "wires": []
     },
     {
-        "id": "bff279510e1ebb64",
+        "id": "d03c771610c6a641",
         "type": "comment",
-        "z": "c12363994e8480aa",
-        "name": "NCD Gateway Node",
-        "info": "",
-        "x": 230,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "dd74e06401ccd644",
-        "type": "comment",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "Execute Node",
         "info": "",
-        "x": 230,
-        "y": 340,
+        "x": 210,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "b1eb21d66b74e552",
+        "id": "181b9b0a954e36e5",
         "type": "comment",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "Process Data",
         "info": "",
         "x": 470,
@@ -396,9 +333,9 @@
         "wires": []
     },
     {
-        "id": "d6c3dec9f8d54b8b",
+        "id": "f15510bbb977e687",
         "type": "comment",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT-OUT",
         "info": "",
         "x": 750,
@@ -406,9 +343,9 @@
         "wires": []
     },
     {
-        "id": "9523062b1e78cab6",
+        "id": "37d25ffb9cd2a365",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Sim1",
         "topic": "ds/Sim 1",
         "qos": "0",
@@ -418,15 +355,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 750,
         "y": 880,
         "wires": []
     },
     {
-        "id": "3916ab3fcf1d463f",
+        "id": "77e74793f856559d",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Sim2",
         "topic": "ds/Sim 2",
         "qos": "0",
@@ -436,15 +373,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 750,
         "y": 940,
         "wires": []
     },
     {
-        "id": "2ffef987bc1563d3",
+        "id": "f57b00b36b06ac34",
         "type": "mqtt out",
-        "z": "c12363994e8480aa",
+        "z": "817db795d5709bb9",
         "name": "MQTT Cellular Status",
         "topic": "ds/Cellular Status",
         "qos": "0",
@@ -454,18 +391,114 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "98b7a230daa84efa",
+        "broker": "4d417e7b4d467f53",
         "x": 780,
         "y": 820,
         "wires": []
     },
     {
-        "id": "98b7a230daa84efa",
+        "id": "349eb0cf9562c50b",
+        "type": "exec",
+        "z": "817db795d5709bb9",
+        "command": "sh -c",
+        "addpay": "payload",
+        "append": "uptime && ip route | grep default | awk '{print \"inf: \"$5}' && free -m | grep Mem && df -h | grep '/$' && uname -a && cat /sys/class/thermal/thermal_zone0/temp && top -bn1 | grep '%Cpu(s)' && ip -s link show dev $(ip route | grep default | awk '{print $5}') && cat /sys/class/net/$(ip route | grep default | awk '{print $5}')/address && ip -4 addr show dev $(ip route | grep default | awk '{print $5}') | grep 'inet ' || echo 'IP not found'; if command -v mmcli > /dev/null 2>&1; then if mmcli -L | grep -q 'No modems were found'; then echo 'No modems detected on this system. Skipping SIM checks.'; else mmcli -m 0 | grep -A 5 'SIM' || echo 'SIM1 not detected or modem not found'; mmcli -m 1 | grep -A 5 'SIM' || echo 'SIM2 not detected or modem not found'; fi; else echo 'mmcli is not installed or available on this system.'; fi",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 195,
+        "y": 280,
+        "wires": [
+            [
+                "b71c131412659f44"
+            ],
+            [],
+            [
+                "920f1f3649d328a3"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "920f1f3649d328a3",
+        "type": "debug",
+        "z": "817db795d5709bb9",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 195,
+        "y": 340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "4e33290d5195d73f",
+        "type": "ncd-gateway-node",
+        "z": "817db795d5709bb9",
+        "name": "",
+        "connection": "0b47e914c1107fda",
+        "unknown_devices": 0,
+        "outputs": 1,
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "968cdf7cd6f70212"
+            ]
+        ]
+    },
+    {
+        "id": "968cdf7cd6f70212",
+        "type": "function",
+        "z": "817db795d5709bb9",
+        "name": "function 53",
+        "func": "if (msg.topic === \"modem_mac\") {\n    global.set(\"modem_mac\", msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 375,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "271ecc503fc76ad6",
+        "type": "mqtt out",
+        "z": "817db795d5709bb9",
+        "name": "",
+        "topic": "meta/MAC",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4d417e7b4d467f53",
+        "x": 750,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "4d417e7b4d467f53",
         "type": "mqtt-broker",
-        "name": "Blynk.cloud",
-        "broker": "blynk.cloud",
+        "name": "whiting-turner.blynk.cc - gateway",
+        "broker": "whiting-turner.blynk.cc",
         "port": "8883",
-        "tls": "59176f5932c42a05",
+        "tls": "24171d9ab61f9d13",
         "clientid": "",
         "autoConnect": true,
         "usetls": true,
@@ -492,19 +525,21 @@
         "sessionExpiry": ""
     },
     {
-        "id": "3a158777559a1790",
+        "id": "0b47e914c1107fda",
         "type": "ncd-gateway-config",
-        "name": "",
+        "name": "gateway",
         "comm_type": "serial",
         "ip_address": "",
         "tcp_port": "2101",
+        "tcp_inactive_timeout_active": false,
+        "tcp_inactive_timeout": "",
         "port": "/dev/ttymxc2",
         "baudRate": "115200",
-        "pan_id": "7FFF",
+        "pan_id": "7fff",
         "rssi": false
     },
     {
-        "id": "59176f5932c42a05",
+        "id": "24171d9ab61f9d13",
         "type": "tls-config",
         "name": "",
         "cert": "",
@@ -513,7 +548,7 @@
         "certname": "",
         "keyname": "",
         "caname": "ISRG_Root_X1.der",
-        "servername": "blynk.cloud",
+        "servername": "whiting-turner.blynk.cc",
         "verifyservercert": false,
         "alpnprotocol": ""
     }
