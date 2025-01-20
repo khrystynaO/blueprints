@@ -531,8 +531,6 @@
         "comm_type": "serial",
         "ip_address": "",
         "tcp_port": "2101",
-        "tcp_inactive_timeout_active": false,
-        "tcp_inactive_timeout": "",
         "port": "/dev/ttymxc2",
         "baudRate": "115200",
         "pan_id": "7fff",

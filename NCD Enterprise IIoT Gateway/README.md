@@ -40,16 +40,29 @@ The NCD Enterprise IIoT Gateway facilitates seamless integration and communicati
 
 #### 2.4 Connectivity Interfaces
 
-The NCD Enterprise IIoT Gateway offers multiple connectivity options to ensure reliable communication and data transfer between your IoT devices and the network. This section covers the setup and configuration for Wi-Fi, Ethernet, and LTE interfaces.
+The NCD Enterprise IIoT Gateway offers multiple connectivity options to ensure
+reliable communication and data transfer between your IoT devices and the
+network. This section covers the setup and configuration for Wi-Fi, Ethernet,
+    and LTE interfaces.
 
 #### 2.4.1 Ethernet Configuration
 
-The gateway supports Ethernet connectivity for stable and high-speed data transmission.
+Ethernet provides a stable and fast connection.
 
-1. **Connect to ETH1:** Use an Ethernet cable to connect the ETH1 port on the gateway to a DHCP-enabled router for automatic IP assignment.
-2. **Static IP Configuration (Optional):**
-   - Access the web configuration interface.
-   - Navigate to "Network > Ethernet" and set a static IP if required for your network setup.
+1. **Connect Ethernet Cable:**
+   - Plug one end of an Ethernet cable into the ETH1 port on the gateway.
+   - Plug the other end into your router or network switch.
+
+2. **Power On the Gateway:**
+   - Connect the power adapter to the gateway and plug it into a power outlet.
+   - The gateway should power on, indicated by the power LED lighting up.
+
+3. **Access the Web Interface:**
+   - Open a web browser on a computer connected to the same network.
+   - Enter the gateway’s IP address (you can find this in your router’s connected devices list) to access the web interface.
+
+4. **Optional: Static IP Configuration:**
+   - If you need a fixed IP for the gateway, navigate to "Network > Ethernet" in the web interface and set a static IP.
 
 #### 2.4.2 Wi-Fi Configuration
 
@@ -64,6 +77,9 @@ The gateway can function in both Wi-Fi Access Point (AP) and Client modes, with 
    - If you need the gateway to connect to an existing Wi-Fi network, select “Client” as the mode.
    - Enter the SSID and password of the Wi-Fi network you wish to connect to.
    - Click “Submit” to save the settings.
+
+3. **Disconnect Ethernet Cable:**
+   - Once Wi-Fi is set up, you can disconnect the Ethernet cable.
 
 #### 2.4.3 LTE Configuration
 
@@ -114,11 +130,9 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 
 ### 3. Preparing Your Device in Blynk.Cloud
 
-1. Click the **`Use Blueprint`** button in the [NCD Enterprise IIoT Gateway](https://blynk.cloud/dashboard/blueprints/Library/TMPL4j9oOe4aB).
-2. In the left panel, select **Devices**.
-3. Click **New Device**.
-4. Choose **From Template -> NCD Enterprise IIoT Gateway**, and click **Create**.
-
+1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
+2. **Activate the Device:** On the right panel, click the **Activate Device** button.
+3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
 > **Note:** Record the device credentials shown in the upper right corner for use in the next step.
 
 ### 4. Accessing Node-RED on the Gateway
@@ -128,17 +142,55 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 
 ### 5. Configuring the Node-RED Flow
 
-1. Copy and import the [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Gateway/NCD%20Enterprise%20IIoT%20Gateway/Firmware/flow.json) into Node-RED.
-2. Open settings for the MQTT node and update the server properties:
+1. Copy or download the firmware flow file from second step of device activation into Node-RED.
+   - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
+   - Paste the copied code or upload the flow file (.json).
+2. **Set Up MQTT:**
+   - Click on the any of the highlighted MQTT-out node.
+
+	![MQTT Out](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/flow-mqtt-out.png)
+
+   - Select the highlighted icon.
+
+	![MQTT Property](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/mqtt-property.jpg)
+
    - Go to the Security tab.
-   - Enter your [Blynk device credentials](https://docs.blynk.io/en/getting-started/activating-devices/manual-device-activation#getting-auth-token) in the Password field, and use "device" for the Username field.
-   For more details, refer to the [Blynk Node-RED guide](https://docs.blynk.io/en/hardware-guides/node-red#configure-the-mqtt-broker) **Configure the MQTT Broker** topic.
 
-![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Gateway/NCD%20Enterprise%20IIoT%20Gateway/Image/flow.png)
+	![Broker Property](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/broker-property.png)
 
-### 6. Running the Sample Using Node-RED
+   - Enter the AuthToken generated by Blynk as a password for your device (use “device” as the username).
 
-Deploy the flow and use Blynk.cloud for testing.
+	![Security Tab](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/security-tab.png)
+
+   Your flow should look like this:![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Gateway/NCD%20Enterprise%20IIoT%20Gateway/Image/flow.png)
+
+### Step 6: Running the Sample Using Node-RED
+
+1. **Deploy the Flow:**
+   - Click the **Deploy** button in Node-RED to activate the flow. When flow connect to cloud status by the mqtt node will have green color and have text "Connected".
+
+2. **Test Your Setup:**
+   - Go to Blynk.cloud to check the sensor data and verify everything is working.
+    The **NCD Enterprise IIoT Gateway Dashboard** provides a comprehensive overview
+    of the device's operational status, connectivity, and resource utilization. It
+    includes the following key sections:
+
+    1. **General Information:**
+       - Displays device status (ON/OFF), uptime duration, and the assigned IP address.
+
+    2. **Connectivity:**
+       - Shows active network link (Ethernet/Wi-Fi), data transmission statistics (RX/TX bytes), and cellular status, indicating whether SIM cards are detected.
+
+    3. **Usage Metrics:**
+       - Real-time RAM usage, storage capacity, and CPU utilization.
+
+    4. **System Information:**
+       - Displays Linux kernel version and system build details.
+
+    5. **CPU Temperature:**
+       - A visual gauge displays the current CPU temperature, helping monitor thermal performance.
+
+    The dashboard allows users to track system performance, troubleshoot connectivity issues, and ensure the gateway operates optimally for IoT applications.
 
 ## Next Steps
 
