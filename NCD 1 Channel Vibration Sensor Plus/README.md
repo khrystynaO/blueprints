@@ -151,8 +151,6 @@ If SSH is not enabled on the gateway, follow these steps:
        - The tab allows for proactive maintenance by notifying you when certain parameters exceed predefined limits.
        - Additionally, you can view custom charts that help in detailed analysis of specific data points, ensuring that your system operates within optimal conditions.
 
-	![Settings and Diagnosis](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/tab3.png)
-
 3. **Analyze and Adjust:**
    - After reviewing the data on each tab, make necessary adjustments to your settings or setup. The dashboard, historical data, and settings provide a comprehensive view of your system’s health and performance, allowing you to maintain it efficiently.
 
