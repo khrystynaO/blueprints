@@ -1,8 +1,6 @@
 ## Introduction
 
-The sample project consists of the sensor, which measures temperature,
-humidity, pressure, and air quality, and transmits these measurements wirelessly
-to the NCD Enterprise IIoT Gateway.
+The sample project consists of a sensor that measures temperature, humidity, pressure, and air quality, and transmits these measurements wirelessly to the NCD Enterprise IIoT Gateway.
 
 ## How To Use This Blueprint
 
@@ -17,7 +15,7 @@ to the NCD Enterprise IIoT Gateway.
 - Batteries (if applicable)
 - Mounting accessories
 
-Verify that you have all necessary parts. For detailed instructions on unpacking and initial setup, refer to the [drawing tab](https://store.ncd.io/product/industrial-iot-long-range-wireless-environmental-temperature-humidity-pressure-air-quality-sensor/#drawing) on the product page.
+Ensure you have all necessary components. For detailed instructions on unpacking and initial setup, refer to the [drawing tab](https://store.ncd.io/product/industrial-iot-long-range-wireless-environmental-temperature-humidity-pressure-air-quality-sensor/#drawing) on the product page.
 
 ### 2. Configuring the NCD Enterprise IIoT Gateway
 
@@ -27,58 +25,64 @@ Verify that you have all necessary parts. For detailed instructions on unpacking
 
 The NCD Enterprise IIoT Gateway facilitates seamless integration and communication between various IoT devices and networks.
 
-If you don't setup gateway early please go to blynk cloud and use blueprint for gatway for more clear setup https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq
-If you already did this - continue - dont need any other action with gateway.
+If you haven't set up the gateway yet, please visit Blynk Cloud and use the blueprint for the gateway for a clearer setup: [Blynk Cloud Blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq).
+If you have already set it up, you can proceed without further action.
 
 #### 2.5 Access Interfaces
 
-1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using `ncdio` / `ncdB3ast` for login.
-   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx`
-   are the last 4 characters of the Gateway's MAC address. The MAC address can
-   be found on the side of the device. For example, if the last 4 characters of
-   your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
-   - **Customizations:** Set up user accounts, logging, and notifications for specific events.
-2. **Node-Red:** Visit `http://[domain_or_ip]:1880` to use Node-Red.
+1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
+   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
+   - **Customization:** Set up user accounts, logging, and notifications for specific events.
+2. **Node-RED:** Access Node-RED at `http://[domain_or_ip]:1880`.
 3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.
 
 ### 3. Preparing Your Device in Blynk.Cloud
 
 1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
-2. **Generate Static Tokens**
-   - Go to the **Developer Zone**
+2. **Generate Static Tokens:**
+   - Go to the **Developer Zone**.
    - Select **Static Tokens**.
    - Click **Generate Static Tokens** and choose **Generate Multiple**.
    - Select the template: **NCD Environmental Air Quality**.
    - Specify the number of tokens you need for your sensors.
-
-3. **Download and Extract the Tokens File**
+3. **Download and Extract the Tokens File:**
    - Download the generated ZIP archive.
-   - Extract it and locate the file named `*_tokens.csv` (insteaf of * must be varior number).
+   - Extract it and locate the file named `*_tokens.csv` (the `*` represents a variable number).
    - Save this file.
 
-### 4. Transfer file with token to the gateway
+### 4. Transferring the Token File to the Gateway
 
-   If you don't turn on ssh on gateway please follow this instruction, if already do move forward.
-   - Open the Gateway's web dashboard at:
-       `http://ncd-xxxx.local`
+If SSH is not enabled on the gateway, follow these steps:
+   - Open the Gateway's web dashboard at: `http://ncd-xxxx.local`
      - Go to **Service** > **SSH**.
      - Turn **ON** SSH, then click **Submit** and **Apply**.
 
-4. **Transfer the Tokens File to the Gateway**
-   Linux::
+#### File Transfer (Linux):
 
-   - Open the terminal in folder contains file with token by open in Files this folder and tab right button of mouse and choose open in Terminal
-   - Copy command without change and use the following command to transfer the `*_tokens.csv` file to the Gateway:
-     ```bash
-     scp *_tokens.csv ncdio@ncd-a9c2.local:/home/ncdio/.node-red/
-     ```
-     Password: `ncdB3ast`
+1. Open the terminal in the folder containing the token file by right-clicking and selecting "Open in Terminal."
+2. Copy and use the following command to transfer the `*_tokens.csv` file to the Gateway:
+   ```bash
+   scp *_tokens.csv ncdio@ncd-xxxx.local:/home/ncdio/.node-red/
+   ```
+   Password: `ncdB3ast`
 
-   **Note:** Replace `xxxx` in `ncd-xxxx.local` with the last 4 characters of the Gateway's MAC address, which is printed on the device.
-   - Example: If the MAC ends in `c398`, use `http://ncd-c398.local`.
+**Note:** Replace `xxxx` in `ncd-xxxx.local` with the last four characters of the Gateway's MAC address, which is printed on the device.
 
-   Windows:
+#### File Transfer (Windows):
 
+1. Open the folder containing the token file.
+2. Hold down **Shift**, right-click inside the folder, and select **"Open PowerShell window here"** or **"Open Command Prompt here"**.
+3. Use the following command to transfer the `*_tokens.csv` file to the Gateway:
+
+   ```powershell
+   pscp -pw ncdB3ast *_tokens.csv ncdio@ncd-xxxx.local:/home/ncdio/.node-red/
+   ```
+
+   Password: `ncdB3ast`
+
+4. If the `pscp` command is not found, download [PuTTY](https://www.putty.org/) and ensure `pscp.exe` is added to your system's environment variable path.
+
+**Note:** Replace `xxxx` in `ncd-xxxx.local` with the last four characters of the Gateway's MAC address, which can be found on the device label.
 
 ### 5. Accessing Node-RED on the Gateway
 
@@ -87,20 +91,23 @@ If you already did this - continue - dont need any other action with gateway.
 
 ### 6. Configuring the Node-RED Flow
 
-1. Copy or download the firmware flow file from second step of device activation into Node-RED.
+1. Copy the [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD/NCD%20Environmental%20Air%20Quality%20Sensor/Firmware/flow.json)
    - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
    - Paste the copied code or upload the flow file (.json).
-2. **Set Up filename of token file:**
-   - At the dashboard you see the node with name **Provide filename with token** tab on this and you see the new window where can locate field like msg.filename and in value instead of "** _tokens.csv**" type a name of file that you trasfre to gateway(can type only number located before _tokens.scv)
+
+![Import](Image/import.png)
+
+2. **Set the filename of the token file:**
+   - In the dashboard, find the node named **Provide filename with token**, click on it, and enter the token filename you transferred to the gateway.
+
+   Your flow should look like this:
 
 ![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD/NCD%20Environmental%20Air%20Quality%20Sensor/Image/flow.png)
 
 ### 7. Running the Sample Using Node-RED
 
 1. **Deploy the Flow:**
-   - Click the Deploy button in Node-RED to activate the flow. When the flow
-   connects to the cloud, the status indicator of the MQTT node will turn green
-   and display the text "Connected."
+   - Click the **Deploy** button in Node-RED to activate the flow. When the flow connects to the cloud, the MQTT node's status indicator will turn green and display "Connected."
 
 2. **Test Your Setup:**
    - Go to Blynk.cloud to check the sensor data and verify everything is working.
@@ -135,18 +142,18 @@ If you already did this - continue - dont need any other action with gateway.
 
 ## Next Steps
 
-- Explore the Blynk Web Console and Blynk IoT app, and try monitoring your sensor data from both.
+- Explore the Blynk Web Console and IoT app to monitor sensor data.
 - Read the Blynk Documentation to learn how to work with Virtual Pins.
-- [Learn more about Automations.](https://docs.blynk.io/en/concepts/automations)
-- [Discover how to Share Devices with other users.](https://docs.blynk.io/en/blynk.console/devices/device-sharing)
+- [Learn more about Automations](https://docs.blynk.io/en/concepts/automations).
+- [Discover how to Share Devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing).
 - Customize the code to meet your specific needs.
 - Add more sensors or devices to your setup.
 
 ## Troubleshooting
 
-- Ensure you have the latest versions of the software you are using.
-- Verify that all libraries are up to date.
-- Check that all dependencies and configurations are correct.
+- Ensure you have the latest software versions.
+- Verify all libraries are up to date.
+- Check dependencies and configurations.
 - Inspect your code for errors.
 
 ### Common Issues:
@@ -167,27 +174,23 @@ If you already did this - continue - dont need any other action with gateway.
 4. If you receive the following message, generate more tokens and upload the
    `*_tokens.csv` file to the Gateway, you don't need restart the flow for this. The file can contain only new tokens, or
     both new and old tokens:
-
     ```
     No unused tokens available for 00:13:a2:00:42:4f:17:12 in the tokens map.
-    Please create more static tokens for One Channel Vibration Plus (sensor type = 80).
+    Please create more static tokens for NCD Environmental Air Quality (sensor type = 27).
     ```
+
 5. If you see this error, upload the `*_tokens.csv` file and restart the flows:
 
     ```
-    Error: /home/ncdio/.node-red/17_tokens.csv does not exist.
+        Error: /home/ncdio/.node-red/17_tokens.csv does not exist.
     ```
+
+
 ## Related Links
 
 - [Blynk MQTT API documentation](https://docs.blynk.io/en/hardware-guides/mqtt-api)
 - [Blynk Troubleshooting guide](https://docs.blynk.io/en/getting-started/troubleshooting)
-- [Blynk Documentation](https://docs.blynk.io/en/)
-- [Blynk NodeRED Documentation](https://docs.blynk.io/en/hardware-guides/node-red)
-- [NCD Wireless Environmental Sensor Documentation](https://ncd.io/blog/wireless-environmental-sensor-product-manual/)
 - [Node-RED Documentation](https://nodered.org/docs/getting-started/local)
-- [NCD Support](https://ncd.io/contact/)
-- [RT090 HM EG5120 V1.0.2 Documentation](https://www.davantel.com/wp-content/uploads/2023/06/RT090_HM_EG5120_V1.0.2.pdf)
-- [RobustOS Software Manual V1.0.0](https://rjconnect.co.za/wp-content/uploads/2022/12/RT_SM_RobustOS-Software-Manual_V1.0.0.pdf)
 
 By following this blueprint, you can effectively set up and utilize your NCD Wireless Environmental Sensor for various IoT applications.
 
