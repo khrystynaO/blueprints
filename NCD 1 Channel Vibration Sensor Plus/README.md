@@ -171,11 +171,12 @@ to customize the code for specific needs.
 
 To ensure a smooth experience, make sure you are using the latest versions of the software and libraries. Below are some common issues you might encounter and their solutions:
 
-#### Common Issues
+### Common Issues:
 
 1. **Connection Problems:**
    - Ensure the sensor is powered and within range.
-   - Check firewall rules.
+   - Check network settings and firewall rules.
+   - Verify the gateway's network connection.
 
 2. **Calibration Errors:**
    - Follow the software instructions to recalibrate the sensor.
@@ -184,6 +185,20 @@ To ensure a smooth experience, make sure you are using the latest versions of th
 3. **Node-RED Issues:**
    - **Flow Not Deploying:** Check for syntax errors or missing nodes.
    - **MQTT Connection Failure:** Verify MQTT broker settings and credentials.
+
+4. If you receive the following message, generate more tokens and upload the
+   `*_tokens.csv` file to the Gateway, you don't need restart the flow for this. The file can contain only new tokens, or
+    both new and old tokens:
+    ```
+    No unused tokens available for 00:13:a2:00:42:4f:17:12 in the tokens map.
+    Please create more static tokens for NCD 1 Channel Vibration Sensor Plus (sensor type = 80).
+    ```
+
+5. If you see this error, upload the `*_tokens.csv` file and restart the flows:
+
+    ```
+        Error: /home/ncdio/.node-red/17_tokens.csv does not exist.
+    ```
 
 ### Related Links
 
