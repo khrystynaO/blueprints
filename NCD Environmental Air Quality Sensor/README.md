@@ -99,7 +99,7 @@ If SSH is not enabled on the gateway, follow these steps:
 
 ![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import.png)
 
-    - If you see a message like **"Some of the nodes you are importing already exist in your workspace,"** choose **"Import copy."**
+- If you see a message like **"Some of the nodes you are importing already exist in your workspace,"** choose **"Import copy."**
 
 ![Import Copy](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import-copy.png)
 
@@ -129,6 +129,8 @@ If SSH is not enabled on the gateway, follow these steps:
      monitor and analyze indoor air quality. This intuitive interface presents
      essential data points and insights, enabling informed decision-making to
      maintain a healthy environment.
+
+![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard.png)
 
 #### **Key Features:**
 
