@@ -98,7 +98,7 @@ If SSH is not enabled on the gateway, follow these steps:
 ### 6. Configuring the Node-RED Flow
 
 1. Copy the [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Firmware/flow.json)
-   - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
+   - In Node-RED, press **CTRL + I** or use the menu to select **Import**. For all types of sensors, you need to import the new flow, and a single flow will work for all sensors of this type.
    - Paste the copied code or upload the flow file (.json).
 
 ![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import.png)
@@ -116,7 +116,7 @@ If SSH is not enabled on the gateway, follow these steps:
 
     ![Setup filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/filename-token.png)
 
-    And enter the token filename you transferred to the gateway.
+    And enter the token filename that you transferred to the gateway. The filename can contain only numbers before `_tokens.csv`, posible values `15`, `15_tokens`, or `15_tokens.csv`.
 
     ![Type filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/type-filename.png)
 
@@ -125,12 +125,7 @@ If SSH is not enabled on the gateway, follow these steps:
 
 1. **Deploy the Flow:**
    - Click the **Deploy** button in Node-RED to activate the flow. When the flow connects to the cloud, the MQTT node's status indicator will turn green and display "Connected."
-
-2. **Test Your Setup:**
-   - Go to Blynk.cloud to check the sensor data and verify everything is working.### Step 6: Running the Sample Using Node-RED
-
-1. **Deploy the Flow:**
-   - Click the **Deploy** button in Node-RED to activate the flow.
+   Connect to cloud will be when we get data from sensor.
 
 2. **Test Your Setup:**
    - Go to Blynk.cloud to check the sensor data and verify everything is working.
