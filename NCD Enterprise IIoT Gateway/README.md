@@ -175,8 +175,11 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 2. **Test Your Setup:**
    - Go to Blynk.cloud to check the sensor data and verify everything is working.
     The **NCD Enterprise IIoT Gateway Dashboard** provides a comprehensive overview
-    of the device's operational status, connectivity, and resource utilization. It
-    includes the following key sections:
+    of the device's operational status, connectivity, and resource utilization.
+
+    ![Security Tab](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/screenshot-1.png)
+
+    It includes the following key sections:
 
     1. **General Information:**
        - Displays device status (ON/OFF), uptime duration, and the assigned IP address.
