@@ -153,7 +153,7 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 2. **Set Up MQTT:**
    - Click on the any of the highlighted MQTT-out node.
 
-	![MQTT Out](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/flow-mqtt-out.png)
+	![MQTT Out](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Gateway/NCD%20Enterprise%20IIoT%20Gateway/Image/flow-arrow.png)
 
    - Select the highlighted icon.
 
