@@ -57,7 +57,7 @@ If SSH is not enabled on the gateway, follow these steps:
      - Go to **Service** > **SSH**.
      - Turn **ON** SSH, then click **Submit** and **Apply**.
 
-![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard-ncdio.png)
+![SSH](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard-ncdio.png)
 
 #### File Transfer (Linux):
 
@@ -99,6 +99,10 @@ If SSH is not enabled on the gateway, follow these steps:
 
 ![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import.png)
 
+    - If you see a message like **"Some of the nodes you are importing already exist in your workspace,"** choose **"Import copy."**
+
+![Import Copy](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import-copy.png)
+
  Your flow should look like this:
 
 ![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/flow.png)
@@ -106,11 +110,11 @@ If SSH is not enabled on the gateway, follow these steps:
 2. **Set the filename of the token file:**
    - In the dashboard, find the node named **Provide filename with token**, click on it.
 
-![Setup filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/filename-token.png)
+    ![Setup filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/filename-token.png)
 
     And enter the token filename you transferred to the gateway.
 
-![Type filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/type-filename.png)
+    ![Type filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/type-filename.png)
 
 
 ### 7. Running the Sample Using Node-RED
