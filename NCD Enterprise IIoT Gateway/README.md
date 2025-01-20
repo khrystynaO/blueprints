@@ -167,7 +167,7 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 ### Step 6: Running the Sample Using Node-RED
 
 1. **Deploy the Flow:**
-   - Click the **Deploy** button in Node-RED to activate the flow. When flow connect to cloud status by the mqtt node will have green color and have text "Connected".
+   - Click the Deploy button in Node-RED to activate the flow. When the flow connects to the cloud, the status indicator of the MQTT node will turn green and display the text "Connected."
 
 2. **Test Your Setup:**
    - Go to Blynk.cloud to check the sensor data and verify everything is working.
