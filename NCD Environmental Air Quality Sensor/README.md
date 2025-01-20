@@ -99,6 +99,10 @@ If SSH is not enabled on the gateway, follow these steps:
 
 ![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import.png)
 
+ Your flow should look like this:
+
+![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/flow.png)
+
 2. **Set the filename of the token file:**
    - In the dashboard, find the node named **Provide filename with token**, click on it.
 
@@ -108,10 +112,6 @@ If SSH is not enabled on the gateway, follow these steps:
 
 ![Type filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/type-filename.png)
 
-
-   Your flow should look like this:
-
-![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/flow.png)
 
 ### 7. Running the Sample Using Node-RED
 
