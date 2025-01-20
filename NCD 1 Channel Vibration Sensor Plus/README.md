@@ -10,7 +10,6 @@ wirelessly to the NCD Enterprise IIoT Gateway and the Blynk IoT platform.
 
 ### Step 1: Unpacking and Initial Setup
 
-#### 1.1 Required Components:
 - [**Wireless Vibration Temperature Sensor:**](https://store.ncd.io/product/industrial-iot-wireless-vibration-temperature-sensor-v3/) Measures vibration and temperature.
 - [**NCD Enterprise
 Gateway**](https://store.ncd.io/product/enterprise-iiot-gateway/) or
@@ -22,7 +21,7 @@ from the sensor and sends it to Blynk.
 
 ### 2. Configuring the NCD Enterprise IIoT Gateway
 
-#### 2.1 Required Components:
+#### 1 Required Components:
 - NCD Enterprise IIoT Gateway
 - Antennas
 
@@ -33,7 +32,7 @@ The NCD Enterprise IIoT Gateway facilitates seamless integration and communicati
 If you haven't set up the gateway yet, please visit Blynk Cloud and use the blueprint for the gateway for a clearer setup: [Blynk Cloud Blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq).
 If you have already set it up, you can proceed without further action.
 
-#### 2.5 Access Interfaces
+#### 2 Access Interfaces
 
 1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
    - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
