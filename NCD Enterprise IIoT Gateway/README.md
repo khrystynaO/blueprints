@@ -1,6 +1,6 @@
 ## Introduction
 
-This blueprint will guide you through launching your project with the NCD Enterprise IIoT Gateway.
+This blueprint will guide you through setting up your NCD Enterprise IIoT Gateway to work with Blynk using Wi-Fi, Cellular, or Ethernet connectivity.
 
 ## How to Use This Guide
 
