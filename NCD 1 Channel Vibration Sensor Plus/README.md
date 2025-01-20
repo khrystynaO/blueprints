@@ -20,117 +20,115 @@ from the sensor and sends it to Blynk.
 - **Batteries (if applicable):** Power source for the sensor.
 - **Mounting accessories:** To securely install the sensor.
 
-#### 1.2 Initial Setup:
-1. **Unpack all components:** Ensure you have all the required parts.
-2. **Attach antennas to the sensor and gateway:** This enables wireless communication.
+### 2. Configuring the NCD Enterprise IIoT Gateway
 
-### Step 2: Configuring the NCD Gateway
+#### 2.1 Required Components:
+- NCD Enterprise IIoT Gateway
+- Antennas
 
-The NCD Gateway connects your sensor to the internet and the Blynk platform. You can connect the gateway via Ethernet, Wi-Fi, or LTE.
+**Attach antennas to the sensor and gateway:** This enables wireless communication.
 
-#### 2.1 Ethernet Configuration
+The NCD Enterprise IIoT Gateway facilitates seamless integration and communication between various IoT devices and networks.
 
-Ethernet provides a stable and fast connection.
-
-1. **Connect Ethernet Cable:**
-   - Plug one end of an Ethernet cable into the ETH1 port on the gateway.
-   - Plug the other end into your router or network switch.
-
-2. **Power On the Gateway:**
-   - Connect the power adapter to the gateway and plug it into a power outlet.
-   - The gateway should power on, indicated by the power LED lighting up.
-
-3. **Access the Web Interface:**
-   - Open a web browser on a computer connected to the same network.
-   - Enter the gateway’s IP address (you can find this in your router’s connected devices list) to access the web interface.
-
-4. **Optional: Static IP Configuration:**
-   - If you need a fixed IP for the gateway, navigate to "Network > Ethernet" in the web interface and set a static IP.
-
-#### 2.2 Wi-Fi Configuration
-
-Wi-Fi allows wireless communication between the gateway and your network.
-
-1. **Connect to the Gateway:**
-   - Use an Ethernet cable to connect your computer to the gateway’s ETH1 port.
-
-2. **Access the Web Interface:**
-   - Open a web browser and enter the gateway’s default IP address (typically `192.168.0.1`).
-   - Log in using the default credentials provided in the device’s documentation.
-
-3. **Set Up Wi-Fi:**
-   - In the web interface, go to "Interface > Wi-Fi".
-   - Choose between **Access Point (AP) Mode** or **Client Mode**:
-     - **AP Mode:** The gateway creates its own Wi-Fi network.
-     - **Client Mode:** The gateway connects to an existing Wi-Fi network.
-   - Enter the SSID (network name) and password of your Wi-Fi network if using Client Mode.
-   - Click “Submit” to save the settings.
-
-4. **Disconnect Ethernet Cable:**
-   - Once Wi-Fi is set up, you can disconnect the Ethernet cable.
-
-#### 2.3 LTE Configuration
-
-LTE is ideal for remote locations where Ethernet or Wi-Fi isn't available.
-
-**More Information:**
-To get more details about setting up the NCD Gateway, including other connectivity options and advanced configurations, visit the [NCD Enterprise IIoT Gateway Blueprint on Blynk](https://blynk.io/blueprints/ncd-enterprise-iiot-gateway).
-
-#### 2.4 Choosing Connectivity Interfaces
-
-The NCD Enterprise IIoT Gateway offers three main connectivity options: Ethernet, Wi-Fi, and LTE. You can choose the one that best suits your setup.
+If you haven't set up the gateway yet, please visit Blynk Cloud and use the blueprint for the gateway for a clearer setup: [Blynk Cloud Blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq).
+If you have already set it up, you can proceed without further action.
 
 #### 2.5 Access Interfaces
 
-1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using `ncdio` / `ncdB3ast` for login.
-   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last 4 characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last 4 characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
-   - **Network Settings:** Configure static IPs, DNS, and firewall rules as needed.
-   - **Customizations:** Set up user accounts, logging, and notifications for specific events.
-2. **Node-Red:** Visit `http://[domain_or_ip]:1880` to use Node-Red.
+1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
+   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
+   - **Customization:** Set up user accounts, logging, and notifications for specific events.
+2. **Node-RED:** Access Node-RED at `http://[domain_or_ip]:1880`.
 3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.
 
-### Step 3: Setting Up Your Device in Blynk
+### 3. Preparing Your Device in Blynk.Cloud
 
 1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
-2. **Activate the Device:** On the right panel, click the **Activate Device** button.
-3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
+2. **Generate Static Tokens:**
+   - Go to the **Developer Zone**.
+   - Select **Static Tokens**.
+   - Click **Generate Static Tokens** and choose **Generate Multiple**.
+   - Select the template: **NCD 1 Channel Vibration Sensor Plus**.
+   - Specify the number of tokens you need for your sensors.
+3. **Download and Extract the Tokens File:**
+   - Download the generated ZIP archive.
+   - Extract it and locate the file named `*_tokens.csv` (the `*` represents a variable number).
+   - Save this file.
 
-### Step 4: Accessing Node-RED on the Gateway
+### 4. Transferring the Token File to the Gateway
 
-1. **Open Node-RED:**
-   - In a web browser, navigate to `http://[gateway IP]:1880` or `http://[domain]:1880`.
-   - Log in to the Node-RED dashboard using `ncdio` / `ncdB3ast`.
+If SSH is not enabled on the gateway, follow these steps:
+   - Open the Gateway's web dashboard at: `http://ncd-xxxx.local`using the credentials `ncdio` / `ncdB3ast`.
+     - Go to **Service** > **SSH**.
+     - Turn **ON** SSH, then click **Submit** and **Apply**.
 
-### Step 5: Configuring the Node-RED Flow
+![SSH](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard-ncdio.png)
 
-1. **Import the Flow:**
-   - Copy or download the firmware flow file from second step of device activation.
-![Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/2step.png)
+#### File Transfer (Linux):
+
+1. Open the terminal in the folder containing the token file by right-clicking and selecting "Open in Terminal."
+2. Copy and use the following command to transfer the `*_tokens.csv` file to the Gateway:
+   ```bash
+   scp *_tokens.csv ncdio@ncd-xxxx.local:/home/ncdio/.node-red/
+   ```
+   Password: `ncdB3ast`
+
+**Note:** Replace `xxxx` in `ncd-xxxx.local` with the last four characters of the Gateway's MAC address, which is printed on the device.
+
+#### File Transfer (Windows):
+
+1. Open the folder containing the token file.
+2. Hold down **Shift**, right-click inside the folder, and select **"Open PowerShell window here"** or **"Open Command Prompt here"**.
+3. Use the following command to transfer the `*_tokens.csv` file to the Gateway:
+
+   ```powershell
+   pscp -pw ncdB3ast *_tokens.csv ncdio@ncd-xxxx.local:/home/ncdio/.node-red/
+   ```
+
+   Password: `ncdB3ast`
+
+4. If the `pscp` command is not found, download [PuTTY](https://www.putty.org/) and ensure `pscp.exe` is added to your system's environment variable path.
+
+**Note:** Replace `xxxx` in `ncd-xxxx.local` with the last four characters of the Gateway's MAC address, which can be found on the device label.
+
+### 5. Accessing Node-RED on the Gateway
+
+1. Open a web browser and navigate to `http://[domain_or_ip]:1880`.
+2. Log in to the Node-RED dashboard.
+
+### 6. Configuring the Node-RED Flow
+
+1. Copy the [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Firmware/flow.json)
    - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
    - Paste the copied code or upload the flow file (.json).
 
-2. **Set Up MQTT:**
-   - Click on the any of the highlighted MQTT-out node.
+![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import.png)
 
-	![MQTT Out](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/flow-mqtt-out.png)
+- If you see a message like **"Some of the nodes you are importing already exist in your workspace,"** choose **"Import copy."**
 
-   - Select the highlighted icon.
+![Import Copy](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import-copy.png)
 
-	![MQTT Property](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/mqtt-property.jpg)
+ Your flow should look like this:
 
-   - Go to the Security tab.
+![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/flow.png)
 
-	![Broker Property](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/broker-property.png)
+2. **Set the filename of the token file:**
+   - In the dashboard, find the node named **Provide filename with token**, click on it.
 
-   - Enter the AuthToken generated by Blynk as a password for your device (use “device” as the username).
+    ![Setup filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/filename-token.png)
 
-	![Security Tab](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/security-tab.png)
+    And enter the token filename you transferred to the gateway.
 
-   Your flow should look like this:
+    ![Type filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/type-filename.png)
 
-![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/flow.png)
 
-### Step 6: Running the Sample Using Node-RED
+### 7. Running the Sample Using Node-RED
+
+1. **Deploy the Flow:**
+   - Click the **Deploy** button in Node-RED to activate the flow. When the flow connects to the cloud, the MQTT node's status indicator will turn green and display "Connected."
+
+2. **Test Your Setup:**
+   - Go to Blynk.cloud to check the sensor data and verify everything is working.### Step 6: Running the Sample Using Node-RED
 
 1. **Deploy the Flow:**
    - Click the **Deploy** button in Node-RED to activate the flow.
