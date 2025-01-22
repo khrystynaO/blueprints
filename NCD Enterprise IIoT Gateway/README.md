@@ -177,7 +177,7 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
     The **NCD Enterprise IIoT Gateway Dashboard** provides a comprehensive overview
     of the device's operational status, connectivity, and resource utilization.
 
-    ![Security Tab](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/screenshot-1.png)
+    ![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Gateway/NCD%20Enterprise%20IIoT%20Gateway/Image/screenshot-1.png)
 
     It includes the following key sections:
 
