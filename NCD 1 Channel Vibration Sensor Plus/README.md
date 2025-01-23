@@ -153,6 +153,8 @@ If SSH is not enabled on the gateway, follow these steps:
        - The tab allows for proactive maintenance by notifying you when certain parameters exceed predefined limits.
        - Additionally, you can view custom charts that help in detailed analysis of specific data points, ensuring that your system operates within optimal conditions.
 
+     - **The Blynk mobile app** provides the same functionality as the web dashboard, allowing you to monitor and manage your system on the go. You can access real-time data, view historical trends, and configure notification thresholds directly from your mobile device. This ensures continuous monitoring and timely alerts, helping you maintain optimal system performance anytime, anywhere.
+
 3. **Analyze and Adjust:**
    - After reviewing the data on each tab, make necessary adjustments to your settings or setup. The dashboard, historical data, and settings provide a comprehensive view of your system’s health and performance, allowing you to maintain it efficiently.
 
