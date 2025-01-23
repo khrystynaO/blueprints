@@ -215,6 +215,7 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 - Customize the code to meet your specific needs.
 - Add some sensors or devices to your setup.
 
+Video guide:
 [![Watch the video](https://img.youtube.com/vi/EbJnY5h65DE/maxresdefault.jpg)](https://youtu.be/EbJnY5h65DE)
 
 ## Troubleshooting
