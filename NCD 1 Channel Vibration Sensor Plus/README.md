@@ -1,10 +1,11 @@
 ## Introduction
 
-This guide will help you set up and launch your project using the [Industrial
+Set up and launch your project with the [Industrial
 IoT Wireless Vibration Temperature Sensor
-V3](https://store.ncd.io/product/industrial-iot-wireless-vibration-temperature-sensor-v3/).
-You will learn how to measure vibration and temperature and send the data
-wirelessly to the NCD Enterprise IIoT Gateway and the Blynk IoT platform.
+V3](https://store.ncd.io/product/industrial-iot-wireless-vibration-temperature-sensor-v3/), sending vibration and temperature data wirelessly to the
+Blynk IoT platform via the NCD Enterprise IIoT Gateway. This blueprint provides
+a ready-to-use web and mobile dashboards, allowing you to monitor sensor data
+in real-time.
 
 ## How To Use This Blueprint
 
@@ -118,7 +119,7 @@ If SSH is not enabled on the gateway, follow these steps:
 
     ![Setup filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/filename-token.png)
 
-    And enter the token filename that you transferred to the gateway. The filename can contain only numbers before `_tokens.csv`, posible values `15`, `15_tokens`, or `15_tokens.csv`.
+    Enter the token filename that you previously transferred to the gateway. Ensure the filename follows the required format, which must include only numbers before “_tokens.csv.” Valid examples include 15, 15_tokens, or 15_tokens.csv. Avoid adding extra characters or spaces to ensure compatibility.
 
     ![Type filename](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/type-filename.png)
 
@@ -126,8 +127,7 @@ If SSH is not enabled on the gateway, follow these steps:
 ### 7. Running the Sample Using Node-RED
 
 1. **Deploy the Flow:**
-   - Click the **Deploy** button in Node-RED to activate the flow. When the flow connects to the cloud, the MQTT node's status indicator will turn green and display "Connected."
-   Connect to cloud will be when we get data from sensor.
+   - Click the Deploy button in Node-RED to activate the flow. Once the flow is running, the MQTT node’s status indicator will turn green and show “Connected” when data is successfully received from the sensor and transmitted to the cloud.
 
 2. **Test Your Setup:**
    - Go to Blynk.cloud to check the sensor data and verify everything is working.
