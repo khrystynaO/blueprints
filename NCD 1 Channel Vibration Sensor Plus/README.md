@@ -61,6 +61,8 @@ If SSH is not enabled on the gateway, follow these steps:
      - Go to **Service** > **SSH**.
      - Turn **ON** SSH, then click **Submit** and **Apply**.
 
+     - Connect to the Gateway by ETH or WIFI.
+
 ![SSH](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard-ncdio.png)
 
 #### File Transfer (Linux):
@@ -166,6 +168,9 @@ After setting up your system and addressing any issues, you can expand and optim
 Pins](https://docs.blynk.io/en/getting-started/how-to-display-any-sensor-data-in-blynk-app)
 and [MQTT API](https://docs.blynk.io/en/blynk.cloud-mqtt-api/device-mqtt-api)
 to customize the code for specific needs.
+
+🎥 **Watch the Video Guide**
+[![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/bOS4-W-gpJE)
 
 ### Troubleshooting
 
