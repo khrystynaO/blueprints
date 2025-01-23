@@ -128,6 +128,14 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 2. **Node-Red:** Visit `http://[domain_or_ip]:1880` to use Node-Red.
 3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.
 
+#### 2.6 Enable SSH:
+   - Connect by the ETH or WIFI to the gateway.
+   - Open the Gateway's web dashboard at: `http://ncd-xxxx.local`using the credentials `ncdio` / `ncdB3ast`.
+     - Go to **Service** > **SSH**.
+     - Turn **ON** SSH, then click **Submit** and **Apply**.
+
+![SSH](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard-ncdio.png)
+
 ### 3. Preparing Your Device in Blynk.Cloud
 
 1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
@@ -206,6 +214,8 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 - [Discover how to Share Devices with other users.](https://docs.blynk.io/en/blynk.console/devices/device-sharing)
 - Customize the code to meet your specific needs.
 - Add some sensors or devices to your setup.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EbJnY5h65DE" frameborder="0" allowfullscreen></iframe>
 
 ## Troubleshooting
 
