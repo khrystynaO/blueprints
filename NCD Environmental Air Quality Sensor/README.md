@@ -1,6 +1,6 @@
 ## Introduction
 
-The sample project consists of a sensor that measures temperature, humidity, pressure, and air quality, and transmits these measurements wirelessly to the NCD Enterprise IIoT Gateway.
+This sample project features a sensor that measures temperature, humidity, pressure, and air quality, and transmits these measurements wirelessly to Blynk for further visualization and insights.
 
 ## How To Use This Blueprint
 
