@@ -106,7 +106,7 @@ For locations where wired or Wi-Fi connections are impractical, the gateway can 
 | **Dial Number**      | Usually `*99#` for most networks.                       |
 | **Authentication**   | Type of authentication (e.g., PAP, CHAP).               |
 
-![Cellular Settings](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD/NCD%20Environmental%20Air%20Quality%20Sensor/Image/cellular.png)
+![Cellular Settings](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/cellular.png)
 
 5. **Check LTE Connection:** Verify the LTE connection status in the web configuration interface.
 
@@ -140,13 +140,13 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 
 ### 5. Configuring the Node-RED Flow
 
-1. Copy and import the [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD/NCD%20Environmental%20Air%20Quality%20Sensor/Firmware/flow.json) into Node-RED.
+1. Copy and import the [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Firmware/flow.json) into Node-RED.
 2. Open settings for the MQTT node and update the server properties:
    - Go to the Security tab.
    - Enter your [Blynk device credentials](https://docs.blynk.io/en/getting-started/activating-devices/manual-device-activation#getting-auth-token) in the Password field, and use "device" for the Username field.
    For more details, refer to the [Blynk Node-RED guide](https://docs.blynk.io/en/hardware-guides/node-red#configure-the-mqtt-broker) **Configure the MQTT Broker** topic.
 
-![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD/NCD%20Environmental%20Air%20Quality%20Sensor/Image/flow.png)
+![Node-RED Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/flow.png)
 
 ### 6. Running the Sample Using Node-RED
 
