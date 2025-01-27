@@ -1,6 +1,6 @@
 [
     {
-        "id": "32c2dab8abb00224",
+        "id": "4f7179827ffc09fa",
         "type": "tab",
         "label": "1 Channel Vibration Sensor Plus",
         "disabled": false,
@@ -8,29 +8,28 @@
         "env": []
     },
     {
-        "id": "c30c9a33fdbd53ef",
+        "id": "70998457709bb33e",
         "type": "ncd-gateway-node",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
-        "connection": "bc543191495254c0",
+        "connection": "0b47e914c1107fda",
         "unknown_devices": 0,
         "outputs": 1,
-        "x": 290,
-        "y": 160,
+        "x": 330,
+        "y": 480,
         "wires": [
             [
-                "3ce31c48528043f0",
-                "3166f1fe4f62174f"
+                "f111d382c133853c"
             ]
         ]
     },
     {
-        "id": "bf1db162d0c23ed9",
+        "id": "8e2b72f4dd63627a",
         "type": "ncd-wireless-node",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
-        "connection": "3a158777559a1790",
-        "config_comm": "3a158777559a1790",
+        "connection": "0b47e914c1107fda",
+        "config_comm": "0b47e914c1107fda",
         "addr": "",
         "sensor_type": "80",
         "auto_config": "",
@@ -156,130 +155,81 @@
         "high_calibration_420ma": 68714,
         "thermocouple_type_23_active": "",
         "thermocouple_type_23": 0,
-        "x": 310,
-        "y": 60,
+        "x": 290,
+        "y": 380,
         "wires": [
             [
-                "46065091c33bcba5"
+                "4c6af4407906df35",
+                "894eed25d188632b"
             ]
         ]
     },
     {
-        "id": "3ce31c48528043f0",
+        "id": "894eed25d188632b",
         "type": "function",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "data_process",
-        "func": "// Check if the message payload is a string, and parse it if necessary\nlet parsedMsg;\nif (typeof msg.payload === 'string') {\n    // If the payload is a string, parse it as JSON\n    parsedMsg = JSON.parse(msg.payload);\n} else {\n    // Otherwise, assume it's already an object\n    parsedMsg = msg.payload;\n}\n\n// Extract relevant data from the parsed message payload\nlet {\n    nodeId, firmware, battery, battery_percent: batteryPercent, counter, sensor_type: sensorType,\n    sensor_data: sensorData, sensor_name: sensorName, addr: sensorAddr, type\n} = parsedMsg;\n\n// Check if the sensor type is 80 (indicating vibration sensor) and sensorData is defined\nif (sensorType === 80 && sensorData !== undefined) {\n\n    // Calculate the Total Vibration Level (TVL) using the root mean square (RMS) acceleration values for x, y, and z axes\n    let TVL = Math.sqrt(\n        Math.pow(sensorData.x_rms_ACC_G, 2) +\n        Math.pow(sensorData.y_rms_ACC_G, 2) +\n        Math.pow(sensorData.z_rms_ACC_G, 2)\n    );\n\n    // Store calculated TVL, battery level, and temperature in global context for future use\n    global.set(\"TVL\", TVL);\n    global.set(\"batteryLevel\", batteryPercent);\n    global.set(\"temperature\", sensorData.temperature);\n\n    // Combine the three peak values for each axis into a single string for x, y, and z axes\n    let xPeaks = `${sensorData?.x_peak_one_Hz}/${sensorData?.x_peak_two_Hz}/${sensorData?.x_peak_three_Hz}`;\n    let yPeaks = `${sensorData?.y_peak_one_Hz}/${sensorData?.y_peak_two_Hz}/${sensorData?.y_peak_three_Hz}`;\n    let zPeaks = `${sensorData?.z_peak_one_Hz}/${sensorData?.z_peak_two_Hz}/${sensorData?.z_peak_three_Hz}`;\n\n    // Estimate the motor speed (Hz) by finding the maximum peak frequency value among all axes\n    let xMaxPeak = Math.max(sensorData?.x_peak_one_Hz, sensorData?.x_peak_two_Hz, sensorData?.x_peak_three_Hz);\n    let yMaxPeak = Math.max(sensorData?.y_peak_one_Hz, sensorData?.y_peak_two_Hz, sensorData?.y_peak_three_Hz);\n    let zMaxPeak = Math.max(sensorData?.z_peak_one_Hz, sensorData?.z_peak_two_Hz, sensorData?.z_peak_three_Hz);\n\n    // Determine the highest peak value to estimate motor speed\n    let estimatedMotorSpeedHz = Math.max(xMaxPeak, yMaxPeak, zMaxPeak);\n\n    // Return an array of objects with each piece of relevant data for further processing\n    return [\n        { payload: sensorData?.mode },                     // Sensor mode\n        { payload: sensorData?.odr.match(/\\d+/)[0] },      // Output data rate (ODR) extracted as a number\n        { payload: sensorData?.temperature },              // Temperature reading\n        { payload: sensorData?.x_rms_ACC_G },              // X-axis RMS acceleration\n        { payload: sensorData?.x_max_ACC_G },              // X-axis max acceleration\n        { payload: sensorData?.x_velocity_mm_sec },        // X-axis velocity\n        { payload: sensorData?.x_displacement_mm },        // X-axis displacement\n        { payload: sensorData?.x_peak_one_Hz },            // X-axis first peak frequency\n        { payload: sensorData?.x_peak_two_Hz },            // X-axis second peak frequency\n        { payload: sensorData?.x_peak_three_Hz },          // X-axis third peak frequency\n        { payload: sensorData?.y_rms_ACC_G },              // Y-axis RMS acceleration\n        { payload: sensorData?.y_max_ACC_G },              // Y-axis max acceleration\n        { payload: sensorData?.y_velocity_mm_sec },        // Y-axis velocity\n        { payload: sensorData?.y_displacement_mm },        // Y-axis displacement\n        { payload: sensorData?.y_peak_one_Hz },            // Y-axis first peak frequency\n        { payload: sensorData?.y_peak_two_Hz },            // Y-axis second peak frequency\n        { payload: sensorData?.y_peak_three_Hz },          // Y-axis third peak frequency\n        { payload: sensorData?.z_rms_ACC_G },              // Z-axis RMS acceleration\n        { payload: sensorData?.z_max_ACC_G },              // Z-axis max acceleration\n        { payload: sensorData?.z_velocity_mm_sec },        // Z-axis velocity\n        { payload: sensorData?.z_displacement_mm },        // Z-axis displacement\n        { payload: sensorData?.z_peak_one_Hz },            // Z-axis first peak frequency\n        { payload: sensorData?.z_peak_two_Hz },            // Z-axis second peak frequency\n        { payload: sensorData?.z_peak_three_Hz },          // Z-axis third peak frequency\n        { payload: batteryPercent },                       // Battery level percentage\n        { payload: TVL },                                  // Total Vibration Level (TVL)\n        { payload: xPeaks },                               // Combined X-axis peaks\n        { payload: yPeaks },                               // Combined Y-axis peaks\n        { payload: zPeaks },                               // Combined Z-axis peaks\n        { payload: estimatedMotorSpeedHz },                // Estimated motor speed in Hz\n        { payload: \"Null\" },                               // Placeholder for additional processing or default value\n    ];\n}\n",
-        "outputs": 31,
+        "func": "// Check if the message payload is a string, and parse it if necessary\nlet parsedMsg;\nif (typeof msg.payload === 'string') {\n    // If the payload is a string, parse it as JSON\n    parsedMsg = JSON.parse(msg.payload);\n} else {\n    // Otherwise, assume it's already an object\n    parsedMsg = msg.payload;\n}\n\n// Extract relevant data from the parsed message payload\nlet {\n    nodeId, firmware, battery, battery_percent: batteryPercent, counter, sensor_type: sensorType,\n    sensor_data: sensorData, sensor_name: sensorName, addr: sensorAddr, type\n} = parsedMsg;\n\n// Check if the sensor type is 80 (indicating vibration sensor) and sensorData is defined\nif (sensorData !== undefined) {\n\n    // Calculate the Total Vibration Level (TVL) using the root mean square (RMS) acceleration values for x, y, and z axes\n    let TVL = Math.sqrt(\n        Math.pow(sensorData.x_rms_ACC_G, 2) +\n        Math.pow(sensorData.y_rms_ACC_G, 2) +\n        Math.pow(sensorData.z_rms_ACC_G, 2)\n    );\n\n    // Combine the three peak values for each axis into a single string for x, y, and z axes\n    let xPeaks = `${sensorData?.x_peak_one_Hz}/${sensorData?.x_peak_two_Hz}/${sensorData?.x_peak_three_Hz}`;\n    let yPeaks = `${sensorData?.y_peak_one_Hz}/${sensorData?.y_peak_two_Hz}/${sensorData?.y_peak_three_Hz}`;\n    let zPeaks = `${sensorData?.z_peak_one_Hz}/${sensorData?.z_peak_two_Hz}/${sensorData?.z_peak_three_Hz}`;\n\n    // Estimate the motor speed (Hz) by finding the maximum peak frequency value among all axes\n    let xMaxPeak = Math.max(sensorData?.x_peak_one_Hz, sensorData?.x_peak_two_Hz, sensorData?.x_peak_three_Hz);\n    let yMaxPeak = Math.max(sensorData?.y_peak_one_Hz, sensorData?.y_peak_two_Hz, sensorData?.y_peak_three_Hz);\n    let zMaxPeak = Math.max(sensorData?.z_peak_one_Hz, sensorData?.z_peak_two_Hz, sensorData?.z_peak_three_Hz);\n\n    // Determine the highest peak value to estimate motor speed\n    let estimatedMotorSpeedHz = Math.max(xMaxPeak, yMaxPeak, zMaxPeak);\n\n    // Return an array of objects with each piece of relevant data for further processing\n    return [\n        { payload: sensorAddr },                     // Sensor mode\n        { payload: sensorData?.odr.match(/\\d+/)[0] },      // Output data rate (ODR) extracted as a number\n        { payload: sensorData?.temperature },              // Temperature reading\n        { payload: sensorData?.x_rms_ACC_G },              // X-axis RMS acceleration\n        { payload: sensorData?.x_max_ACC_G },              // X-axis max acceleration\n        { payload: sensorData?.y_rms_ACC_G },              // Y-axis RMS acceleration\n        { payload: sensorData?.y_max_ACC_G },              // Y-axis max acceleration\n        { payload: sensorData?.z_rms_ACC_G },              // Z-axis RMS acceleration\n        { payload: sensorData?.z_max_ACC_G },              // Z-axis max acceleration\n        { payload: batteryPercent },                       // Battery level percentage\n        { payload: TVL },                                  // Total Vibration Level (TVL)\n        { payload: xPeaks },                               // Combined X-axis peaks\n        { payload: yPeaks },                               // Combined Y-axis peaks\n        { payload: zPeaks },                               // Combined Z-axis peaks\n        { payload: estimatedMotorSpeedHz },                // Estimated motor speed in Hz\n    ];\n}\n",
+        "outputs": 15,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 560,
-        "y": 320,
+        "y": 380,
         "wires": [
             [
-                "b60c71403c551283"
+                "8dd9885671adfbec"
             ],
             [
-                "e81b2be2f6f790a4"
+                "13b3b71336aaf827"
             ],
             [
-                "ae55608ba659316b"
+                "355682059521a6b0"
             ],
             [
-                "a8784de3333c28a6"
+                "2f430dbd346b03ac"
             ],
             [
-                "a656405cb88fc936"
+                "03c677210ebbc5cd"
             ],
             [
-                "75bb931fbcc44f19"
+                "18c28a0ffabbeaf6"
             ],
             [
-                "1b929424e84df738"
+                "53fc8d1714b4f812"
             ],
             [
-                "66d3358c68a3c65f"
+                "4d0d7e52d99995c1"
             ],
             [
-                "f528ee6c29beefd2"
+                "e50f2c8c88761293"
             ],
             [
-                "cd5effc38f99f543"
+                "58e1d4e3f657be1d"
             ],
             [
-                "492467d7a35cfb06"
+                "1831e0b4b2bda4da"
             ],
             [
-                "2e450bbff685c801"
+                "c0330fc215a256fa"
             ],
             [
-                "ce36d05356377884"
+                "1552b4758d47ccd7"
             ],
             [
-                "8c4cdac1c3540d49"
+                "7296c56763e16a90"
             ],
             [
-                "ba25d01ecf1d585a"
-            ],
-            [
-                "446102293c8fd5cd"
-            ],
-            [
-                "1295947f66faba40"
-            ],
-            [
-                "0f49e821074792fa"
-            ],
-            [
-                "a4af7373b652b53f"
-            ],
-            [
-                "26207f33372b42d6"
-            ],
-            [
-                "938d7f46c5c4639d"
-            ],
-            [
-                "fecc4fbaaef76df1"
-            ],
-            [
-                "658b219d7a5662ca"
-            ],
-            [
-                "63d29f0dcee1e399"
-            ],
-            [
-                "71e0f84e62e79467"
-            ],
-            [
-                "8f67e3da04884b5b"
-            ],
-            [
-                "131ca762086167fa"
-            ],
-            [
-                "a89f3d62755d3dd9"
-            ],
-            [
-                "4bba207de61c8664"
-            ],
-            [
-                "0a902b3efd5f298e"
-            ],
-            [
-                "17b97f6ac93d7644",
-                "b02fe6e9d709fc0f",
-                "b64146a4d5d403b7"
+                "3e53ac875054447e"
             ]
         ]
     },
     {
-        "id": "46065091c33bcba5",
+        "id": "4c6af4407906df35",
         "type": "debug",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "From Sensor",
         "active": true,
         "tosidebar": true,
@@ -290,31 +240,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 550,
-        "y": 60,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "b60c71403c551283",
+        "id": "13b3b71336aaf827",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/mode",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 840,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "e81b2be2f6f790a4",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Output Data Range",
         "qos": "0",
@@ -324,15 +256,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 880,
-        "y": 60,
+        "y": 140,
         "wires": []
     },
     {
-        "id": "ae55608ba659316b",
+        "id": "355682059521a6b0",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Temperature",
         "qos": "0",
@@ -342,15 +274,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 860,
-        "y": 100,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "a8784de3333c28a6",
+        "id": "2f430dbd346b03ac",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/X RMS ACC G",
         "qos": "0",
@@ -360,15 +292,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 870,
-        "y": 140,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "a656405cb88fc936",
+        "id": "03c677210ebbc5cd",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/X MAX ACC G",
         "qos": "0",
@@ -378,105 +310,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 870,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "75bb931fbcc44f19",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/X Velocity mm sec",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "1b929424e84df738",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/X Displacement mm",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 890,
         "y": 260,
         "wires": []
     },
     {
-        "id": "66d3358c68a3c65f",
+        "id": "18c28a0ffabbeaf6",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/X Peak One Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 870,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "f528ee6c29beefd2",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/X Peak Two Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 870,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "cd5effc38f99f543",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/X Peak Three Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "492467d7a35cfb06",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Y RMS ACC G",
         "qos": "0",
@@ -486,15 +328,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 870,
-        "y": 420,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "2e450bbff685c801",
+        "id": "53fc8d1714b4f812",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Y MAX ACC G",
         "qos": "0",
@@ -504,105 +346,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 870,
-        "y": 460,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "ce36d05356377884",
+        "id": "4d0d7e52d99995c1",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Y Velocity mm sec",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "8c4cdac1c3540d49",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Y Displacement mm",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 890,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "ba25d01ecf1d585a",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Y Peak One Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 870,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "446102293c8fd5cd",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Y Peak Two Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 870,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "1295947f66faba40",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Y Peak Three Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "0f49e821074792fa",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Z RMS ACC G",
         "qos": "0",
@@ -612,15 +364,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 870,
-        "y": 700,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "a4af7373b652b53f",
+        "id": "e50f2c8c88761293",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Z MAX ACC G",
         "qos": "0",
@@ -630,105 +382,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 870,
-        "y": 740,
+        "y": 420,
         "wires": []
     },
     {
-        "id": "26207f33372b42d6",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Z Velocity mm sec",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "938d7f46c5c4639d",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Z Displacement mm",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 820,
-        "wires": []
-    },
-    {
-        "id": "fecc4fbaaef76df1",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Z Peak One Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 870,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "658b219d7a5662ca",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Z Peak Two Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 870,
-        "y": 900,
-        "wires": []
-    },
-    {
-        "id": "63d29f0dcee1e399",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "ds/Z Peak Three Hz",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 880,
-        "y": 940,
-        "wires": []
-    },
-    {
-        "id": "3166f1fe4f62174f",
+        "id": "f111d382c133853c",
         "type": "debug",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "From Gateway",
         "active": true,
         "tosidebar": true,
@@ -739,13 +401,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 560,
-        "y": 580,
+        "y": 520,
         "wires": []
     },
     {
-        "id": "71e0f84e62e79467",
+        "id": "58e1d4e3f657be1d",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Battery",
         "qos": "0",
@@ -755,15 +417,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 840,
-        "y": 980,
+        "y": 460,
         "wires": []
     },
     {
-        "id": "8f67e3da04884b5b",
+        "id": "1831e0b4b2bda4da",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Total Vibration Level",
         "qos": "0",
@@ -773,15 +435,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 890,
-        "y": 1020,
+        "y": 500,
         "wires": []
     },
     {
-        "id": "131ca762086167fa",
+        "id": "c0330fc215a256fa",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/X Peaks",
         "qos": "0",
@@ -791,15 +453,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 850,
-        "y": 1060,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "a89f3d62755d3dd9",
+        "id": "1552b4758d47ccd7",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Y Peaks",
         "qos": "0",
@@ -809,15 +471,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 850,
-        "y": 1100,
+        "y": 580,
         "wires": []
     },
     {
-        "id": "4bba207de61c8664",
+        "id": "7296c56763e16a90",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Z Peaks",
         "qos": "0",
@@ -827,15 +489,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 850,
-        "y": 1140,
+        "y": 620,
         "wires": []
     },
     {
-        "id": "0a902b3efd5f298e",
+        "id": "3e53ac875054447e",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
         "topic": "ds/Estimated Motor Speed Hz",
         "qos": "0",
@@ -845,90 +507,17 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
+        "broker": "f469f8f163fbed8e",
         "x": 910,
-        "y": 1180,
-        "wires": []
-    },
-    {
-        "id": "be8c74e3bb3306d3",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "event/low_battery",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 1090,
-        "y": 1240,
-        "wires": []
-    },
-    {
-        "id": "5370ed7cffc52fba",
-        "type": "mqtt in",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "downlink/ds/#",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "7389073fb818c7d9",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 330,
-        "y": 680,
-        "wires": [
-            [
-                "fa307cb0c2134871",
-                "dcf19d4132d9e18a"
-            ]
-        ]
-    },
-    {
-        "id": "fa307cb0c2134871",
-        "type": "function",
-        "z": "32c2dab8abb00224",
-        "name": "check_received_data",
-        "func": "\nif (msg.topic == \"downlink/ds/Temperature Alert Threshold\") {\n    global.set(\"temperature_threshold\", msg.payload)\n} else if (msg.topic == \"downlink/ds/Battery Alert Threshold\") {\n    global.set(\"battery_threshold\", msg.payload)\n} else if (msg.topic == \"downlink/ds/Vibration Alert Threshold\") {\n    global.set(\"vibration_threshold\", msg.payload)\n}\n\n\n",
-        "outputs": 0,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 580,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "dcf19d4132d9e18a",
-        "type": "debug",
-        "z": "32c2dab8abb00224",
-        "name": "Data from server",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 570,
         "y": 660,
         "wires": []
     },
     {
-        "id": "42355adb96df1a19",
+        "id": "8dd9885671adfbec",
         "type": "mqtt out",
-        "z": "32c2dab8abb00224",
+        "z": "4f7179827ffc09fa",
         "name": "",
-        "topic": "event/high_vibration",
+        "topic": "meta/MAC",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -936,151 +525,30 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 1100,
-        "y": 1280,
+        "broker": "f469f8f163fbed8e",
+        "x": 850,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "26794b1a5bd717e1",
-        "type": "mqtt out",
-        "z": "32c2dab8abb00224",
-        "name": "",
-        "topic": "event/high_temperature",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "7389073fb818c7d9",
-        "x": 1110,
-        "y": 1320,
-        "wires": []
-    },
-    {
-        "id": "17b97f6ac93d7644",
-        "type": "function",
-        "z": "32c2dab8abb00224",
-        "name": "check_battery",
-        "func": "// Retrieve global thresholds\nlet batteryThreshold = global.get(\"battery_threshold\") || 0;         // Default to 0 if not set\nlet batteryLevel = global.get(\"batteryLevel\")\n\n// Low Battery Alert\nif (batteryThreshold != 0 && batteryLevel <= batteryThreshold) {\n    msg.payload = `The sensor’s battery level has dropped below ${ batteryThreshold }. Please consider replacing or recharging the battery to ensure continuous operation and accurate data collection.`;\n\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 860,
-        "y": 1240,
-        "wires": [
-            [
-                "be8c74e3bb3306d3"
-            ]
-        ]
-    },
-    {
-        "id": "b02fe6e9d709fc0f",
-        "type": "function",
-        "z": "32c2dab8abb00224",
-        "name": "check_vibration",
-        "func": "// Retrieve global thresholds\nlet vibrationThreshold = global.get(\"vibration_threshold\") || 0;     // Default to 0 if not set\nlet TVL = global.get(\"TVL\");\n\n// Low Battery Alert\nif (vibrationThreshold != 0 && TVL >= vibrationThreshold) {\n  msg.payload = `The sensor has detected vibration levels exceeding ${vibrationThreshold}. Please inspect the machinery for potential issues such as misalignment, imbalance, or looseness to prevent further damage.`;\n  return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 860,
-        "y": 1280,
-        "wires": [
-            [
-                "42355adb96df1a19"
-            ]
-        ]
-    },
-    {
-        "id": "b64146a4d5d403b7",
-        "type": "function",
-        "z": "32c2dab8abb00224",
-        "name": "check_temperature",
-        "func": "// Retrieve global thresholds\nlet temperatureThreshold = global.get(\"temperature_threshold\") || 0; // Default to 0 if not set\nlet temperature = global.get(\"temperature\")\n\n// Low Battery Alert\nif (temperatureThreshold != 0 && temperature >= temperatureThreshold) {\n    msg.payload = `The sensor has detected a temperature above ${temperatureThreshold}. Please check for overheating conditions, which may lead to equipment failure or reduced efficiency if not addressed promptly.;`;    \n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 1320,
-        "wires": [
-            [
-                "26794b1a5bd717e1"
-            ]
-        ]
-    },
-    {
-        "id": "20d34dceec36628c",
-        "type": "inject",
-        "z": "32c2dab8abb00224",
-        "name": "run",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "60",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 610,
-        "y": 1280,
-        "wires": [
-            [
-                "17b97f6ac93d7644",
-                "b02fe6e9d709fc0f",
-                "b64146a4d5d403b7"
-            ]
-        ]
-    },
-    {
-        "id": "bc543191495254c0",
+        "id": "0b47e914c1107fda",
         "type": "ncd-gateway-config",
-        "name": "test",
-        "comm_type": "serial",
-        "ip_address": "127.0.0.1",
-        "tcp_port": "2101",
-        "port": "/dev/ttymxc2",
-        "baudRate": "115200",
-        "pan_id": "7FFF",
-        "rssi": false
-    },
-    {
-        "id": "3a158777559a1790",
-        "type": "ncd-gateway-config",
-        "name": "",
+        "name": "gateway",
         "comm_type": "serial",
         "ip_address": "",
         "tcp_port": "2101",
         "port": "/dev/ttymxc2",
         "baudRate": "115200",
-        "pan_id": "7FFF",
+        "pan_id": "7fff",
         "rssi": false
     },
     {
-        "id": "7389073fb818c7d9",
+        "id": "f469f8f163fbed8e",
         "type": "mqtt-broker",
-        "name": "Blynk-cloud",
+        "name": "blynk.cloud - vibration free",
         "broker": "blynk.cloud",
         "port": "8883",
-        "tls": "d0fad18ad7899af8",
+        "tls": "536c3c3ae5738546",
         "clientid": "",
         "autoConnect": true,
         "usetls": true,
@@ -1107,7 +575,7 @@
         "sessionExpiry": ""
     },
     {
-        "id": "d0fad18ad7899af8",
+        "id": "536c3c3ae5738546",
         "type": "tls-config",
         "name": "",
         "cert": "",
