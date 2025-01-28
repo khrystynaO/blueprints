@@ -10,8 +10,9 @@ to the NCD Enterprise IIoT Gateway.
 
 ### 1. Unpacking and Initial Setup
 
-#### 1.1 Required Components:
-- [Industrial IoT Long Range Wireless Environmental Temperature, Humidity, Pressure, and Air Quality Sensor](https://store.ncd.io/product/industrial-iot-long-range-wireless-environmental-temperature-humidity-pressure-air-quality-sensor/)
+- [Industrial IoT Long Range Wireless Environmental Temperature, Humidity,
+    Pressure, and Air Quality
+    Sensor](https://store.ncd.io/product/industrial-iot-long-range-wireless-environmental-temperature-humidity-pressure-air-quality-sensor/)
 - One of the NCD Gateway options:
     - [NCD Enterprise IIoT Gateway](https://store.ncd.io/product/enterprise-iiot-gateway/)
     - [Enterprise IIoT Gateway Lite](https://store.ncd.io/product/enterprise-iiot-gateway-lite/)
@@ -19,109 +20,30 @@ to the NCD Enterprise IIoT Gateway.
 - Batteries (if applicable)
 - Mounting accessories
 
-Verify that you have all necessary parts. For detailed instructions on unpacking and initial setup, refer to the [drawing tab](https://store.ncd.io/product/industrial-iot-long-range-wireless-environmental-temperature-humidity-pressure-air-quality-sensor/#drawing) on the product page.
+Verify that you have all necessary parts. For detailed instructions on
+unpacking and initial setup, refer to the [drawing
+tab](https://store.ncd.io/product/industrial-iot-long-range-wireless-environmental-temperature-humidity-pressure-air-quality-sensor/#drawing)
+on the product page.
 
 ### 2. Configuring the NCD Enterprise IIoT Gateway
 
-#### 2.1 Required Components:
+#### 1 Required Components:
 - NCD Enterprise IIoT Gateway
 - Antennas
 
+**Attach antennas to the sensor and gateway:** This enables wireless communication.
+
 The NCD Enterprise IIoT Gateway facilitates seamless integration and communication between various IoT devices and networks.
 
-#### 2.2 Hardware Setup
+If you haven't set up the gateway yet, please visit Blynk Cloud and use the blueprint for the gateway for a clearer setup: [Blynk Cloud Blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq).
+If you have already set it up, you can proceed without further action.
 
-1. **Connect Terminal Connectors:** Insert the terminal connectors into their designated ports.
-2. **Attach Antennas:**
-   - **WiFi and DigiMesh Antennas:** Install these into the appropriate ports.
-   - **LTE Antennas (Optional):** If using LTE, attach the antennas and insert the SIM card.
-3. **Connect to ETH1:** Use an Ethernet cable to link the ETH1 port to a DHCP router for automatic IP assignment.
-4. **Power Supply:** Connect the power supply to the gateway and ensure it powers on.
+#### 2 Access Interfaces
 
-#### 2.3 Preparation
-
-1. **SIM Card:**
-   - Ensure the SIM card is activated with data services enabled.
-   - Verify network coverage and signal strength in your area.
-2. **Safety Precautions:**
-   - Power off the gateway before inserting the SIM card to avoid damage.
-   - Handle antennas carefully to avoid damaging the connectors.
-
-#### 2.4 Connectivity Interfaces
-
-The NCD Enterprise IIoT Gateway offers multiple connectivity options to ensure reliable communication and data transfer between your IoT devices and the network. This section covers the setup and configuration for Wi-Fi, Ethernet, and LTE interfaces.
-
-#### 2.4.1 Ethernet Configuration
-
-The gateway supports Ethernet connectivity for stable and high-speed data transmission.
-
-1. **Connect to ETH1:** Use an Ethernet cable to connect the ETH1 port on the gateway to a DHCP-enabled router for automatic IP assignment.
-2. **Static IP Configuration (Optional):**
-   - Access the web configuration interface.
-   - Navigate to "Network > Ethernet" and set a static IP if required for your network setup.
-
-#### 2.4.2 Wi-Fi Configuration
-
-The gateway can function in both Wi-Fi Access Point (AP) and Client modes, with AP mode as the default setting.
-
-1. **Configure Router as Wi-Fi AP:**
-   - Click “Interface > Wi-Fi > Wi-Fi” in the web configuration interface.
-   - Select “AP” as the mode and click “Submit”.
-   - Note that only 2.4GHz Wi-Fi is supported.
-
-2. **Switch to Client Mode:**
-   - If you need the gateway to connect to an existing Wi-Fi network, select “Client” as the mode.
-   - Enter the SSID and password of the Wi-Fi network you wish to connect to.
-   - Click “Submit” to save the settings.
-
-#### 2.4.3 LTE Configuration
-
-For locations where wired or Wi-Fi connections are impractical, the gateway can connect via LTE.
-
-1. **Insert SIM Card:** Ensure the SIM card is properly inserted into the designated slot.
-2. **Attach LTE Antennas:** Securely connect the LTE antennas to the marked ports on the gateway.
-3. **Login to the Device:**
-   - Connect the gateway’s Ethernet port to a PC with a standard Ethernet cable.
-   - Configure the PC with a static IP address on the same subnet as the gateway. Use the following settings:
-
-    ```
-    IP address: 192.168.0.2
-    Subnet mask: 255.255.255.0
-    Default gateway: 192.168.0.1
-    Preferred DNS server: 8.8.8.8
-    ```
-    - Open a web browser and navigate to the gateway's IP address.
-    - Login using the credentials provided in the [device documentation](https://www.davantel.com/wp-content/uploads/2023/06/RT090_HM_EG5120_V1.0.2.pdf).
-
-4. **Configure Cellular Settings:**
-    - Navigate to the "Network -> Cellular" section in the web interface.
-    - Enter the APN settings provided by your LTE service provider.
-    - Save the settings and reboot the gateway if necessary.
-
-| **Parameter**        | **Description**                                         |
-|----------------------|---------------------------------------------------------|
-| **APN**              | Access Point Name provided by the LTE service provider. |
-| **Username**         | Username for the APN (if required).                     |
-| **Password**         | Password for the APN (if required).                     |
-| **Dial Number**      | Usually `*99#` for most networks.                       |
-| **Authentication**   | Type of authentication (e.g., PAP, CHAP).               |
-
-![Cellular Settings](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/cellular.png)
-
-5. **Check LTE Connection:** Verify the LTE connection status in the web configuration interface.
-
-By configuring these connectivity interfaces, you ensure that your gateway is equipped to handle various network scenarios, providing flexibility and reliability for your IoT applications.
-
-#### 2.5 Access Interfaces
-
-1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using `ncdio` / `ncdB3ast` for login.
-   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx`
-   are the last 4 characters of the Gateway's MAC address. The MAC address can
-   be found on the side of the device. For example, if the last 4 characters of
-   your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
-   - **Network Settings:** Configure static IPs, DNS, and firewall rules as needed.
-   - **Customizations:** Set up user accounts, logging, and notifications for specific events.
-2. **Node-Red:** Visit `http://[domain_or_ip]:1880` to use Node-Red.
+1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
+   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
+   - **Customization:** Set up user accounts, logging, and notifications for specific events.
+2. **Node-RED:** Access Node-RED at `http://[domain_or_ip]:1880`.
 3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.
 
 ### 3. Preparing Your Device in Blynk.Cloud
@@ -151,6 +73,15 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 ### 6. Running the Sample Using Node-RED
 
 Deploy the flow and use Blynk.cloud for testing.
+
+Your dashboard should look like this:
+
+![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/screenshot-1.png)
+
+The Environmental Air Quality Dashboard provides a comprehensive, real-time
+visualization of key environmental parameters to help users monitor and analyze
+indoor air quality. This intuitive interface presents essential data points and
+insights, enabling informed decision-making to maintain a healthy environment.
 
 ## Next Steps
 
