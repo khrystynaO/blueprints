@@ -51,7 +51,11 @@ If you have already set it up, you can proceed without further action.
 
 1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
 2. **Activate the Device:** On the right panel, click the **Activate Device** button.
-3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
+3. **Generate AuthToken:** Click the **Generate AuthToken** button.
+
+![1step](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/1step.png)
+
+You'll need the generated AuthToken for the next step. Click button **Next**.
 
 ### 4. Accessing Node-RED on the Gateway
 
@@ -62,8 +66,13 @@ If you have already set it up, you can proceed without further action.
 
 1. **Import the Flow:**
     - Copy or download the firmware [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Firmware/flow.json) from second step of device activation.
+
+![2step](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/2step.png)
+
     - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
     - Paste the copied code or upload the flow file (.json).
+
+![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/import.png)
 
 Your flow should look like this:
 
@@ -95,13 +104,7 @@ Your dashboard should look like this:
 
 ![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/screenshot-1.png)
 
-The Environmental Air Quality Dashboard provides a comprehensive, real-time
-visualization of key environmental parameters to help users monitor and analyze
-indoor air quality. This intuitive interface presents essential data points and
-insights, enabling informed decision-making to maintain a healthy environment. The Blynk mobile app provides the same functionality as the web dashboard,
-allowing you to monitor and manage your system on the go. You can access real-time data, view historical trends directly from your mobile device. This ensures continuous
-monitoring and timely alerts, helping you maintain optimal system
-performance anytime, anywhere.
+The Environmental Air Quality Dashboard provides a comprehensive, real-time visualization of key environmental parameters to help users monitor and analyze indoor air quality. This intuitive interface presents essential data points and insights, enabling informed decision-making to maintain a healthy environment. The Blynk mobile app provides the same functionality as the web dashboard, allowing you to monitor and manage your system on the go. You can access real-time data, view historical trends directly from your mobile device. This ensures continuous monitoring and timely alerts, helping you maintain optimal system performance anytime, anywhere.
 
 ## Next Steps
 
