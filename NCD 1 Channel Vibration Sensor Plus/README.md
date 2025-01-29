@@ -8,7 +8,7 @@ wirelessly to the NCD Enterprise IIoT Gateway and the Blynk IoT platform.
 
 ## How To Use This Blueprint
 
-### Step 1: Unpacking and Initial Setup
+### 1. Unpacking and Initial Setup
 
 #### 1.1 Required Components:
 - [**Wireless Vibration Temperature Sensor:**](https://store.ncd.io/product/industrial-iot-wireless-vibration-temperature-sensor-v3/) Measures vibration and temperature.
@@ -24,84 +24,44 @@ from the sensor and sends it to Blynk.
 1. **Unpack all components:** Ensure you have all the required parts.
 2. **Attach antennas to the sensor and gateway:** This enables wireless communication.
 
-### Step 2: Configuring the NCD Gateway
+### 2. Configuring the NCD Enterprise IIoT Gateway
 
-The NCD Gateway connects your sensor to the internet and the Blynk platform. You can connect the gateway via Ethernet, Wi-Fi, or LTE.
+#### 1 Required Components:
+- NCD Enterprise IIoT Gateway
+- Antennas
 
-#### 2.1 Ethernet Configuration
+**Attach antennas to the sensor and gateway:** This enables wireless communication.
 
-Ethernet provides a stable and fast connection.
+The NCD Enterprise IIoT Gateway facilitates seamless integration and communication between various IoT devices and networks.
 
-1. **Connect Ethernet Cable:**
-   - Plug one end of an Ethernet cable into the ETH1 port on the gateway.
-   - Plug the other end into your router or network switch.
+If you haven't set up the gateway yet, please visit blynk.cloud and use the [blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq) for the gateway for a clearer setup.
 
-2. **Power On the Gateway:**
-   - Connect the power adapter to the gateway and plug it into a power outlet.
-   - The gateway should power on, indicated by the power LED lighting up.
+If you have already set it up, you can proceed without further action.
 
-3. **Access the Web Interface:**
-   - Open a web browser on a computer connected to the same network.
-   - Enter the gateway’s IP address (you can find this in your router’s connected devices list) to access the web interface.
+#### 2 Access Interfaces
 
-4. **Optional: Static IP Configuration:**
-   - If you need a fixed IP for the gateway, navigate to "Network > Ethernet" in the web interface and set a static IP.
-
-#### 2.2 Wi-Fi Configuration
-
-Wi-Fi allows wireless communication between the gateway and your network.
-
-1. **Connect to the Gateway:**
-   - Use an Ethernet cable to connect your computer to the gateway’s ETH1 port.
-
-2. **Access the Web Interface:**
-   - Open a web browser and enter the gateway’s default IP address (typically `192.168.0.1`).
-   - Log in using the default credentials provided in the device’s documentation.
-
-3. **Set Up Wi-Fi:**
-   - In the web interface, go to "Interface > Wi-Fi".
-   - Choose between **Access Point (AP) Mode** or **Client Mode**:
-     - **AP Mode:** The gateway creates its own Wi-Fi network.
-     - **Client Mode:** The gateway connects to an existing Wi-Fi network.
-   - Enter the SSID (network name) and password of your Wi-Fi network if using Client Mode.
-   - Click “Submit” to save the settings.
-
-4. **Disconnect Ethernet Cable:**
-   - Once Wi-Fi is set up, you can disconnect the Ethernet cable.
-
-#### 2.3 LTE Configuration
-
-LTE is ideal for remote locations where Ethernet or Wi-Fi isn't available.
-
-**More Information:**
-To get more details about setting up the NCD Gateway, including other connectivity options and advanced configurations, visit the [NCD Enterprise IIoT Gateway Blueprint on Blynk](https://blynk.io/blueprints/ncd-enterprise-iiot-gateway).
-
-#### 2.4 Choosing Connectivity Interfaces
-
-The NCD Enterprise IIoT Gateway offers three main connectivity options: Ethernet, Wi-Fi, and LTE. You can choose the one that best suits your setup.
-
-#### 2.5 Access Interfaces
-
-1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using `ncdio` / `ncdB3ast` for login.
-   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last 4 characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last 4 characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
-   - **Network Settings:** Configure static IPs, DNS, and firewall rules as needed.
-   - **Customizations:** Set up user accounts, logging, and notifications for specific events.
-2. **Node-Red:** Visit `http://[domain_or_ip]:1880` to use Node-Red.
-3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.
-
-### Step 3: Setting Up Your Device in Blynk
+1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
+   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
+   - **Customization:** Set up user accounts, logging, and notifications for specific events.
+2. **Node-RED:** Access Node-RED at `http://[domain_or_ip]:1880`.
+3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.### Step 3: Setting Up Your Device in Blynk
 
 1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
 2. **Activate the Device:** On the right panel, click the **Activate Device** button.
 3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
 
-### Step 4: Accessing Node-RED on the Gateway
+### 3. Preparing Your Device in Blynk.Cloud
 
-1. **Open Node-RED:**
-   - In a web browser, navigate to `http://[gateway IP]:1880` or `http://[domain]:1880`.
-   - Log in to the Node-RED dashboard using `ncdio` / `ncdB3ast`.
+1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
+2. **Activate the Device:** On the right panel, click the **Activate Device** button.
+3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
 
-### Step 5: Configuring the Node-RED Flow
+### 4. Accessing Node-RED on the Gateway
+
+1. Open a web browser and navigate to `http://[domain_or_ip]:1880`.
+2. Log in to the Node-RED dashboard.
+
+### 5: Configuring the Node-RED Flow
 
 1. **Import the Flow:**
    - Copy or download the firmware flow file from second step of device activation.
@@ -130,13 +90,13 @@ The NCD Enterprise IIoT Gateway offers three main connectivity options: Ethernet
 
 ![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/flow.png)
 
-### Step 6: Running the Sample Using Node-RED
+### 6: Running the Sample Using Node-RED
 
 1. **Deploy the Flow:**
    - Click the **Deploy** button in Node-RED to activate the flow.
 
 2. **Test Your Setup:**
-   - Go to Blynk.cloud to check the sensor data and verify everything is working.
+   - Go to Blynk.cloud to check the sensor data and verify everything is working. Connect during deployment flow, but data will be transferred to the cloud when the gateway receives it from the sensor.
    - Blynk dashboard provides a real-time overview of data from the **NCD 1 Channel Vibration Sensor** using the Blynk platform. Key features include:
        - **Status**: Device status (e.g., Online).
        - **Time Range Selection**: View data over different periods (e.g., 1h, 1d, 1mo).
@@ -149,6 +109,12 @@ The NCD Enterprise IIoT Gateway offers three main connectivity options: Ethernet
          - Estimated Motor Speed (Hz).
          - Output Data Range.
          - Battery Level.
+
+The Blynk mobile app provides the same functionality as the web dashboard,
+allowing you to monitor and manage your system on the go. You can access
+real-time data, view historical trends directly from your mobile device.
+This ensures continuous monitoring and timely alerts, helping you maintain
+optimal system
 
 ![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/screenshot-1.png)
 
