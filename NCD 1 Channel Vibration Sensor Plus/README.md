@@ -158,6 +158,11 @@ If SSH is not enabled on the gateway, follow these steps:
 3. **Analyze and Adjust:**
    - After reviewing the data on each tab, make necessary adjustments to your settings or setup. The dashboard, historical data, and settings provide a comprehensive view of your system’s health and performance, allowing you to maintain it efficiently.
 
+Adding more sensors will work automatically—when the gateway receives a message from a new sensor, it will process it. You only need to create new tokens when you see a message in the debug log similar to the one in **Troubleshooting 4** and device automatically will be created in blynk.cloud.
+
+🎥 **Watch the Video Guide**
+[![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/bOS4-W-gpJE)
+
 ### Next Steps
 
 After setting up your system and addressing any issues, you can expand and optimize your project with the following steps:
@@ -165,20 +170,9 @@ After setting up your system and addressing any issues, you can expand and optim
 - Explore the Blynk Web Console and Blynk IoT app, start monitoring your sensor data from both.
 - [Set up notifications and log events with Automations.](https://docs.blynk.io/en/concepts/automations).
 - [Discover how to Share Devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing).
-- Add more sensors or [devices](https://docs.blynk.io/en/blynk.console/devices/actions-with-devices#create-device) to your setup.
-- Learn how to work with [Virtual
-Pins](https://docs.blynk.io/en/getting-started/how-to-display-any-sensor-data-in-blynk-app)
-and [MQTT API](https://docs.blynk.io/en/blynk.cloud-mqtt-api/device-mqtt-api)
-to customize the code for specific needs.
-
-🎥 **Watch the Video Guide**
-[![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/bOS4-W-gpJE)
+- Learn how to work with [Virtual Pins](https://docs.blynk.io/en/getting-started/how-to-display-any-sensor-data-in-blynk-app) and [MQTT API](https://docs.blynk.io/en/blynk.cloud-mqtt-api/device-mqtt-api) to customize the code for specific needs.
 
 ### Troubleshooting
-
-To ensure a smooth experience, make sure you are using the latest versions of the software and libraries. Below are some common issues you might encounter and their solutions:
-
-### Common Issues:
 
 1. **Connection Problems:**
    - Ensure the sensor is powered and within range.
