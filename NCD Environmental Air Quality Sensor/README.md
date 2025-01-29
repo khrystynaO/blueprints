@@ -35,7 +35,8 @@ on the product page.
 
 The NCD Enterprise IIoT Gateway facilitates seamless integration and communication between various IoT devices and networks.
 
-If you haven't set up the gateway yet, please visit Blynk Cloud and use the blueprint for the gateway for a clearer setup: [Blynk Cloud Blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq).
+If you haven't set up the gateway yet, please visit blynk.cloud and use the [blueprint](https://blynk.cloud/dashboard/88287/blueprints/Library/TMPL40YtWwLlq) for the gateway for a clearer setup.
+
 If you have already set it up, you can proceed without further action.
 
 #### 2 Access Interfaces
@@ -48,7 +49,7 @@ If you have already set it up, you can proceed without further action.
 
 ### 3. Preparing Your Device in Blynk.Cloud
 
-1. Click the **`Use Blueprint`** button in the [NCD Environmental Air Quality Sensor](https://blynk.cloud/dashboard/blueprints/Library/TMPL49toG3xmD).
+1. Click the **`Use Blueprint`** button in the [NCD Environmental Air Quality Sensor](https://blynk.cloud/dashboard/blueprints/Library/TMPL4Bvbtdt3v).
 2. In the left panel, select **Devices**.
 3. Click **New Device**.
 4. Choose **From Template -> NCD Environmental Air Quality Sensor**, and click **Create**.
