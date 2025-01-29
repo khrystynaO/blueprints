@@ -49,12 +49,9 @@ If you have already set it up, you can proceed without further action.
 
 ### 3. Preparing Your Device in Blynk.Cloud
 
-1. Click the **`Use Blueprint`** button in the [NCD Environmental Air Quality Sensor](https://blynk.cloud/dashboard/blueprints/Library/TMPL4Bvbtdt3v).
-2. In the left panel, select **Devices**.
-3. Click **New Device**.
-4. Choose **From Template -> NCD Environmental Air Quality Sensor**, and click **Create**.
-
-> **Note:** Record the device credentials shown in the upper right corner for use in the next step.
+1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
+2. **Activate the Device:** On the right panel, click the **Activate Device** button.
+3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
 
 ### 4. Accessing Node-RED on the Gateway
 
