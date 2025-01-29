@@ -123,6 +123,8 @@ optimal system
 
 ![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/screenshot-1.png)
 
+To add a new sensor the same type, you need to repeat this guide for the new device.
+
 ### Next Steps
 
 After setting up your system and addressing any issues, you can expand and optimize your project with the following steps:
