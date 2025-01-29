@@ -1,6 +1,6 @@
 [
     {
-        "id": "c89ef65ac7d40c72",
+        "id": "8c1ecf813a07dae2",
         "type": "tab",
         "label": "NCD IO - 27 Environmental",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "e5d1d022d80dd449",
+        "id": "c0ca3d19ade1bdae",
         "type": "debug",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "Debug Sensor",
         "active": true,
         "tosidebar": true,
@@ -25,12 +25,12 @@
         "wires": []
     },
     {
-        "id": "a2587ab93c553a3f",
+        "id": "63e8d87927f8b8ef",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Battery",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -39,16 +39,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 880,
-        "y": 220,
+        "y": 200,
         "wires": []
     },
     {
-        "id": "79cf4bf7569ab0e2",
+        "id": "ef3391f8013375d9",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Temperature",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -57,16 +57,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 900,
-        "y": 280,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "6e561b2ad649185c",
+        "id": "c7721948d5cccd8f",
         "type": "function",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "data_process",
-        "func": "// Check if the message payload is a string, and parse it if necessary\nlet parsedMsg;\nif (typeof msg.payload === 'string') {\n    parsedMsg = JSON.parse(msg.payload);\n} else {\n    parsedMsg = msg.payload;\n}\n\n// Extract relevant data from the parsed message payload\nlet { \n    nodeId, firmware, battery, battery_percent: batteryPercent, counter, sensor_type: sensorType,\n    sensor_data: sensorData, sensor_name: sensorName, addr: sensorAddr, type \n} = parsedMsg;\n\n// Initialize color properties for different sensor data and image\nlet colorProp = {\n    temperature: \"\",\n    pressure: \"\",\n    humidity: \"\",\n    gas_resistance: \"\",\n    iaq: \"\",\n    image: \"\"\n};\n\n// Check if the sensor type is 27 and sensorData is defined\nif (sensorType === 27 && sensorData !== undefined) {\n    // Set color property and image for IAQ (Indoor Air Quality) if it's defined\n    if (sensorData.iaq !== undefined) {\n        if (sensorData.iaq <= 50) {\n            colorProp.iaq = \"#5ca731\"; // Green for good IAQ\n            colorProp.image = 0;\n        } else if (sensorData.iaq <= 100) {\n            colorProp.iaq = \"#ADB847\"; // Light green for moderate IAQ\n            colorProp.image = 1;\n        } else if (sensorData.iaq <= 150) {\n            colorProp.iaq = \"#E6A22C\"; // Yellow for unhealthy for sensitive groups\n            colorProp.image = 2;\n        } else if (sensorData.iaq <= 200) {\n            colorProp.iaq = \"#ED8125\"; // Orange for unhealthy\n            colorProp.image = 3;\n        } else if (sensorData.iaq <= 300) {\n            colorProp.iaq = \"#D4403C\"; // Red for very unhealthy\n            colorProp.image = 4;\n        } else {\n            colorProp.iaq = \"#A9364A\"; // Purple for hazardous\n            colorProp.image = 5;\n        }\n    }\n\n    // Set color property for Temperature if it's defined\n    if (sensorData.temperature !== undefined) {\n        if (sensorData.temperature >= 18 && sensorData.temperature <= 24) {\n            colorProp.temperature = \"#5CA731\"; // Green for comfortable temperature\n        } else if ((sensorData.temperature >= 15 && sensorData.temperature < 18) || \n                   (sensorData.temperature > 24 && sensorData.temperature <= 27)) {\n            colorProp.temperature = \"#BE7E00\"; // Orange for slightly uncomfortable\n        } else {\n            colorProp.temperature = \"#A9364A\"; // Red for very uncomfortable\n        }\n    }\n\n    // Set color property for Pressure if it's defined\n    if (sensorData.pressure !== undefined) {\n        if (sensorData.pressure >= 1010 && sensorData.pressure <= 1020) {\n            colorProp.pressure = \"#5CA731\"; // Green for normal pressure\n        } else if ((sensorData.pressure >= 1000 && sensorData.pressure < 1010) || \n                   (sensorData.pressure > 1020 && sensorData.pressure <= 1030)) {\n            colorProp.pressure = \"#BE7E00\"; // Orange for slightly abnormal pressure\n        } else {\n            colorProp.pressure = \"#A9364A\"; // Red for very abnormal pressure\n        }\n    }\n\n    // Set color property for Humidity if it's defined\n    if (sensorData.humidity !== undefined) {\n        if (sensorData.humidity >= 30 && sensorData.humidity <= 50) {\n            colorProp.humidity = \"#5CA731\"; // Green for comfortable humidity\n        } else if ((sensorData.humidity >= 20 && sensorData.humidity < 30) || \n                   (sensorData.humidity > 50 && sensorData.humidity <= 60)) {\n            colorProp.humidity = \"#BE7E00\"; // Orange for slightly uncomfortable\n        } else {\n            colorProp.humidity = \"#A9364A\"; // Red for very uncomfortable\n        }\n    }\n\n    // Set color property for Gas Resistance if it's defined\n    if (sensorData.gas_resistance !== undefined) {\n        if (sensorData.gas_resistance >= 70000 && sensorData.gas_resistance <= 100000) {\n            colorProp.gas_resistance = \"#5CA731\"; // Green for good gas resistance\n        } else if (sensorData.gas_resistance >= 30000 && sensorData.gas_resistance < 70000) {\n            colorProp.gas_resistance = \"#BE7E00\"; // Orange for moderate gas resistance\n        } else {\n            colorProp.gas_resistance = \"#A9364A\"; // Red for poor gas resistance\n        }\n    }\n}\n\n// Send the formatted message to different MQTT outputs including color properties and image\nreturn [\n    { payload: colorProp.image },              // Image index based on IAQ\n    { payload: batteryPercent },               // Battery percentage\n    { payload: sensorData?.temperature },      // Temperature data\n    { payload: sensorData?.pressure },         // Pressure data\n    { payload: sensorData?.humidity },         // Humidity data\n    { payload: sensorData?.gas_resistance },   // Gas resistance data\n    { payload: sensorData?.iaq },              // IAQ data\n    { payload: colorProp.temperature },        // Temperature color property\n    { payload: colorProp.pressure },           // Pressure color property\n    { payload: colorProp.humidity },           // Humidity color property\n    { payload: colorProp.gas_resistance }      // Gas resistance color property\n];\n",
-        "outputs": 12,
+        "func": "// Check if the message payload is a string, and parse it if necessary\nlet parsedMsg;\nif (typeof msg.payload === 'string') {\n    parsedMsg = JSON.parse(msg.payload);\n} else {\n    parsedMsg = msg.payload;\n}\n\n// Extract relevant data from the parsed message payload\nlet { \n    nodeId, firmware, battery, battery_percent: batteryPercent, counter, sensor_type: sensorType,\n    sensor_data: sensorData, sensor_name: sensorName, addr: sensorAddr, type \n} = parsedMsg;\n\n// Initialize color properties for different sensor data and image\nlet colorProp = {\n    temperature: \"\",\n    pressure: \"\",\n    humidity: \"\",\n    gas_resistance: \"\",\n    iaq: \"\",\n    image: \"\"\n};\n\n// Check if the sensor type is 27 and sensorData is defined\nif (sensorData !== undefined) {\n    // Set color property and image for IAQ (Indoor Air Quality) if it's defined\n    if (sensorData.iaq !== undefined) {\n        if (sensorData.iaq <= 50) {\n            colorProp.iaq = \"#5ca731\"; // Green for good IAQ\n            colorProp.image = 0;\n        } else if (sensorData.iaq <= 100) {\n            colorProp.iaq = \"#ADB847\"; // Light green for moderate IAQ\n            colorProp.image = 1;\n        } else if (sensorData.iaq <= 150) {\n            colorProp.iaq = \"#E6A22C\"; // Yellow for unhealthy for sensitive groups\n            colorProp.image = 2;\n        } else if (sensorData.iaq <= 200) {\n            colorProp.iaq = \"#ED8125\"; // Orange for unhealthy\n            colorProp.image = 3;\n        } else if (sensorData.iaq <= 300) {\n            colorProp.iaq = \"#D4403C\"; // Red for very unhealthy\n            colorProp.image = 4;\n        } else {\n            colorProp.iaq = \"#A9364A\"; // Purple for hazardous\n            colorProp.image = 5;\n        }\n    }\n\n    // Set color property for Temperature if it's defined\n    if (sensorData.temperature !== undefined) {\n        if (sensorData.temperature >= 18 && sensorData.temperature <= 24) {\n            colorProp.temperature = \"#5CA731\"; // Green for comfortable temperature\n        } else if ((sensorData.temperature >= 15 && sensorData.temperature < 18) || \n                   (sensorData.temperature > 24 && sensorData.temperature <= 27)) {\n            colorProp.temperature = \"#BE7E00\"; // Orange for slightly uncomfortable\n        } else {\n            colorProp.temperature = \"#A9364A\"; // Red for very uncomfortable\n        }\n    }\n\n    // Set color property for Pressure if it's defined\n    if (sensorData.pressure !== undefined) {\n        if (sensorData.pressure >= 1010 && sensorData.pressure <= 1020) {\n            colorProp.pressure = \"#5CA731\"; // Green for normal pressure\n        } else if ((sensorData.pressure >= 1000 && sensorData.pressure < 1010) || \n                   (sensorData.pressure > 1020 && sensorData.pressure <= 1030)) {\n            colorProp.pressure = \"#BE7E00\"; // Orange for slightly abnormal pressure\n        } else {\n            colorProp.pressure = \"#A9364A\"; // Red for very abnormal pressure\n        }\n    }\n\n    // Set color property for Humidity if it's defined\n    if (sensorData.humidity !== undefined) {\n        if (sensorData.humidity >= 30 && sensorData.humidity <= 50) {\n            colorProp.humidity = \"#5CA731\"; // Green for comfortable humidity\n        } else if ((sensorData.humidity >= 20 && sensorData.humidity < 30) || \n                   (sensorData.humidity > 50 && sensorData.humidity <= 60)) {\n            colorProp.humidity = \"#BE7E00\"; // Orange for slightly uncomfortable\n        } else {\n            colorProp.humidity = \"#A9364A\"; // Red for very uncomfortable\n        }\n    }\n\n    // Set color property for Gas Resistance if it's defined\n    if (sensorData.gas_resistance !== undefined) {\n        if (sensorData.gas_resistance >= 70000 && sensorData.gas_resistance <= 100000) {\n            colorProp.gas_resistance = \"#5CA731\"; // Green for good gas resistance\n        } else if (sensorData.gas_resistance >= 30000 && sensorData.gas_resistance < 70000) {\n            colorProp.gas_resistance = \"#BE7E00\"; // Orange for moderate gas resistance\n        } else {\n            colorProp.gas_resistance = \"#A9364A\"; // Red for poor gas resistance\n        }\n    }\n}\n\n// Send the formatted message to different MQTT outputs including color properties and image\nreturn [\n    { payload: colorProp.image },              // Image index based on IAQ\n    { payload: batteryPercent },               // Battery percentage\n    { payload: sensorData?.temperature },      // Temperature data\n    { payload: sensorData?.pressure },         // Pressure data\n    { payload: sensorData?.humidity },         // Humidity data\n    { payload: sensorData?.gas_resistance },   // Gas resistance data\n    { payload: sensorData?.iaq },              // IAQ data\n    { payload: colorProp.temperature },        // Temperature color property\n    { payload: colorProp.pressure },           // Pressure color property\n    { payload: colorProp.humidity },           // Humidity color property\n    { payload: colorProp.gas_resistance },      // Gas resistance color property\n    { payload: sensorAddr }                     // MAC\n];\n",
+        "outputs": 13,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -76,50 +76,53 @@
         "y": 300,
         "wires": [
             [
-                "f37aae910013b59d"
+                "990a673df17c9bce"
             ],
             [
-                "a2587ab93c553a3f"
+                "63e8d87927f8b8ef"
             ],
             [
-                "79cf4bf7569ab0e2"
+                "ef3391f8013375d9"
             ],
             [
-                "c98a3c8d85c73adc"
+                "82ab687d416763d3"
             ],
             [
-                "c4a169da17b7876c"
+                "493a5d2c69aa1c3a"
             ],
             [
-                "91e2bdd8c8d76e8b"
+                "a66eb138bf13fdd6"
             ],
             [
-                "94a6bb022db1c542"
+                "15a50ba3f9966e74"
             ],
             [
-                "5517752c074d9597"
+                "9e151dadacf4212b"
             ],
             [
-                "bf26dc4a294ade9f"
+                "6439d4a24915e557"
             ],
             [
-                "b6a51c31bc156a4e"
+                "1f8421e2ad0d05e9"
             ],
             [
-                "d80df312f7fe1555"
+                "eb389abc99859b95"
             ],
             [
-                "5f1a9827d072380e"
+                "7c792574b948ba82"
+            ],
+            [
+                "43a1fe9004de897a"
             ]
         ]
     },
     {
-        "id": "94a6bb022db1c542",
+        "id": "15a50ba3f9966e74",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/IAQ",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -128,16 +131,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 870,
-        "y": 520,
+        "y": 400,
         "wires": []
     },
     {
-        "id": "c98a3c8d85c73adc",
+        "id": "82ab687d416763d3",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Pressure",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -146,16 +149,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 890,
-        "y": 340,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "91e2bdd8c8d76e8b",
+        "id": "a66eb138bf13fdd6",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Gas_resistance",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -164,16 +167,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 910,
-        "y": 460,
+        "y": 360,
         "wires": []
     },
     {
-        "id": "c4a169da17b7876c",
+        "id": "493a5d2c69aa1c3a",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Humidity",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -182,16 +185,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 890,
-        "y": 400,
+        "y": 320,
         "wires": []
     },
     {
-        "id": "5517752c074d9597",
+        "id": "9e151dadacf4212b",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Temperature/prop/color",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -200,16 +203,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 930,
-        "y": 580,
+        "y": 440,
         "wires": []
     },
     {
-        "id": "bf26dc4a294ade9f",
+        "id": "6439d4a24915e557",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Pressure/prop/color",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -218,16 +221,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 920,
-        "y": 640,
+        "y": 480,
         "wires": []
     },
     {
-        "id": "b6a51c31bc156a4e",
+        "id": "1f8421e2ad0d05e9",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Humidity/prop/color",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -236,16 +239,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 920,
-        "y": 700,
+        "y": 520,
         "wires": []
     },
     {
-        "id": "d80df312f7fe1555",
+        "id": "eb389abc99859b95",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Gas_resistance/prop/color",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -254,16 +257,16 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 940,
-        "y": 760,
+        "y": 560,
         "wires": []
     },
     {
-        "id": "5f1a9827d072380e",
+        "id": "7c792574b948ba82",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/IAQ/prop/color",
-        "qos": "",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -272,13 +275,13 @@
         "expiry": "",
         "broker": "98b7a230daa84efa",
         "x": 910,
-        "y": 820,
+        "y": 600,
         "wires": []
     },
     {
-        "id": "f37aae910013b59d",
+        "id": "990a673df17c9bce",
         "type": "mqtt out",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
         "topic": "ds/Air Quality Image",
         "qos": "",
@@ -294,29 +297,29 @@
         "wires": []
     },
     {
-        "id": "dc96a0aaada2e083",
+        "id": "b392a108f130f134",
         "type": "comment",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "NCD Sensor Node",
         "info": "",
-        "x": 290,
-        "y": 240,
+        "x": 270,
+        "y": 260,
         "wires": []
     },
     {
-        "id": "9cd0f749c7597204",
+        "id": "c15be4b630191c8e",
         "type": "comment",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "Process data from sensor",
         "info": "",
-        "x": 570,
+        "x": 630,
         "y": 180,
         "wires": []
     },
     {
-        "id": "9cb8e5de15c06f47",
+        "id": "dbbf099d8c88cd6b",
         "type": "comment",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "MQTT-OUT",
         "info": "",
         "x": 890,
@@ -324,12 +327,12 @@
         "wires": []
     },
     {
-        "id": "1837cf9c692e99fb",
+        "id": "c9ade0e8de1237e9",
         "type": "ncd-wireless-node",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
-        "connection": "3a158777559a1790",
-        "config_comm": "3a158777559a1790",
+        "connection": "0b47e914c1107fda",
+        "config_comm": "0b47e914c1107fda",
         "addr": "",
         "sensor_type": "27",
         "auto_config": "",
@@ -456,44 +459,44 @@
         "thermocouple_type_23_active": "",
         "thermocouple_type_23": 0,
         "x": 290,
-        "y": 280,
+        "y": 300,
         "wires": [
             [
-                "e5d1d022d80dd449"
+                "c0ca3d19ade1bdae",
+                "c7721948d5cccd8f"
             ]
         ]
     },
     {
-        "id": "715dc7e746915c25",
+        "id": "9b5f92327b75f070",
         "type": "ncd-gateway-node",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "",
-        "connection": "3a158777559a1790",
+        "connection": "0b47e914c1107fda",
         "unknown_devices": 0,
         "outputs": 1,
-        "x": 270,
-        "y": 140,
+        "x": 290,
+        "y": 200,
         "wires": [
             [
-                "b59c4aa396a0893e",
-                "6e561b2ad649185c"
+                "f0cc76d3eb4e9538"
             ]
         ]
     },
     {
-        "id": "05ebfd2730809ed4",
+        "id": "1fb59d73d2fec0e2",
         "type": "comment",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "NCD Gateway Node",
         "info": "",
         "x": 270,
-        "y": 100,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "b59c4aa396a0893e",
+        "id": "f0cc76d3eb4e9538",
         "type": "debug",
-        "z": "c89ef65ac7d40c72",
+        "z": "8c1ecf813a07dae2",
         "name": "Debug Gateway",
         "active": true,
         "tosidebar": true,
@@ -508,9 +511,27 @@
         "wires": []
     },
     {
+        "id": "43a1fe9004de897a",
+        "type": "mqtt out",
+        "z": "8c1ecf813a07dae2",
+        "name": "",
+        "topic": "meta/MAC",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "98b7a230daa84efa",
+        "x": 890,
+        "y": 640,
+        "wires": []
+    },
+    {
         "id": "98b7a230daa84efa",
         "type": "mqtt-broker",
-        "name": "Blynk.cloud",
+        "name": "blynk.cloud - 27 free",
         "broker": "blynk.cloud",
         "port": "8883",
         "tls": "59176f5932c42a05",
@@ -540,15 +561,15 @@
         "sessionExpiry": ""
     },
     {
-        "id": "3a158777559a1790",
+        "id": "0b47e914c1107fda",
         "type": "ncd-gateway-config",
-        "name": "",
+        "name": "gateway",
         "comm_type": "serial",
         "ip_address": "",
         "tcp_port": "2101",
         "port": "/dev/ttymxc2",
         "baudRate": "115200",
-        "pan_id": "7FFF",
+        "pan_id": "7fff",
         "rssi": false
     },
     {
