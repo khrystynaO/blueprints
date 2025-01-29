@@ -54,7 +54,13 @@ If you have already set it up, you can proceed without further action.
 
 1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
 2. **Activate the Device:** On the right panel, click the **Activate Device** button.
-3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
+3. **Generate AuthToken:** Click the **Generate AuthToken** button.
+
+![1step](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/1step.png)
+
+You'll need the generated AuthToken for the next step. Click button **Next**.
+
+![2step](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/2step.png)
 
 ### 4. Accessing Node-RED on the Gateway
 
