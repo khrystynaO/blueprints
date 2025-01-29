@@ -119,13 +119,6 @@ To add a new sensor the same type, you need to repeat this guide for the new dev
 
 ## Troubleshooting
 
-- Ensure you have the latest versions of the software you are using.
-- Verify that all libraries are up to date.
-- Check that all dependencies and configurations are correct.
-- Inspect your code for errors.
-
-### Common Issues:
-
 1. **Connection Problems:**
    - Ensure the sensor is powered and within range.
    - Check network settings and firewall rules.
