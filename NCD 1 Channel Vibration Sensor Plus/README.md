@@ -60,7 +60,6 @@ If you have already set it up, you can proceed without further action.
 
 You'll need the generated AuthToken for the next step. Click button **Next**.
 
-![2step](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/2step.png)
 
 ### 4. Accessing Node-RED on the Gateway
 
@@ -70,8 +69,10 @@ You'll need the generated AuthToken for the next step. Click button **Next**.
 ### 5: Configuring the Node-RED Flow
 
 1. **Import the Flow:**
-   - Copy or download the firmware flow file from second step of device activation.
-![Flow](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Firmware/flow.json)
+   - Copy or download the firmware[flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Firmware/flow.json) file from second step of device activation.
+
+![2step](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/2step.png)
+
    - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
    - Paste the copied code or upload the flow file (.json).
 
