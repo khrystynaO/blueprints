@@ -206,6 +206,14 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 
     The dashboard allows users to track system performance, troubleshoot connectivity issues, and ensure the gateway operates optimally for IoT applications.
 
+    The Blynk mobile app provides the same functionality as the web dashboard, allowing you to monitor and manage your system on the go. You can access real-time data, view historical trends, and configure notification thresholds directly from your mobile device. This ensures continuous monitoring and timely alerts, helping you maintain optimal system performance anytime, anywhere.
+
+
+    To add a new gateway, you need to repeat this guide for the new device.
+
+🎥 **Watch the Video Guide**
+[![Watch the video](https://img.youtube.com/vi/EbJnY5h65DE/maxresdefault.jpg)](https://youtu.be/EbJnY5h65DE)
+
 ## Next Steps
 
 - Explore the Blynk Web Console and Blynk IoT app, and try monitoring your gateway data.
@@ -214,9 +222,6 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
 - [Discover how to Share Devices with other users.](https://docs.blynk.io/en/blynk.console/devices/device-sharing)
 - Customize the code to meet your specific needs.
 - Add some sensors or devices to your setup.
-
-🎥 **Watch the Video Guide**
-[![Watch the video](https://img.youtube.com/vi/EbJnY5h65DE/maxresdefault.jpg)](https://youtu.be/EbJnY5h65DE)
 
 ## Troubleshooting
 
