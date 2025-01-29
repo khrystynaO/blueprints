@@ -170,7 +170,6 @@ Adding more sensors will work automatically—when the gateway receives a messag
 - [Learn more about Automations](https://docs.blynk.io/en/concepts/automations).
 - [Discover how to Share Devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing).
 - Customize the code to meet your specific needs.
-- Add more sensors or devices to your setup.
 
 ## Troubleshooting
 
