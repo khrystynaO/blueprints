@@ -106,6 +106,8 @@ Your dashboard should look like this:
 
 The Environmental Air Quality Dashboard provides a comprehensive, real-time visualization of key environmental parameters to help users monitor and analyze indoor air quality. This intuitive interface presents essential data points and insights, enabling informed decision-making to maintain a healthy environment. The Blynk mobile app provides the same functionality as the web dashboard, allowing you to monitor and manage your system on the go. You can access real-time data, view historical trends directly from your mobile device. This ensures continuous monitoring and timely alerts, helping you maintain optimal system performance anytime, anywhere.
 
+To add a new sensor the same type, you need to repeat this guide for the new device.
+
 ## Next Steps
 
 - Explore the Blynk Web Console and Blynk IoT app, and try monitoring your sensor data from both.
