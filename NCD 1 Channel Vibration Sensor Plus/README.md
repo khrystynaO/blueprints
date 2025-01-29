@@ -75,6 +75,8 @@ You'll need the generated AuthToken for the next step. Click button **Next**.
    - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
    - Paste the copied code or upload the flow file (.json).
 
+![Import](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/import.png)
+
 2. **Set Up MQTT:**
    - Click on the any of the highlighted MQTT-out node.
 
