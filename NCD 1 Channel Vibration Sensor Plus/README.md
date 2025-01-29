@@ -76,7 +76,7 @@ If you have already set it up, you can proceed without further action.
 
    - Select the highlighted icon.
 
-	![MQTT Property](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/mqtt-property.jpg)
+	![MQTT Property](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/mqtt-property.png)
 
    - Go to the Security tab.
 
