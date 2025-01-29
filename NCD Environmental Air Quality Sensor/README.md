@@ -132,6 +132,9 @@ If SSH is not enabled on the gateway, follow these steps:
 
 ![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-Env/NCD%20Environmental%20Air%20Quality%20Sensor/Image/dashboard.png)
 
+- **The Blynk mobile app** provides the same functionality as the web dashboard, allowing you to monitor and manage your system on the go. You can access real-time data, view historical trends, and configure notification thresholds directly from your mobile device. This ensures continuous monitoring and timely alerts, helping you maintain optimal system performance anytime, anywhere.
+
+
 #### **Key Features:**
 
 1. **Device Overview:**
@@ -155,6 +158,11 @@ If SSH is not enabled on the gateway, follow these steps:
 5. **Data Visualization & History:**
    - Offers live and historical data views, allowing users to analyze trends over various periods, such as hours, days, or months.
 
+Adding more sensors will work automatically—when the gateway receives a message from a new sensor, it will process it. You only need to create new tokens when you see a message in the debug log similar to the one in **Troubleshooting 4** and device automatically will be created in blynk.cloud.
+
+🎥 **Watch the Video Guide**
+[![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/bOS4-W-gpJE)
+
 ## Next Steps
 
 - Explore the Blynk Web Console and IoT app to monitor sensor data.
@@ -165,13 +173,6 @@ If SSH is not enabled on the gateway, follow these steps:
 - Add more sensors or devices to your setup.
 
 ## Troubleshooting
-
-- Ensure you have the latest software versions.
-- Verify all libraries are up to date.
-- Check dependencies and configurations.
-- Inspect your code for errors.
-
-### Common Issues:
 
 1. **Connection Problems:**
    - Ensure the sensor is powered and within range.
@@ -200,12 +201,12 @@ If SSH is not enabled on the gateway, follow these steps:
         Error: /home/ncdio/.node-red/17_tokens.csv does not exist.
     ```
 
+### Related Links
 
-## Related Links
-
-- [Blynk MQTT API documentation](https://docs.blynk.io/en/hardware-guides/mqtt-api)
-- [Blynk Troubleshooting guide](https://docs.blynk.io/en/getting-started/troubleshooting)
+- [Blynk MQTT API Documentation](https://docs.blynk.io/en/hardware-guides/mqtt-api)
+- [Blynk Documentation](https://docs.blynk.io/en/)
+- [Blynk Node-RED Guide](https://docs.blynk.io/en/hardware-guides/node-red)
+- [NCD Wireless Vibration Temperature Sensor Documentation](https://store.ncd.io/product/industrial-iot-wireless-vibration-temperature-sensor-v3/)
 - [Node-RED Documentation](https://nodered.org/docs/getting-started/local)
-
-By following this blueprint, you can effectively set up and utilize your NCD Wireless Environmental Sensor for various IoT applications.
+- [NCD Support](https://ncd.io/contact/)
 
