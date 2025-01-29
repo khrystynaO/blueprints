@@ -67,7 +67,7 @@ You'll need the generated AuthToken for the next step. Click button **Next**.
 1. **Import the Flow:**
     - Copy or download the firmware [flow file](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Firmware/flow.json) from second step of device activation.
 
-![2step](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/2step.png)
+     ![2step](https://raw.githubusercontent.com/khrystynaO/blueprints/khrystynaO/feature/NCD-Env-Free/NCD%20Environmental%20Air%20Quality%20Sensor/Image/2step.png)
 
     - In Node-RED, press **CTRL + I** or use the menu to select **Import**.
     - Paste the copied code or upload the flow file (.json).
