@@ -40,21 +40,17 @@ If you have already set it up, you can proceed without further action.
 
 #### 2 Access Interfaces
 
-1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
-   - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
-   - **Customization:** Set up user accounts, logging, and notifications for specific events.
-2. **Node-RED:** Access Node-RED at `http://[domain_or_ip]:1880`.
-3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.### Step 3: Setting Up Your Device in Blynk
-
-1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
-2. **Activate the Device:** On the right panel, click the **Activate Device** button.
-3. **Generate AuthToken:** Click the **Generate AuthToken** button. You'll need the generated AuthToken for the next step. Click button **Next**.
+   1. **Web Configuration:** Access the configuration interface at `http://[domain_or_ip]` using the credentials `ncdio` / `ncdB3ast`.
+      - **Domain Name:** The domain name format is `ncd-xxxx.local`, where `xxxx` are the last four characters of the Gateway's MAC address. The MAC address can be found on the side of the device. For example, if the last four characters of your Gateway's MAC address are `c398`, the domain name would be `http://ncd-c398.local`.
+      - **Customization:** Set up user accounts, logging, and notifications for specific events.
+   2. **Node-RED:** Access Node-RED at `http://[domain_or_ip]:1880`.
+   3. **SSH Access:** Connect via SSH with `ncdio` / `ncdB3ast` on port 22.
 
 ### 3. Preparing Your Device in Blynk.Cloud
 
-1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
-2. **Activate the Device:** On the right panel, click the **Activate Device** button.
-3. **Generate AuthToken:** Click the **Generate AuthToken** button.
+   1. **Use the Sensor Blueprint:** Click the **Use Blueprint** button.
+   2. **Activate the Device:** On the right panel, click the **Activate Device** button.
+   3. **Generate AuthToken:** Click the **Generate AuthToken** button.
 
 ![1step](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/NCD-1Channel-Vibration-Sensor-Free/NCD%201%20Channel%20Vibration%20Sensor%20Plus/Image/1step.png)
 
@@ -63,8 +59,8 @@ You'll need the generated AuthToken for the next step. Click button **Next**.
 
 ### 4. Accessing Node-RED on the Gateway
 
-1. Open a web browser and navigate to `http://[domain_or_ip]:1880`.
-2. Log in to the Node-RED dashboard.
+   1. Open a web browser and navigate to `http://[domain_or_ip]:1880`.
+   2. Log in to the Node-RED dashboard.
 
 ### 5: Configuring the Node-RED Flow
 
