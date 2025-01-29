@@ -140,10 +140,6 @@ to customize the code for specific needs.
 
 ### Troubleshooting
 
-To ensure a smooth experience, make sure you are using the latest versions of the software and libraries. Below are some common issues you might encounter and their solutions:
-
-#### Common Issues
-
 1. **Connection Problems:**
    - Ensure the sensor is powered and within range.
    - Check firewall rules.
