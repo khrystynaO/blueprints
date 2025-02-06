@@ -35,7 +35,9 @@ The **Milesight WS302 Sound Level Sensor** monitors and analyzes sound levels in
 3. **Configure the Gateway:**
    - Follow the manufacturer's instructions to connect the gateway to TTN.
    - Ensure the gateway is online and visible in the TTN Console.
-   - *[Insert Screenshot of TTN Gateway Registration Page]*
+
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/gateway.png)
+
 
 #### **Frequency Plans**
 | **Frequency Plan** | **Region**            | **Description**                                                                 |
@@ -206,6 +208,42 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/blynk-dash-2-page.png)
 
 ---
+
+
+### **Step 6 Setting Alerts**
+1. **Log in to Blynk Console**.
+2. **Create Automations**:
+   - Choose **Device State**
+   - Choose your device and triggers for specific thresholds (e.g., LAeq > 80 dB).
+   - Define actions (e.g., send notifications).
+3. **Save and Test**:
+   - Simulate events to ensure triggers activate correctly.
+
+---
+
+## **Step 7: Adding Location in Blynk**
+
+### **5.1 Configuring Location**
+1. **Go to Location Section in Blynk**:
+   - In the Blynk dashboard, navigate to the **Location** section.
+2. **Add the Address**:
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/location.png)
+
+   - Enter the sensor's address or drag the pin on the map to the correct location.
+   - Save the location.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/location-2.png)
+
+3. **Assign Location in Metadata**:
+   - Navigate to device **Info & Metadata** in Blynk.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/location-3.png)
+
+   - Assign the saved location to the device.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/location-4.png)
+
 
 🎥 **Watch the Video Guide**  
 [![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/cuykM1xJTrU?feature=shared)
