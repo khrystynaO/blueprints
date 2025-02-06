@@ -1,7 +1,3 @@
-It seems the instructions are already quite clear and well-structured. However, there are a few areas where the language can be smoothed out. I’ve reworded some sections for clarity and natural flow:
-
----
-
 ## **Milesight WS302 Sound Level Sensor Blueprint Guide**
 
 The **Milesight WS302 Sound Level Sensor** monitors and analyzes sound levels in various environments, providing metrics such as instantaneous sound levels (**LA**), equivalent continuous sound levels (**LAeq**), and maximum sound levels (**LAmax**). It also monitors battery levels and RSSI for reliable operation. This guide provides step-by-step instructions to set up the sensor, register it with **The Things Network (TTN)**, and integrate it with **Blynk IoT** for data visualization and control.
