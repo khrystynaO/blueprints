@@ -78,7 +78,7 @@ The dashboard for the created application looks like this:
    - Pair the sensor via NFC.
    - Navigate to **Settings** -> **LoRaWAN Settings**.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/main-mob-app.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/mobile-2.png)
 
 2. **Configure LoRaWAN Parameters**:
    - **DevEUI**: Use the default value (found on the sensor label).
@@ -90,9 +90,7 @@ The dashboard for the created application looks like this:
    - **Default Application Port**: Set to 85.
    - Use the **Write** button to save these settings via NFC.
    
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/app-mobile-2.png)
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/app-mobile-3.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/mobile.png)
 
 ---
 
