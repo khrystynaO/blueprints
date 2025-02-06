@@ -64,7 +64,7 @@ The **Milesight WS302 Sound Level Sensor** monitors and analyzes sound levels in
 
 ![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/create-form.png)
 
-> **Note:** 
+> **Note:**
 > To ensure smooth operation, it’s recommended that all devices within a TTN application are of the same sensor type (e.g., WS302). If you’d like to use different types of sensors, consider creating a separate application for each sensor type. This helps maintain better compatibility and performance.
 
 The dashboard for the created application looks like this:
@@ -89,7 +89,7 @@ The dashboard for the created application looks like this:
    - **Spreading Factor**: Set to SF10-DR2.
    - **Default Application Port**: Set to 85.
    - Use the **Write** button to save these settings via NFC.
-   
+
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/mobile.png)
 
 ---
@@ -108,7 +108,7 @@ The dashboard for the created application looks like this:
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/integarion-mqtt-key.png)
 
    - In the **API Keys** section of the left menu, select the newly generated key.
-   - Under **Rights**, select **Grant individual rights** and ensure the following permissions are enabled: 
+   - Under **Rights**, select **Grant individual rights** and ensure the following permissions are enabled:
      - **View device keys in application**
      - **Create devices in application**
      - **Edit device keys in application**
@@ -123,7 +123,7 @@ The dashboard for the created application looks like this:
 1. **Click "Use Blueprint"** at the top of the WS302 blueprint page.
 2. **Set Up MQTT in Blynk:**
    - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **Milesight WS302**.
- 
+
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/add.png)
 
    - Enter the data from **Step 2:**
@@ -148,13 +148,13 @@ The dashboard for the created application looks like this:
 
 1. Go to **Developer Zone** > **My Templates** > select **Milesight WS302**, then click **Activate Device**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/bp-dash.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/bp-dashboard.png)
 
 2. In the new window, enter the data provided in **Step 2.3:**
    - **Application Key**
    - **Join EUI**
    - **DevEUI**
-   
+
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/sample-data.png)
 
 3. Click **Next** and wait for the device to come online.
@@ -243,7 +243,7 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/location-4.png)
 
 
-🎥 **Watch the Video Guide**  
+🎥 **Watch the Video Guide**
 [![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/cuykM1xJTrU?feature=shared)
 
 ## **Step 6: Error Handling and Troubleshooting**
