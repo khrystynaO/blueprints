@@ -212,7 +212,7 @@ By configuring these connectivity interfaces, you ensure that your gateway is eq
     To add a new gateway, you need to repeat this guide for the new device.
 
 🎥 **Watch the Video Guide**
-[![Watch the video](https://img.youtube.com/vi/EbJnY5h65DE/maxresdefault.jpg)](https://youtu.be/EbJnY5h65DE)
+[![Watch the video](https://img.youtube.com/vi/XFQJU6fPVCo/maxresdefault.jpg)](https://youtu.be/XFQJU6fPVCo)
 
 ## Next Steps
 
