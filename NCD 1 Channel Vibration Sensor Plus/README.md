@@ -161,7 +161,7 @@ If SSH is not enabled on the gateway, follow these steps:
 Adding more sensors will work automatically—when the gateway receives a message from a new sensor, it will process it. You only need to create new tokens when you see a message in the debug log similar to the one in **Troubleshooting 4** and device automatically will be created in blynk.cloud.
 
 🎥 **Watch the Video Guide**
-[![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/bOS4-W-gpJE)
+[![Watch the video](https://img.youtube.com/vi/2IdSoBFrduU/maxresdefault.jpg)](https://youtu.be/2IdSoBFrduU)
 
 ### Next Steps
 
