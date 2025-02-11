@@ -19,7 +19,7 @@ The **Milesight WS302 Sound Level Sensor** monitors and analyzes sound levels in
 
 ## **Step 2: Registering the Sensor on The Things Network (TTN)**
 
-### **2.1 Setting Up the LoRaWAN Gateway**
+### **2.1 Setting Up the LoRaWAN Gateway if you don't do this before**
 1. **Log in to the TTN Console:** Visit the [TTN Console](https://console.cloud.thethings.network/).
 2. **Add a Gateway:**
    - Navigate to **Gateways** > **Add Gateway**.
@@ -70,13 +70,15 @@ The dashboard for the created application looks like this:
 ---
 
 ### **2.3 Pairing the Sensor with the TTN Application**
-1. **Open the Milesight ToolBox App**:
+1. **[Download and install Milesight ToolBox App](https://www.milesight.com/iot/resources/download-center/#milesight-toolbox)**
+
+2. **Open the Milesight ToolBox App**:
    - Pair the sensor via NFC.
    - Navigate to **Settings** -> **LoRaWAN Settings**.
 
 ![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS203/Images/mobile-2.png)
 
-2. **Configure LoRaWAN Parameters**:
+3. **Configure LoRaWAN Parameters**:
    - **DevEUI**: Use the default value (found on the sensor label).
    - **AppEUI**: Use the manufacturer’s default value or generate a new one.
    - **AppKey**: Use the manufacturer’s default or generate a new one.
@@ -95,7 +97,7 @@ The dashboard for the created application looks like this:
    - In the TTN Console, open your application and select **Integrations**.
 2. **Select MQTT**:
    - Click **MQTT** from the available integration options.
-3. **You’ll Need These Details to Set Up the MQTT Integration in Blynk**:
+3. **You’ll need these details to set up the MQTT integration in Blynk**:
    - **Server Address**
    - **Port**
    - **Username**
