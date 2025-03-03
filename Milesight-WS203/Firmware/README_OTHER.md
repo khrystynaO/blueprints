@@ -1,6 +1,0 @@
-/*
-
-FIXME: insert here formater
-
-*/
-
