@@ -1,6 +1,6 @@
 [
     {
-        "id": "4f7179827ffc09fa",
+        "id": "f80f5946202b1a7a",
         "type": "tab",
         "label": "1 Channel Vibration Sensor Plus",
         "disabled": false,
@@ -8,28 +8,28 @@
         "env": []
     },
     {
-        "id": "70998457709bb33e",
+        "id": "280f4bc5ee509120",
         "type": "ncd-gateway-node",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
-        "connection": "0b47e914c1107fda",
+        "connection": "f0dfd4dce7e9b113",
         "unknown_devices": 0,
         "outputs": 1,
         "x": 330,
         "y": 480,
         "wires": [
             [
-                "f111d382c133853c"
+                "5af1a3707a67dc13"
             ]
         ]
     },
     {
-        "id": "8e2b72f4dd63627a",
+        "id": "afb79874bf786f91",
         "type": "ncd-wireless-node",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
-        "connection": "0b47e914c1107fda",
-        "config_comm": "0b47e914c1107fda",
+        "connection": "f0dfd4dce7e9b113",
+        "config_comm": "f0dfd4dce7e9b113",
         "addr": "",
         "sensor_type": "80",
         "auto_config": "",
@@ -49,7 +49,6 @@
         "change_enabled": "",
         "change_pr": "0",
         "change_interval": "0",
-        "cm_calibration": "60.6",
         "bp_altitude": "0",
         "bp_pressure": "0",
         "bp_temp_prec": "0",
@@ -103,8 +102,6 @@
         "led_accelerometer_threshold_84": "",
         "led_velocity_threshold_84_active": "",
         "led_velocity_threshold_84": "",
-        "acceleration_interrupt_threshold_84_active": "",
-        "acceleration_interrupt_threshold_84": "",
         "set_rtc_101": 0,
         "current_calibration_82": "",
         "current_calibration_82_active": false,
@@ -155,81 +152,21 @@
         "high_calibration_420ma": 68714,
         "thermocouple_type_23_active": "",
         "thermocouple_type_23": 0,
+        "acceleration_interrupt_threshold_84_active": "",
+        "acceleration_interrupt_threshold_84": "",
         "x": 290,
         "y": 380,
         "wires": [
             [
-                "4c6af4407906df35",
-                "894eed25d188632b"
+                "f9698fde9279b000",
+                "15fa62dada40c9b0"
             ]
         ]
     },
     {
-        "id": "894eed25d188632b",
-        "type": "function",
-        "z": "4f7179827ffc09fa",
-        "name": "data_process",
-        "func": "// Check if the message payload is a string, and parse it if necessary\nlet parsedMsg;\nif (typeof msg.payload === 'string') {\n    // If the payload is a string, parse it as JSON\n    parsedMsg = JSON.parse(msg.payload);\n} else {\n    // Otherwise, assume it's already an object\n    parsedMsg = msg.payload;\n}\n\n// Extract relevant data from the parsed message payload\nlet {\n    nodeId, firmware, battery, battery_percent: batteryPercent, counter, sensor_type: sensorType,\n    sensor_data: sensorData, sensor_name: sensorName, addr: sensorAddr, type\n} = parsedMsg;\n\n// Check if the sensor type is 80 (indicating vibration sensor) and sensorData is defined\nif (sensorData !== undefined) {\n\n    // Calculate the Total Vibration Level (TVL) using the root mean square (RMS) acceleration values for x, y, and z axes\n    let TVL = Math.sqrt(\n        Math.pow(sensorData.x_rms_ACC_G, 2) +\n        Math.pow(sensorData.y_rms_ACC_G, 2) +\n        Math.pow(sensorData.z_rms_ACC_G, 2)\n    );\n\n    // Combine the three peak values for each axis into a single string for x, y, and z axes\n    let xPeaks = `${sensorData?.x_peak_one_Hz}/${sensorData?.x_peak_two_Hz}/${sensorData?.x_peak_three_Hz}`;\n    let yPeaks = `${sensorData?.y_peak_one_Hz}/${sensorData?.y_peak_two_Hz}/${sensorData?.y_peak_three_Hz}`;\n    let zPeaks = `${sensorData?.z_peak_one_Hz}/${sensorData?.z_peak_two_Hz}/${sensorData?.z_peak_three_Hz}`;\n\n    // Estimate the motor speed (Hz) by finding the maximum peak frequency value among all axes\n    let xMaxPeak = Math.max(sensorData?.x_peak_one_Hz, sensorData?.x_peak_two_Hz, sensorData?.x_peak_three_Hz);\n    let yMaxPeak = Math.max(sensorData?.y_peak_one_Hz, sensorData?.y_peak_two_Hz, sensorData?.y_peak_three_Hz);\n    let zMaxPeak = Math.max(sensorData?.z_peak_one_Hz, sensorData?.z_peak_two_Hz, sensorData?.z_peak_three_Hz);\n\n    // Determine the highest peak value to estimate motor speed\n    let estimatedMotorSpeedHz = Math.max(xMaxPeak, yMaxPeak, zMaxPeak);\n\n    // Return an array of objects with each piece of relevant data for further processing\n    return [\n        { payload: sensorAddr },                     // Sensor mode\n        { payload: sensorData?.odr.match(/\\d+/)[0] },      // Output data rate (ODR) extracted as a number\n        { payload: sensorData?.temperature },              // Temperature reading\n        { payload: sensorData?.x_rms_ACC_G },              // X-axis RMS acceleration\n        { payload: sensorData?.x_max_ACC_G },              // X-axis max acceleration\n        { payload: sensorData?.y_rms_ACC_G },              // Y-axis RMS acceleration\n        { payload: sensorData?.y_max_ACC_G },              // Y-axis max acceleration\n        { payload: sensorData?.z_rms_ACC_G },              // Z-axis RMS acceleration\n        { payload: sensorData?.z_max_ACC_G },              // Z-axis max acceleration\n        { payload: batteryPercent },                       // Battery level percentage\n        { payload: TVL },                                  // Total Vibration Level (TVL)\n        { payload: xPeaks },                               // Combined X-axis peaks\n        { payload: yPeaks },                               // Combined Y-axis peaks\n        { payload: zPeaks },                               // Combined Z-axis peaks\n        { payload: estimatedMotorSpeedHz },                // Estimated motor speed in Hz\n    ];\n}\n",
-        "outputs": 15,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 560,
-        "y": 380,
-        "wires": [
-            [
-                "8dd9885671adfbec"
-            ],
-            [
-                "13b3b71336aaf827"
-            ],
-            [
-                "355682059521a6b0"
-            ],
-            [
-                "2f430dbd346b03ac"
-            ],
-            [
-                "03c677210ebbc5cd"
-            ],
-            [
-                "18c28a0ffabbeaf6"
-            ],
-            [
-                "53fc8d1714b4f812"
-            ],
-            [
-                "4d0d7e52d99995c1"
-            ],
-            [
-                "e50f2c8c88761293"
-            ],
-            [
-                "58e1d4e3f657be1d"
-            ],
-            [
-                "1831e0b4b2bda4da"
-            ],
-            [
-                "c0330fc215a256fa"
-            ],
-            [
-                "1552b4758d47ccd7"
-            ],
-            [
-                "7296c56763e16a90"
-            ],
-            [
-                "3e53ac875054447e"
-            ]
-        ]
-    },
-    {
-        "id": "4c6af4407906df35",
+        "id": "f9698fde9279b000",
         "type": "debug",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "From Sensor",
         "active": true,
         "tosidebar": true,
@@ -244,9 +181,9 @@
         "wires": []
     },
     {
-        "id": "13b3b71336aaf827",
+        "id": "00ac0c380e905db1",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Output Data Range",
         "qos": "0",
@@ -262,9 +199,9 @@
         "wires": []
     },
     {
-        "id": "355682059521a6b0",
+        "id": "e0c6dc4616cb9c8b",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Temperature",
         "qos": "0",
@@ -280,9 +217,9 @@
         "wires": []
     },
     {
-        "id": "2f430dbd346b03ac",
+        "id": "c6772b27d3ea6191",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/X RMS ACC G",
         "qos": "0",
@@ -298,9 +235,9 @@
         "wires": []
     },
     {
-        "id": "03c677210ebbc5cd",
+        "id": "c4d27632377e939d",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/X MAX ACC G",
         "qos": "0",
@@ -316,9 +253,9 @@
         "wires": []
     },
     {
-        "id": "18c28a0ffabbeaf6",
+        "id": "6023034f50d8fa41",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Y RMS ACC G",
         "qos": "0",
@@ -334,9 +271,9 @@
         "wires": []
     },
     {
-        "id": "53fc8d1714b4f812",
+        "id": "4ab1bb85787562b7",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Y MAX ACC G",
         "qos": "0",
@@ -352,9 +289,9 @@
         "wires": []
     },
     {
-        "id": "4d0d7e52d99995c1",
+        "id": "ded4b9a145ed3b3b",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Z RMS ACC G",
         "qos": "0",
@@ -370,9 +307,9 @@
         "wires": []
     },
     {
-        "id": "e50f2c8c88761293",
+        "id": "a8918cbb84713574",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Z MAX ACC G",
         "qos": "0",
@@ -388,9 +325,9 @@
         "wires": []
     },
     {
-        "id": "f111d382c133853c",
+        "id": "5af1a3707a67dc13",
         "type": "debug",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "From Gateway",
         "active": true,
         "tosidebar": true,
@@ -405,9 +342,9 @@
         "wires": []
     },
     {
-        "id": "58e1d4e3f657be1d",
+        "id": "ba1e72b6d0681524",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Battery",
         "qos": "0",
@@ -423,9 +360,9 @@
         "wires": []
     },
     {
-        "id": "1831e0b4b2bda4da",
+        "id": "a43e05b6063c4ff3",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Total Vibration Level",
         "qos": "0",
@@ -441,9 +378,9 @@
         "wires": []
     },
     {
-        "id": "c0330fc215a256fa",
+        "id": "7b518acf68e7d1cc",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/X Peaks",
         "qos": "0",
@@ -459,9 +396,9 @@
         "wires": []
     },
     {
-        "id": "1552b4758d47ccd7",
+        "id": "93fa059a0fb8683f",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Y Peaks",
         "qos": "0",
@@ -477,9 +414,9 @@
         "wires": []
     },
     {
-        "id": "7296c56763e16a90",
+        "id": "b672f1041c1003f3",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Z Peaks",
         "qos": "0",
@@ -495,9 +432,9 @@
         "wires": []
     },
     {
-        "id": "3e53ac875054447e",
+        "id": "8a69bd1622dd973b",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "ds/Estimated Motor Speed Hz",
         "qos": "0",
@@ -513,9 +450,9 @@
         "wires": []
     },
     {
-        "id": "8dd9885671adfbec",
+        "id": "7a18a22d476b555e",
         "type": "mqtt out",
-        "z": "4f7179827ffc09fa",
+        "z": "f80f5946202b1a7a",
         "name": "",
         "topic": "meta/MAC",
         "qos": "0",
@@ -531,7 +468,69 @@
         "wires": []
     },
     {
-        "id": "0b47e914c1107fda",
+        "id": "15fa62dada40c9b0",
+        "type": "function",
+        "z": "f80f5946202b1a7a",
+        "name": "data_process",
+        "func": "// Ensure that the data field exists in the parsed message\nif (msg.data === undefined) {\n    // If data is undefined, log an error and return a default message\n    node.error(\"Error: data is undefined\", msg);\n}\n\n// Ensure that sensor_data exists inside the data field\nlet sensorData = msg.data.sensor_data;\nif (sensorData === undefined) {\n    // If sensor_data is undefined, log an error and return a default message\n    node.error(\"Error: data is undefined\", msg);\n}\n\n// Destructure the relevant data, including sensor_name from msg.data\nlet {\n    nodeId, firmware, battery, battery_percent: batteryPercent, counter, sensor_type: sensorType,\n    sensor_name: sensorName, // Correcting here to pull directly from msg.data\n    addr: sensorAddr, type,\n} = msg.data; // sensor_name is directly in msg.data, not in sensor_data\n\n// Check if the sensor type is 80 (indicating vibration sensor) and sensorData is defined\nif (sensorData !== undefined) {\n\n    // Calculate the Total Vibration Level (TVL) using the root mean square (RMS) acceleration values for x, y, and z axes\n    let TVL = Math.sqrt(\n        Math.pow(sensorData.x_rms_ACC_G, 2) +\n        Math.pow(sensorData.y_rms_ACC_G, 2) +\n        Math.pow(sensorData.z_rms_ACC_G, 2)\n    );\n\n    // Combine the three peak values for each axis into a single string for x, y, and z axes\n    let xPeaks = `${sensorData?.x_peak_one_Hz}/${sensorData?.x_peak_two_Hz}/${sensorData?.x_peak_three_Hz}`;\n    let yPeaks = `${sensorData?.y_peak_one_Hz}/${sensorData?.y_peak_two_Hz}/${sensorData?.y_peak_three_Hz}`;\n    let zPeaks = `${sensorData?.z_peak_one_Hz}/${sensorData?.z_peak_two_Hz}/${sensorData?.z_peak_three_Hz}`;\n\n    // Estimate the motor speed (Hz) by finding the maximum peak frequency value among all axes\n    let xMaxPeak = Math.max(sensorData?.x_peak_one_Hz, sensorData?.x_peak_two_Hz, sensorData?.x_peak_three_Hz);\n    let yMaxPeak = Math.max(sensorData?.y_peak_one_Hz, sensorData?.y_peak_two_Hz, sensorData?.y_peak_three_Hz);\n    let zMaxPeak = Math.max(sensorData?.z_peak_one_Hz, sensorData?.z_peak_two_Hz, sensorData?.z_peak_three_Hz);\n\n    // Determine the highest peak value to estimate motor speed\n    let estimatedMotorSpeedHz = Math.max(xMaxPeak, yMaxPeak, zMaxPeak);\n\n    // Return an array of objects with each piece of relevant data for further processing\n    return [\n        { payload: sensorAddr },                     // Sensor mode\n        { payload: sensorData.odr.match(/\\d+/)[0]  },      // Output data rate (ODR) extracted as a number\n        { payload: sensorData?.temperature },              // Temperature reading\n        { payload: sensorData?.x_rms_ACC_G },              // X-axis RMS acceleration\n        { payload: sensorData?.x_max_ACC_G },              // X-axis max acceleration\n        { payload: sensorData?.y_rms_ACC_G },              // Y-axis RMS acceleration\n        { payload: sensorData?.y_max_ACC_G },              // Y-axis max acceleration\n        { payload: sensorData?.z_rms_ACC_G },              // Z-axis RMS acceleration\n        { payload: sensorData?.z_max_ACC_G },              // Z-axis max acceleration\n        { payload: batteryPercent },                       // Battery level percentage\n        { payload: TVL },                                  // Total Vibration Level (TVL)\n        { payload: xPeaks },                               // Combined X-axis peaks\n        { payload: yPeaks },                               // Combined Y-axis peaks\n        { payload: zPeaks },                               // Combined Z-axis peaks\n        { payload: estimatedMotorSpeedHz },                // Estimated motor speed in Hz\n    ];\n}\n",
+        "outputs": 15,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 380,
+        "wires": [
+            [
+                "7a18a22d476b555e"
+            ],
+            [
+                "00ac0c380e905db1"
+            ],
+            [
+                "e0c6dc4616cb9c8b"
+            ],
+            [
+                "c6772b27d3ea6191"
+            ],
+            [
+                "c4d27632377e939d"
+            ],
+            [
+                "6023034f50d8fa41"
+            ],
+            [
+                "4ab1bb85787562b7"
+            ],
+            [
+                "ded4b9a145ed3b3b"
+            ],
+            [
+                "a8918cbb84713574"
+            ],
+            [
+                "ba1e72b6d0681524"
+            ],
+            [
+                "a43e05b6063c4ff3"
+            ],
+            [
+                "7b518acf68e7d1cc"
+            ],
+            [
+                "93fa059a0fb8683f"
+            ],
+            [
+                "b672f1041c1003f3"
+            ],
+            [
+                "8a69bd1622dd973b"
+            ]
+        ]
+    },
+    {
+        "id": "f0dfd4dce7e9b113",
         "type": "ncd-gateway-config",
         "name": "gateway",
         "comm_type": "serial",
