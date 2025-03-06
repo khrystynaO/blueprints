@@ -240,6 +240,8 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS302/Images/location-4.png)
 
+🎥 **Watch the Video Guide**
+[![Watch the video](https://img.youtube.com/vi/YbFF-Iec38w/maxresdefault.jpg)](https://youtu.be/YbFF-Iec38w)
 
 ## **Step 6: Error Handling and Troubleshooting**
 
@@ -381,6 +383,4 @@ function readInt16LE(bytes) {
 - Try onboarding the sensor using static tokens
 
 ---
-
-**FIXME:** Replace the video URL with the correct link once available.
 
