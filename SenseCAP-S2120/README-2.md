@@ -28,7 +28,7 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
    - Click **Register Gateway**
 3. Follow manufacturer instructions to bring the gateway online.
 
-!![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/gateway.png)
+!![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/gateway.png)
 
 
 #### **Frequency Plans**
@@ -54,7 +54,7 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
      - **Handler**: Select the handler for your region.
    - Click **Create Application**.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/create-form.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/create-form.png)
 
 > **Note:**
 > To ensure smooth operation, it’s recommended that all devices within a TTN
@@ -64,7 +64,7 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
 
 The dashboard for the created application looks like this:
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/dash-app.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/dash-app.png)
 
 ---
 
@@ -77,7 +77,7 @@ The dashboard for the created application looks like this:
    - Enter the pairing password. The default password is 000000.
    - Select the Sensor by BT ID (BT ID is on the bottom label of the sensor). Then, the basic information of the sensor will be displayed after entering.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/mobile-2.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/mobile-2.png)
 
 3. **Configure parameters**:
    S2120 weather stations are manufactured to support universal frequency plan from 863MHz ~928MHz in one SKU. That is to say, every single device can support 7 frequency plans.
@@ -93,7 +93,7 @@ The dashboard for the created application looks like this:
   - When the device is disconnected from Bluetooth, the LED lights up for 5 seconds and then flashes as a breathing ligh
 
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/mobile.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/mobile.png)
 
 ---
 
@@ -108,7 +108,7 @@ The dashboard for the created application looks like this:
    - **Username**
    - **Password**: Click **Generate new API key** and copy the generated key. Keep it secure.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/integarion-mqtt-key.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/integarion-mqtt-key.png)
 
    - In the **API Keys** section of the left menu, select the newly generated key.
    - Under **Rights**, select **Grant individual rights** and ensure the following permissions are enabled:
@@ -116,7 +116,7 @@ The dashboard for the created application looks like this:
      - **Create devices in application**
      - **Edit device keys in application**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/edit-permition.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/edit-permition.png)
 
 ---
 
@@ -127,7 +127,7 @@ The dashboard for the created application looks like this:
 2. **Set Up MQTT in Blynk:**
    - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **SenseCAP-S2120**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/add.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/add.png)
 
    - Enter the data from **Step 2:**
      - **Hostname:** MQTT server address with port `1883` or `8883` (e.g., `eu1.cloud.thethings.network:8883`)
@@ -135,7 +135,7 @@ The dashboard for the created application looks like this:
      - **Password:** The copied API key
    - Click **Connect**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/connect.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/connect.png)
 
 3. **Enable Automated Device Onboarding:**
    - Once connected, click **Edit** and toggle **Enable automated device onboarding**.
@@ -144,33 +144,27 @@ The dashboard for the created application looks like this:
    - Specify The Things Stack component addresses (found under **Network Information** in the **Admin Panel**).
    - Save changes.
 
-	![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/advanced-complete.png)
+	![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/advanced-complete.png)
 ---
 
 ## **Step 4: Onboarding the Sensor to Blynk**
 
 1. Go to **Developer Zone** > **My Templates** > select **SenseCAP-S2120 Weather Station**, then click **Activate Device**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/bp-dashboard.png)
-
 2. In the new window, enter the data provided in **Step 2.3:**
    - **Application Key**
    - **Join EUI**
    - **DevEUI**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/sample-data.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/sample-data.png)
 
 3. Click **Next** and wait for the device to come online.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/wait-for-dev.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/wait-for-dev.png)
 
 You can verify the device’s status in TTN. To add more sensors, create new devices in Blynk following the same process. Once the device is online, you'll be redirected to the dashboard to test your setup.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/created-dev.png)
-
-When data from the sensor is received in TTN, you will see something like this in the dashboard:
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/ttn-dash-with-data.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/created-dev.png)
 
 ---
 
@@ -181,7 +175,7 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 ### **5.1 Dashboard Overview**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/img_1.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Image/img_1.png)
 
 | Widget                 | Virtual Pin | Unit      |
 |------------------------|-------------|-----------|
@@ -199,7 +193,7 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 ### **5.2 Device Details Tab**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/img_2.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Image/img_2.png)
 
 | Widget                 | Virtual Pin | Description                        |
 |------------------------|-------------|------------------------------------|
@@ -242,21 +236,21 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
    - In the Blynk dashboard, navigate to the **Location** section.
 2. **Add the Address**:
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/location.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location.png)
 
    - Enter the sensor's address or drag the pin on the map to the correct location.
    - Save the location.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/location-2.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location-2.png)
 
 3. **Assign Location in Metadata**:
    - Navigate to device **Info & Metadata** in Blynk.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/location-3.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location-3.png)
 
    - Assign the saved location to the device.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Images/location-4.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location-4.png)
 
 🎥 **Watch the Video Guide**
 [![Watch the video](https://img.youtube.com/vi/YbFF-Iec38w/maxresdefault.jpg)](https://youtu.be/YbFF-Iec38w)
