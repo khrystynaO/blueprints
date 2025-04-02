@@ -28,101 +28,154 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
    - Click **Register Gateway**
 3. Follow manufacturer instructions to bring the gateway online.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/gateway.png)
+!![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/gateway.png)
 
-### **2.2 Creating an Application**
-1. Navigate to **Applications** > **Add Application**.
-2. Fill out:
-   - **Application ID**: `sensecap-8-in-1-weather-station-1`
-   - **Description**: e.g., `Outdoor environmental monitoring`
-   - **Handler**: Choose the regional handler
-3. Click **Create Application**.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/create-form.png)
+#### **Frequency Plans**
+| **Frequency Plan** | **Region**            | **Description**                                                                 |
+|--------------------|-----------------------|---------------------------------------------------------------------------------|
+| **EU868**          | Europe                | Operates at 868 MHz. Commonly used across the EU for LoRaWAN deployments.       |
+| **US915**          | North America         | Operates at 915 MHz. Used in the United States, Canada, and Mexico.             |
+| **AS923**          | Asia-Pacific          | Operates at 923 MHz. Covers countries like Japan, Australia, and New Zealand.   |
+| **IN865**          | India                 | Operates at 865 MHz. Dedicated plan for deployments in India.                   |
+| **AU915**          | Australia/New Zealand | Operates at 915 MHz. Preferred for LoRaWAN in Australia and New Zealand.        |
+| **KR920**          | South Korea           | Operates at 920 MHz. Allocated specifically for South Korea.                    |
+| **RU864**          | Russia                | Operates at 864 MHz. Used exclusively within Russia.                            |
+
+---
+
+### **2.2 Creating a New Application**
+1. **Log in to TTN Console**.
+2. **Create an Application:**
+   - Navigate to **Applications** > **Add Application**.
+   - Enter:
+     - **Application ID**: A unique name (e.g., `sound-monitor`).
+     - **Description**: (e.g., `Monitoring environmental noise levels`).
+     - **Handler**: Select the handler for your region.
+   - Click **Create Application**.
+
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/create-form.png)
 
 > **Note:**
-> It is recommended to keep all devices in one application the same model. For mixed models, use separate applications to ensure optimal decoding and compatibility.
+> To ensure smooth operation, it’s recommended that all devices within a TTN
+> application are of the same sensor type (e.g., SenseCAP-S2120). If you’d like to use
+> different types of sensors, consider creating a separate application for each
+> sensor type. This helps maintain better compatibility and performance.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/ttn-dash.png)
+The dashboard for the created application looks like this:
 
-### **2.3 Adding the Device to TTN**
-1. Use the **SenseCAP Mate App** or **SenseCAP Console**.
-2. Connect to the sensor via **Bluetooth**.
-3. Navigate to **LoRaWAN Settings**, and input:
-   - **DevEUI**, **AppEUI**, **AppKey** (from sensor label or generated)
-   - **Frequency Plan**: Match the gateway region
-   - **LoRaWAN Version**: 1.0.3
-   - **Class Type**: Typically **Class A**
-   - **RX2 Data Rate**: DR3
-   - **Spreading Factor**: SF10-DR2
-   - **Default Application Port**: 85
-4. Save and apply settings.
-
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/mobile-2.png)
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/mobile.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/dash-app.png)
 
 ---
 
-## **Step 3: Configure MQTT in TTN for Blynk**
-1. In the TTN Console, go to your Application > **Integrations** > **MQTT**.
-2. Click **Generate new API Key**.
-3. Save the following:
-   - **Server**: `eu1.cloud.thethings.network`
-   - **Port**: `8883`
-   - **Username**: Application ID
-   - **Password**: Generated API key
-4. In **API Keys**, click the generated key and ensure the following permissions:
-   - View device keys
-   - Create/edit devices
-   - View uplink messages
+### **2.3 Pairing the Sensor with the TTN Application**
+1. **[Download and install SenseCAP Mate App](https://www.pgyer.com/sensecapmate)**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/integarion-mqtt-key.png)
+2. **Connect to Sensor to App**:
+   - After the battery is installed, the red LED will be steady on. Also activate Bluetooth. Press button and hold for 3 seconds, the LED will flash at 1s frequency.
+   - Please click the “Setup” button to turn on Bluetooth and click “ Scan ” to start scanning the sensor's Bluetooth.
+   - Enter the pairing password. The default password is 000000.
+   - Select the Sensor by BT ID (BT ID is on the bottom label of the sensor). Then, the basic information of the sensor will be displayed after entering.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/edit-permition.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/mobile-2.png)
 
----
+3. **Configure parameters**:
+   S2120 weather stations are manufactured to support universal frequency plan from 863MHz ~928MHz in one SKU. That is to say, every single device can support 7 frequency plans.
+   - Set the corresponding frequency band based on the frequency band of the gateway.
+   - Click the “Setting” and select the platform is “The Things Network”.
+   - Select the Frequency Plan, if your gateway is US915, set the sensor to US915.
+   - The device uses OTAA to join the LoRaWAN network by default. So, we can set the device EUI, App EUI and APP Key here.
+       - **DevEUI**: Use the default value (found on the sensor label).
+       - **AppEUI**: Use the manufacturer’s default value or generate a new one.
+       - **AppKey**: Use the manufacturer’s default or generate a new one.
+  - Click the “Send” button, send the setting to the sensor for it to take effect.
+  - Click the “Home” button, the App will disconnect the Bluetooth connection. Then, the sensor will reboot.
+  - When the device is disconnected from Bluetooth, the LED lights up for 5 seconds and then flashes as a breathing ligh
 
-## **Step 4: Integrating TTN with Blynk**
 
-### **4.1 Add Integration in Blynk**
-1. Log in to Blynk Console.
-2. Go to **Developer Zone** > **Integrations** > **The Things Stack** > **Add**.
-3. Choose the template **SenseCAP S2120**.
-4. Enter:
-   - **Hostname**: `eu1.cloud.thethings.network`
-   - **Port**: `8883`
-   - **Username**: TTN Application ID
-   - **Password**: MQTT API Key
-5. Click **Connect**.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/connect.png)
-
-6. Enable **Automated Device Onboarding** and specify:
-   - LoRaWAN version
-   - Frequency plan
-   - Regional parameters
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/advanced-complete.png)
-
-### **4.2 Activate the Device in Blynk**
-1. Go to **My Templates** > **SenseCAP S2120** > **Activate Device**.
-2. Enter:
-   - **Join EUI**, **DevEUI**, **App Key**
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/sample-data.png)
-
-3. Click **Next**, wait until the device shows as online.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/wait-for-dev.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/mobile.png)
 
 ---
 
-## **Step 5: Monitoring Data in Blynk**
+### **2.4 Configuring MQTT Integration in TTN**
+1. **Navigate to TTN Integration Settings**:
+   - In the TTN Console, open your application and select **Integrations**.
+2. **Select MQTT**:
+   - Click **MQTT** from the available integration options.
+3. **You’ll need these details to set up the MQTT integration in Blynk**:
+   - **Server Address**
+   - **Port**
+   - **Username**
+   - **Password**: Click **Generate new API key** and copy the generated key. Keep it secure.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/integarion-mqtt-key.png)
+
+   - In the **API Keys** section of the left menu, select the newly generated key.
+   - Under **Rights**, select **Grant individual rights** and ensure the following permissions are enabled:
+     - **View device keys in application**
+     - **Create devices in application**
+     - **Edit device keys in application**
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/edit-permition.png)
+
+---
+
+## **Step 3: Integrating TTN with Blynk**
+
+### **3.1 Configuring Blynk Integration via MQTT**
+1. **Click "Use Blueprint"** at the top of the blueprint page.
+2. **Set Up MQTT in Blynk:**
+   - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **SenseCAP-S2120**.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/add.png)
+
+   - Enter the data from **Step 2:**
+     - **Hostname:** MQTT server address with port `1883` or `8883` (e.g., `eu1.cloud.thethings.network:8883`)
+     - **Username**
+     - **Password:** The copied API key
+   - Click **Connect**.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/connect.png)
+
+3. **Enable Automated Device Onboarding:**
+   - Once connected, click **Edit** and toggle **Enable automated device onboarding**.
+   - Specify the LoRaWAN version, frequency plan, and regional parameter version.
+   - Enable "Support class B" and/or "Support class C" if required.
+   - Specify The Things Stack component addresses (found under **Network Information** in the **Admin Panel**).
+   - Save changes.
+
+	![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/advanced-complete.png)
+---
+
+## **Step 4: Onboarding the Sensor to Blynk**
+
+1. Go to **Developer Zone** > **My Templates** > select **SenseCAP-S2120 Weather Station**, then click **Activate Device**.
+
+2. In the new window, enter the data provided in **Step 2.3:**
+   - **Application Key**
+   - **Join EUI**
+   - **DevEUI**
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/sample-data.png)
+
+3. Click **Next** and wait for the device to come online.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/wait-for-dev.png)
+
+You can verify the device’s status in TTN. To add more sensors, create new devices in Blynk following the same process. Once the device is online, you'll be redirected to the dashboard to test your setup.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/created-dev.png)
+
+---
+
+## **Step 5: Monitoring and Analyzing Data**
+
+### **5.1 Dashboard Overview**
+The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality. Key features include:
 
 ### **5.1 Dashboard Overview**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/img_1.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/img_1.png)
 
 | Widget                 | Virtual Pin | Unit      |
 |------------------------|-------------|-----------|
@@ -140,7 +193,7 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
 
 ### **5.2 Device Details Tab**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/img_2.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/img_2.png)
 
 | Widget                 | Virtual Pin | Description                        |
 |------------------------|-------------|------------------------------------|
@@ -165,67 +218,64 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
 
 ---
 
-## **Step 7: Location Assignment**
-
-1. In Blynk Dashboard, navigate to **Location** widget.
-2. Add your device's physical location:
-   - Enter address or drag the pin on the map
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/location.png)
-
-3. Save changes.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/location-2.png)
-
-4. Go to **Device Metadata**, assign saved location.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/location-3.png)
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Images/location-4.png)
-
-🎥 **Watch the Video Guide for setup LoraWAN device in Blynk**
-[![Watch the video](https://img.youtube.com/vi/YbFF-Iec38w/maxresdefault.jpg)](https://youtu.be/YbFF-Iec38w)
+### **Step 6 Setting Alerts**
+1. **Log in to Blynk Console**.
+2. **Create Automations**:
+   - Choose **Device State**
+   - Choose your device and triggers for specific thresholds (e.g., LAeq > 80 dB).
+   - Define actions (e.g., send notifications).
+3. **Save and Test**:
+   - Simulate events to ensure triggers activate correctly.
 
 ---
 
-## **Step 8: Troubleshooting**
+## **Step 7: Adding Location in Blynk**
 
-### **Common Issues**
-- **No Data**:
-   - Check TTN application status and device join info
-   - Ensure payload formatter is applied
-- **Battery Drain**:
-   - Reduce reporting interval
-- **Incorrect Readings**:
-   - Check sensor calibration
+### **5.1 Configuring Location**
+1. **Go to Location Section in Blynk**:
+   - In the Blynk dashboard, navigate to the **Location** section.
+2. **Add the Address**:
 
-### **Payload Formatter (Example)**
-```js
-function decodeUplink(input) {
-  var bytes = input.bytes;
-  return {
-    data: {
-      temperature: bytes[0] / 10,
-      humidity: bytes[1] / 2,
-      pressure: ((bytes[2] << 8) + bytes[3]) / 10,
-      windSpeed: bytes[4] / 10,
-      windDirection: (bytes[5] << 8) + bytes[6],
-      rainfall: bytes[7] / 10,
-      solarRadiation: (bytes[8] << 8) + bytes[9],
-      uvIndex: bytes[10] / 10,
-      battery: bytes[11],
-    }
-  };
-}
-```
-> Use SenseCAP official payload docs for full decoding structure.
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS302/Images/location.png)
 
+   - Enter the sensor's address or drag the pin on the map to the correct location.
+   - Save the location.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS302/Images/location-2.png)
+
+3. **Assign Location in Metadata**:
+   - Navigate to device **Info & Metadata** in Blynk.
+   - Assign the saved location to the device.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/location-4.png)
+
+🎥 **Watch the Video Guide for connect another LoraWAN device to Blynk**
+[![Watch the video](https://img.youtube.com/vi/YbFF-Iec38w/maxresdefault.jpg)](https://youtu.be/YbFF-Iec38w)
+
+## **Step 6: Error Handling and Troubleshooting**
+
+### **6.1 Common Issues**
+1. **Sensor Issues:**
+   - Check battery polarity and charge
+   - Reset the sensor if unresponsive
+2. **Connectivity Problems:**
+   - Verify LoRaWAN settings and gateway connection
+   - Test MQTT integration
+3. **Data Issues:**
+   - Check the payload formatter in TTN
+   - If only the battery level is displayed or data is missing, go to **TTN** > **Your Application** > **Payload Formatters** > **Uplink/Downlink**, update the code, and save changes
+
+Uplink:
+````
 ---
 
 ## **Next Steps**
-- Customize dashboards per project needs
-- Invite users to view or control devices
-- Explore [Blynk Documentation](https://docs.blynk.io)
-- Try static token provisioning for large-scale deployments
+- Explore the Blynk Web Console and IoT app to monitor sensor data
+- Read the Blynk Documentation to learn about Virtual Pins
+- [Learn how to Share Devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing)
+- Customize the code to meet your specific needs
+- Try onboarding the sensor using static tokens
+
+---
 
 
