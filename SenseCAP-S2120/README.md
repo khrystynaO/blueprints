@@ -216,17 +216,6 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 ---
 
-### **Step 6 Setting Alerts**
-1. **Log in to Blynk Console**.
-2. **Create Automations**:
-   - Choose **Device State**
-   - Choose your device and triggers for specific thresholds (e.g., LAeq > 80 dB).
-   - Define actions (e.g., send notifications).
-3. **Save and Test**:
-   - Simulate events to ensure triggers activate correctly.
-
----
-
 ## **Step 7: Adding Location in Blynk**
 
 ### **5.1 Configuring Location**
