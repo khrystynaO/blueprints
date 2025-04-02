@@ -135,7 +135,7 @@ The dashboard for the created application looks like this:
      - **Password:** The copied API key
    - Click **Connect**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/connect.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/connect.png)
 
 3. **Enable Automated Device Onboarding:**
    - Once connected, click **Edit** and toggle **Enable automated device onboarding**.
@@ -156,7 +156,7 @@ The dashboard for the created application looks like this:
    - **Join EUI**
    - **DevEUI**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/sample-data.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/sample-data.png)
 
 3. Click **Next** and wait for the device to come online.
 
@@ -175,7 +175,7 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 ### **5.1 Dashboard Overview**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Image/img_1.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/img_1.png)
 
 | Widget                 | Virtual Pin | Unit      |
 |------------------------|-------------|-----------|
@@ -193,7 +193,7 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 ### **5.2 Device Details Tab**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAPS2120/Image/img_2.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/img_2.png)
 
 | Widget                 | Virtual Pin | Description                        |
 |------------------------|-------------|------------------------------------|
