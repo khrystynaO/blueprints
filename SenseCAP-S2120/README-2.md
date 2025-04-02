@@ -236,23 +236,20 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
    - In the Blynk dashboard, navigate to the **Location** section.
 2. **Add the Address**:
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS302/Images/location.png)
 
    - Enter the sensor's address or drag the pin on the map to the correct location.
    - Save the location.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location-2.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS302/Images/location-2.png)
 
 3. **Assign Location in Metadata**:
    - Navigate to device **Info & Metadata** in Blynk.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location-3.png)
-
    - Assign the saved location to the device.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAP-S2120/SenseCAP-S2120/Image/location-4.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/location-4.png)
 
-🎥 **Watch the Video Guide**
+🎥 **Watch the Video Guide for connect another LoraWAN device to Blynk**
 [![Watch the video](https://img.youtube.com/vi/YbFF-Iec38w/maxresdefault.jpg)](https://youtu.be/YbFF-Iec38w)
 
 ## **Step 6: Error Handling and Troubleshooting**
