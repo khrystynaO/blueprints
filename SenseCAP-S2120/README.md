@@ -222,9 +222,6 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 1. **Go to Location Section in Blynk**:
    - In the Blynk dashboard, navigate to the **Location** section.
 2. **Add the Address**:
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-WS302/Images/location.png)
-
    - Enter the sensor's address or drag the pin on the map to the correct location.
    - Save the location.
 
