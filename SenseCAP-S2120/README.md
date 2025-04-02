@@ -151,6 +151,8 @@ The dashboard for the created application looks like this:
 
 1. Go to **Developer Zone** > **My Templates** > select **SenseCAP-S2120 Weather Station**, then click **Activate Device**.
 
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/dash-bp.png)
+
 2. In the new window, enter the data provided in **Step 2.3:**
    - **Application Key**
    - **Join EUI**
