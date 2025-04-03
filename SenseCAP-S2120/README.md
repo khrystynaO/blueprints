@@ -635,7 +635,7 @@ You can onboard the sensor in two ways:
    - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name in TTN.
 
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev.png)
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2121/SenseCAP-S2120/Image/ttn-dev-in-ttn.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev-in-ttn.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev-fill.png)
 
 
