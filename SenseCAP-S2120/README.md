@@ -1,6 +1,11 @@
 ## **SenseCAP S2120 8-in-1 Weather Sensor Blueprint Guide**
 
-The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device designed to measure and transmit key environmental data including **air temperature**, **humidity**, **barometric pressure**, **wind speed**, **wind direction**, **precipitation**, **solar radiation**, and **UV index**. This guide walks you through setup, registration on **The Things Network (TTN)**, and integration with **Blynk IoT** for real-time monitoring and control.
+The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device
+designed to measure and transmit key environmental data including **air
+temperature**, **humidity**, **barometric pressure**, **wind speed**, **wind
+direction**, **precipitation**, **solar radiation**, and **UV index**. This
+guide walks you through setup, registration on **The Things Network (TTN)**,
+and integration with **Blynk IoT** for real-time monitoring and control.
 
 ---
 
@@ -49,8 +54,8 @@ The **SenseCAP S2120 8-in-1 LoRaWAN Weather Sensor** is a powerful device design
 2. **Create an Application:**
    - Navigate to **Applications** > **Add Application**.
    - Enter:
-     - **Application ID**: A unique name (e.g., `sound-monitor`).
-     - **Description**: (e.g., `Monitoring environmental noise levels`).
+     - **Application ID**: A unique name (e.g., `sensecap 8-in-1 weather station`).
+     - **Description**: (e.g., `Weather Station`).
      - **Handler**: Select the handler for your region.
    - Click **Create Application**.
 
@@ -169,9 +174,7 @@ The dashboard for the created application looks like this:
 ## **Step 5: Monitoring and Analyzing Data**
 
 ### **5.1 Dashboard Overview**
-The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality. Key features include:
-
-### **5.1 Dashboard Overview**
+The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120/SenseCAP-S2120/Image/img_1.png)
 
