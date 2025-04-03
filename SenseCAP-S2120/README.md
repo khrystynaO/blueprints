@@ -544,7 +544,7 @@ function decodeDownlink(input) {
 
 ---
 
-### **2.4 Pairing the Sensor with the TTN Application**
+### **2.4 Pairing the Sensor with the SenseCAP Mate App**
 1. **[Download and install the SenseCAP Mate App](https://www.pgyer.com/sensecapmate).**
 2. **Connect the Sensor to the App:**
    - After installing the battery, the red LED will remain steady. Activate Bluetooth by pressing and holding the button for 3 seconds; the LED will flash at a 1-second interval.
@@ -603,9 +603,9 @@ function decodeDownlink(input) {
 
 ---
 
-## **Step 4: Adding the Sensor as an End Device**
+## **Step 4: Adding the Sensor as an End Device in TTN console**
 
-1. Select your application and click **Register End Device**.
+1. Open the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 2. From the LoRaWAN Device Repository:
    - **Brand**: SenseCAP
    - **Model**: S2120 8-in-1 LoRaWAN® Weather Sensor
@@ -627,12 +627,12 @@ function decodeDownlink(input) {
 
 You can onboard the sensor in two ways:
 
-1. **Automatic Device Creation**
-   As soon as the sensor sends data to TTN, it will appear on Blynk Cloud automatically.
+1. **Automatic Device Creation – Recommended**
+   As soon as the sensor sends data to TTN, it will automatically appear on the Blynk Cloud.
 
-2. **Manual Device Creation**
-   - Navigate to **Devices** → **Create Device** and use the **SenseCAP-S2120** template.
-   - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name in TTN.
+2. **Manual Device Creation – If Something Goes Wrong**
+   - Navigate to **Devices** → **Create Device**, and select the **SenseCAP-S2120** template.
+   - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name from TTN.
 
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev-in-ttn.png)
