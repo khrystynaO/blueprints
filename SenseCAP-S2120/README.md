@@ -68,10 +68,6 @@ control.
 > for each sensor type. This helps maintain better compatibility and
 > performance.
 
-The dashboard for the created application looks like this:
-
-![Dashboard](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/dash-app.png)
-
 ---
 
 ### **2.3 Setting Up the Payload Formatter in the TTN Application**
