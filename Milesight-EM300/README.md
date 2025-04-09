@@ -211,9 +211,9 @@ function readInt16LE(bytes) {
 1. Open the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 2. From the LoRaWAN Device Repository:
    - **Brand**: Milesight
-   - **Model**:
+   - **Model**: EM300-ZLD
    - **Hardware/Firmware Version**: Use the latest version if unsure
-   - **Profile/Region**: Based on SenseCAP Mate or the Frequency Plan table above
+   - **Profile/Region**: Based on the Frequency Plan table above
 
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-1.png)
 
