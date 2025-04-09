@@ -7,8 +7,6 @@ step-by-step instructions to set up the sensor, register it with **The Things
 Network (TTN)**, and integrate it with **Blynk IoT** for data visualization and
 control.
 
----
-
 ## **Step 1: Unpacking and Initial Setup**
 
 ### **1.1 Required Components**
@@ -19,8 +17,6 @@ control.
 1. **Verify Package Contents:** Make sure all components are included and undamaged.
 2. **Install the Batteries:** Insert the batteries into the sensor, ensuring the correct polarity.
 3. **Power On the Sensor:** Hold the power button for 3 seconds. The LED will confirm activation.
-
----
 
 ## **Step 2: Registering the Sensor on The Things Network (TTN)**
 
@@ -49,8 +45,6 @@ control.
 | **AU915**          | Australia/New Zealand | Operates at 915 MHz. Preferred for LoRaWAN in Australia and New Zealand.        |
 | **KR920**          | South Korea           | Operates at 920 MHz. Allocated specifically for South Korea.                    |
 | **RU864**          | Russia                | Operates at 864 MHz. Used exclusively within Russia.                            |
-
----
 
 ### **2.2 Creating a New Application**
 1. **Log in to TTN Console**.
@@ -150,7 +144,6 @@ function readInt16LE(bytes) {
 }
 
 ```
----
 
 ### **2.4 Pairing the Sensor with the TTN Application**
 1. **[Download and install Milesight ToolBox App](https://www.milesight.com/iot/resources/download-center/#milesight-toolbox)**
@@ -173,8 +166,6 @@ function readInt16LE(bytes) {
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/mobile.png)
 
----
-
 ### **2.5 Configuring MQTT Integration in TTN**
 1. **Navigate to TTN Integration Settings**:
    - In the TTN Console, open your application and select **Integrations**.
@@ -187,8 +178,6 @@ function readInt16LE(bytes) {
    - **Password**: Click **Generate new API key** and copy the generated key. Keep it secure.
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
-
----
 
 ## **Step 3: Integrating TTN with Blynk**
 
@@ -243,17 +232,19 @@ You can onboard the sensor in two ways:
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-in-ttn.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-fill.png)
----
 
 ## **Step 6: Monitoring and Analyzing Data**
 
 ### **Dashboard Overview**
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
-At the top of the dashboard, users can view the device name, connection status, and associated user information. A green indicator labeled “Online” confirms that the device is actively connected to the platform. To the right, a map displays the device’s last known location, with the option to add location tags for improved organization and tracking. A prominent red alert banner will appear immediately if the device detects the presence of water. This alert remains visible until the device no longer senses water, ensuring that critical conditions are easily recognized. Below the alert, a water status history bar provides a chronological view of the device’s detection activity. Green segments indicate periods where no water was present, while red segments mark intervals of detected water presence. This timeline assists users in precisely identifying when and for how long water was detected. The dashboard also displays the device’s battery level. Maintaining adequate battery power is essential for continuous operation and reliable event reporting. It is recommended to replace or recharge the device’s battery when the level drops below 20% to prevent interruptions in monitoring. Environmental conditions are monitored through live humidity and temperature readings. Humidity is shown as a percentage, while temperature is displayed in degrees Celsius. These indicators provide important context regarding the environment in which the device is deployed, assisting users in detecting conditions that may contribute to potential risks. Historical data graphs for humidity and temperature are available for trend analysis. Users may adjust the displayed timeframe by selecting from live data, one hour, six hours, one day, one week, one month, three months, six months, or one year. This functionality enables detailed or high-level analysis depending on the operational needs. Device settings can be adjusted by selecting the "Edit" button located near the device’s name. This allows users to configure parameters such as reporting intervals, thresholds, and tagging, ensuring that the device operates according to specific site requirements. In normal operation, users should verify the device’s connection status and review whether any water detection alerts are active. Immediate attention is advised if a water detection alert is present. Following any necessary response actions, users should review the water detection history and environmental data to assess ongoing site conditions. Routine monitoring of the battery level and environmental indicators will help ensure the device remains functional and reliable over time.
+
+At the top of the dashboard, users can view the device name, online status, and last known location, with options to add location tags for better organization. A green **Online** indicator confirms active connectivity. If water is detected, a red alert banner appears and remains visible until the condition is resolved. Beneath the alert, the **Water Status History** bar provides a timeline, with green indicating dry periods and red marking water detection events.
+
+The dashboard also displays the device’s **battery level**, with replacement or recharge recommended below 20% to ensure continuous operation. Current **humidity** and **temperature** readings are shown to monitor environmental conditions, and historical graphs are available for trend analysis. Users can adjust the displayed timeframe from **Live** up to **one year**. Device settings, such as reporting intervals and thresholds, can be modified via the **Edit** button.
+
+Regularly checking the device’s connection, battery status, and water detection alerts is essential for maintaining reliable performance and timely incident response.
 
 ![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online-2.png)
-
----
 
 ## **Step 7: Alerts & Automations**
 
@@ -261,8 +252,6 @@ At the top of the dashboard, users can view the device name, connection status, 
 2. Create triggers based on **Device State** or **Sensor Value**.
    - Example: `water == 1` → Send notification
    - Example: `Temperature < 10` → Update dashboard label
-
----
 
 ## **Step 8: Adding Location in Blynk**
 
@@ -274,16 +263,12 @@ At the top of the dashboard, users can view the device name, connection status, 
 3. Click **Save**.
 4. In the device's **Info & Metadata**, assign the saved location.
 
----
-
 ## **Step 9: Error Handling and Troubleshooting**
 
 ### **9.1 Common Issues**
 - **Sensor Not Responding**: Check battery orientation and charge. Try a reset.
 - **No Connectivity**: Recheck gateway setup and frequency plan.
 - **Missing Data**: Update your **Payload Formatter** in TTN’s Uplink/Downlink settings.
-
----
 
 ## **Next Steps**
 - Explore the Blynk Web Console and mobile app.
