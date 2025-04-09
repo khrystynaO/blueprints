@@ -74,10 +74,11 @@ control.
 
 1. Open the created application and, from the left-hand menu, select **Payload Formatters**.
 
-![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/formater.png)
+![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/formater.png)
 
 2. Select the **Uplink** tab and choose **Custom JavaScript Formatter**.
 3. Paste the following formatter code and click **Save Changes**:
+
 ```javascript
 function decodeUplink(input) {
     var res = Decoder(input.bytes, input.fPort);
