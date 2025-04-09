@@ -167,11 +167,12 @@ function readInt16LE(bytes) {
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/mobile.png)
 
 ### **2.5 Configuring MQTT Integration in TTN**
-1. **Navigate to TTN Integration Settings**:
+1. **Clink to the Use The Blueprint**
+2. **Navigate to TTN Integration Settings**:
    - In the TTN Console, open your application and select **Integrations**.
-2. **Select MQTT**:
+3. **Select MQTT**:
    - Click **MQTT** from the available integration options.
-3. **You’ll need these details to set up the MQTT integration in Blynk**:
+4. **You’ll need these details to set up the MQTT integration in Blynk**:
    - **Server Address**
    - **Port**
    - **Username**
