@@ -216,14 +216,14 @@ function readInt16LE(bytes) {
    - **Hardware/Firmware Version**: Use the latest version if unsure
    - **Profile/Region**: Based on the Frequency Plan table above
 
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-1.png)
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
 
 3. Enter:
    - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.3
    - A unique **End Device ID**
 4. Click **Register Device**
 
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-2.png)
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-2.png))
 
 
 
@@ -234,15 +234,15 @@ You can onboard the sensor in two ways:
 1. **Automatic Device Creation – Recommended**
    As soon as the sensor sends data to TTN, it will automatically appear on the Blynk Cloud.
 
-![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/dev-online.png)
+![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online.png)
 
 2. **Manual Device Creation – If Something Goes Wrong**
    - Navigate to **Devices** → **Create Device**, and select the **Milesight-EM300** template.
    - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name from TTN.
 
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/ttn-dev.png)
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/ttn-dev-in-ttn.png)
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/ttn-dev-fill.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-in-ttn.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-fill.png)
 ---
 
 ## **Step 6: Monitoring and Analyzing Data**
@@ -250,7 +250,7 @@ You can onboard the sensor in two ways:
 ### **1 Dashboard Overview**
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality. Key features include:
 
-![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/dev-online-2.png)
+![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online-2.png)
 
 At the top of the dashboard, users can view the device name, connection status,
    and associated user information. A green indicator labeled “Online” confirms
@@ -305,7 +305,7 @@ At the top of the dashboard, users can view the device name, connection status,
 1. Navigate to the **Location** section in Blynk.
 2. Enter the address or drag the map pin to the correct location.
 
-![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/location-2.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-2.png)
 
 3. Click **Save**.
 4. In the device's **Info & Metadata**, assign the saved location.
