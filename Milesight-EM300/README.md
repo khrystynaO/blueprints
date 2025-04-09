@@ -223,7 +223,7 @@ function readInt16LE(bytes) {
    - A unique **End Device ID**
 4. Click **Register Device**
 
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-2.png))
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png))
 
 
 
