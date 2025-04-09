@@ -70,13 +70,27 @@ control.
 > different types of sensors, consider creating a separate application for each
 > sensor type. This helps maintain better compatibility and performance.
 
-The dashboard for the created application looks like this:
+### **2.3 Setting Up the Payload Formatter in the TTN Application**
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dash-app.png)
+1. Open the created application and, from the left-hand menu, select **Payload Formatters**.
 
+![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/formater.png)
+
+2. Select the **Uplink** tab and choose **Custom JavaScript Formatter**.
+3. Paste the following formatter code and click **Save Changes**:
+```javascript
+
+
+```
+
+4. Then, switch to the **Downlink** tab and choose **Custom JavaScript Formatter**.
+5. Paste the downlink formatter code, and click **Save Changes**:
+
+````
+````
 ---
 
-### **2.3 Pairing the Sensor with the TTN Application**
+### **2.4 Pairing the Sensor with the TTN Application**
 1. **[Download and install Milesight ToolBox App](https://www.milesight.com/iot/resources/download-center/#milesight-toolbox)**
 
 2. **Open the Milesight ToolBox App**:
@@ -99,7 +113,7 @@ The dashboard for the created application looks like this:
 
 ---
 
-### **2.4 Configuring MQTT Integration in TTN**
+### **2.5 Configuring MQTT Integration in TTN**
 1. **Navigate to TTN Integration Settings**:
    - In the TTN Console, open your application and select **Integrations**.
 2. **Select MQTT**:
@@ -112,14 +126,6 @@ The dashboard for the created application looks like this:
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
 
-   - In the **API Keys** section of the left menu, select the newly generated key.
-   - Under **Rights**, select **Grant individual rights** and ensure the following permissions are enabled:
-     - **View device keys in application**
-     - **Create devices in application**
-     - **Edit device keys in application**
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/edit-permition.png)
-
 ---
 
 ## **Step 3: Integrating TTN with Blynk**
@@ -127,9 +133,9 @@ The dashboard for the created application looks like this:
 ### **3.1 Configuring Blynk Integration via MQTT**
 1. **Click "Use Blueprint"** at the top of the EM300 blueprint page.
 2. **Set Up MQTT in Blynk:**
-   - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **Milesight EM300**.
+   - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **Milesight EM300 ZLD**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
+![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
 
   - Enter the data from **Step 2:**
      - **Hostname:** MQTT server address with port `1883` or `8883` (e.g., `eu1.cloud.thethings.network:8883`)
@@ -137,149 +143,125 @@ The dashboard for the created application looks like this:
      - **Password:** The copied API key
    - Click **Connect**.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
+![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
 
-3. **Enable Automated Device Onboarding:**
-   - Once connected, click **Edit** and toggle **Enable automated device onboarding**.
-   - Specify the LoRaWAN version, frequency plan, and regional parameter version.
-   - Enable "Support class B" and/or "Support class C" if required.
-   - Specify The Things Stack component addresses (found under **Network Information** in the **Admin Panel**).
-   - Save changes.
+## **Step 4: Adding the Sensor as an End Device in TTN console**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/advanced-complete.png)
+1. Open the TTN console, select your application (created in step 2.2) and click **Register End Device**.
+2. From the LoRaWAN Device Repository:
+   - **Brand**: Milesight
+   - **Model**:
+   - **Hardware/Firmware Version**: Use the latest version if unsure
+   - **Profile/Region**: Based on SenseCAP Mate or the Frequency Plan table above
 
-----
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-1.png)
 
-## **Step 4: Onboarding the Sensor to Blynk**
+3. Enter:
+   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.3
+   - A unique **End Device ID**
+4. Click **Register Device**
 
-1. Go to **Developer Zone** > **My Templates** > select **Milesight EM300**, then click **Activate Device**.
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/end-dev-2.png)
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/bp-dashboard.png)
 
-2. In the new window, enter the data provided in **Step 2.3:**
-   - **Application Key**
-   - **Join EUI**
-   - **DevEUI**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/sample-data.png)
+## **Step 5: Onboarding the Sensor to Blynk**
 
-3. Click **Next** and wait for the device to come online.
+You can onboard the sensor in two ways:
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/wait-for-dev.png)
+1. **Automatic Device Creation – Recommended**
+   As soon as the sensor sends data to TTN, it will automatically appear on the Blynk Cloud.
 
-You can verify the device’s status in TTN. To add more sensors, create new
-devices in Blynk following the same process. Once the device is online, you'll
-be redirected to the dashboard to test your setup.
+![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/dev-online.png)
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/created-dev.png)
+2. **Manual Device Creation – If Something Goes Wrong**
+   - Navigate to **Devices** → **Create Device**, and select the **Milesight-EM300** template.
+   - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name from TTN.
 
-When data from the sensor is received in TTN, you will see something like this in the dashboard:
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dash-with-data.png)
-
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/ttn-dev.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/ttn-dev-in-ttn.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/ttn-dev-fill.png)
 ---
 
-## **Step 5: Monitoring and Analyzing Data**
+## **Step 6: Monitoring and Analyzing Data**
 
-### **5.1 Dashboard Overview**
+### **1 Dashboard Overview**
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality. Key features include:
 
-- **Device Overview:**
+![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/dev-online-2.png)
 
-   - Water Status (V12): The device is currently off, as indicated by the text "Device is Off" and the blue indicator.
-
-   - Humidity (V1): Shows a value of 42%, represented by a circular progress bar.
-
-   - Temperature (V2): Displays a temperature of 54°C, with a circular progress bar indicating the temperature within a range of -30 to 70°C.
-
-   - Power (V5): A toggle switch that is currently set to "Off," suggesting the device is not powered on.
-
-   - RSSI (V4): Indicates a signal strength of -74 dBm, which is typical for wireless network devices, showing the signal reception quality.
-
-   - Battery level (V0): Shows a battery level of 66%, indicating the remaining charge of the device.- **Location Map:** Displays the sensor's geographical location
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/blynk-dash-with-data.png)
-
-### **5.2 Settings Overview**
-
-- **Frequency Weighting (V7):** Choose between A and C frequency weightings
-- **Fast Time Weighting (V8):** Toggle fast time weighting On/Off
-- **Reporting Interval (V9):** Set the data reporting interval (Live, 15 sec, 30 sec, 1 min)
-- **Built-In LED (V10):** Toggle the built-in LED On/Off
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/blynk-dash-2-page.png)
+At the top of the dashboard, users can view the device name, connection status,
+   and associated user information. A green indicator labeled “Online” confirms
+   that the device is actively connected to the platform. To the right, a map
+   displays the device’s last known location, with the option to add location
+   tags for improved organization and tracking. A prominent red alert banner
+   will appear immediately if the device detects the presence of water. This
+   alert remains visible until the device no longer senses water, ensuring that
+   critical conditions are easily recognized. Below the alert, a water status
+   history bar provides a chronological view of the device’s detection
+   activity. Green segments indicate periods where no water was present, while
+   red segments mark intervals of detected water presence. This timeline
+   assists users in precisely identifying when and for how long water was
+   detected. The dashboard also displays the device’s battery level.
+   Maintaining adequate battery power is essential for continuous operation and
+   reliable event reporting. It is recommended to replace or recharge the
+   device’s battery when the level drops below 20% to prevent interruptions in
+   monitoring. Environmental conditions are monitored through live humidity and
+   temperature readings. Humidity is shown as a percentage, while temperature
+   is displayed in degrees Celsius. These indicators provide important context
+   regarding the environment in which the device is deployed, assisting users
+   in detecting conditions that may contribute to potential risks. Historical
+   data graphs for humidity and temperature are available for trend analysis.
+   Users may adjust the displayed timeframe by selecting from live data, one
+   hour, six hours, one day, one week, one month, three months, six months, or
+   one year. This functionality enables detailed or high-level analysis
+   depending on the operational needs. Device settings can be adjusted by
+   selecting the "Edit" button located near the device’s name. This allows
+   users to configure parameters such as reporting intervals, thresholds, and
+   tagging, ensuring that the device operates according to specific site
+   requirements. In normal operation, users should verify the device’s
+   connection status and review whether any water detection alerts are active.
+   Immediate attention is advised if a water detection alert is present.
+   Following any necessary response actions, users should review the water
+   detection history and environmental data to assess ongoing site conditions.
+   Routine monitoring of the battery level and environmental indicators will
+   help ensure the device remains functional and reliable over time.
 
 ---
 
+## **Step 7: Alerts & Automations**
 
-### **Step 6 Setting Alerts**
-1. **Log in to Blynk Console**.
-2. **Create Automations**:
-   - Choose **Device State**
-   - Choose your device and triggers for specific thresholds (e.g., LAeq > 80 dB).
-   - Define actions (e.g., send notifications).
-3. **Save and Test**:
-   - Simulate events to ensure triggers activate correctly.
+1. In the Blynk Console, open **Automations**.
+2. Create triggers based on **Device State** or **Sensor Value**.
+   - Example: `water == 1` → Send notification
+   - Example: `Temperature < 10` → Update dashboard label
 
 ---
 
-## **Step 7: Adding Location in Blynk**
+## **Step 8: Adding Location in Blynk**
 
-### **5.1 Configuring Location**
-1. **Go to Location Section in Blynk**:
-   - In the Blynk dashboard, navigate to the **Location** section.
-2. **Add the Address**:
+1. Navigate to the **Location** section in Blynk.
+2. Enter the address or drag the map pin to the correct location.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Image/location-2.png)
 
-   - Enter the sensor's address or drag the pin on the map to the correct location.
-   - Save the location.
+3. Click **Save**.
+4. In the device's **Info & Metadata**, assign the saved location.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-2.png)
+---
 
-3. **Assign Location in Metadata**:
-   - Navigate to device **Info & Metadata** in Blynk.
+## **Step 9: Error Handling and Troubleshooting**
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.png)
-
-   - Assign the saved location to the device.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-4.png)
-
-
-🎥 **Watch the Video Guide**
-[![Watch the video](https://img.youtube.com/vi/bOS4-W-gpJE/maxresdefault.jpg)](https://youtu.be/cuykM1xJTrU?feature=shared)
-
-## **Step 6: Error Handling and Troubleshooting**
-
-### **6.1 Common Issues**
-1. **Sensor Issues:**
-   - Check battery polarity and charge
-   - Reset the sensor if unresponsive
-2. **Connectivity Problems:**
-   - Verify LoRaWAN settings and gateway connection
-   - Test MQTT integration
-3. **Data Issues:**
-   - Check the payload formatter in TTN
-   - If only the battery level is displayed or data is missing, go to **TTN** >
-   **Your Application** > **Payload Formatters** > **Uplink/Downlink**, update
-   the code, and save changes
-
-Uplink:
-````
-
-````
+### **9.1 Common Issues**
+- **Sensor Not Responding**: Check battery orientation and charge. Try a reset.
+- **No Connectivity**: Recheck gateway setup and frequency plan.
+- **Missing Data**: Update your **Payload Formatter** in TTN’s Uplink/Downlink settings.
 
 ---
 
 ## **Next Steps**
-- Explore the Blynk Web Console and IoT app to monitor sensor data
-- Read the Blynk Documentation to learn about Virtual Pins
-- [Learn how to Share Devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing)
-- Customize the code to meet your specific needs
-- Try onboarding the sensor using static tokens
-
----
-
-**FIXME:** Replace the video URL with the correct link once available.
-
+- Explore the Blynk Web Console and mobile app.
+- Review [Blynk’s Virtual Pins documentation](https://docs.blynk.io/en/blynk.console/templates/datastreams).
+- [Share devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing).
+- Customize the integration for your own use case.
+- Try onboarding the sensor using static tokens.
