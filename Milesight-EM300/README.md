@@ -264,6 +264,9 @@ Regularly checking the device’s connection, battery status, and water detectio
 3. Click **Save**.
 4. In the device's **Info & Metadata**, assign the saved location.
 
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-4.png)
+
 ## **Step 9: Error Handling and Troubleshooting**
 
 ### **9.1 Common Issues**
