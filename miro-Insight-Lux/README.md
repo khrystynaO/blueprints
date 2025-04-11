@@ -37,11 +37,18 @@ Set up your LoRaWAN Gateway as usual in the TTN Console:
 - Register the **Gateway**.
 - Use the correct **Frequency Plan** for your region:
 
-| **Frequency Plan** | **Region**            |
-|--------------------|------------------------|
-| **EU868**          | Europe                 |
-| **US915**          | North America          |
-| **AU915**          | Australia / New Zealand |
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/gateway.png)
+
+#### **Frequency Plans**
+| **Frequency Plan** | **Region**            | **Description**                                                                 |
+|--------------------|-----------------------|---------------------------------------------------------------------------------|
+| **EU868**          | Europe                | Operates at 868 MHz. Commonly used across the EU for LoRaWAN deployments.       |
+| **US915**          | North America         | Operates at 915 MHz. Used in the United States, Canada, and Mexico.             |
+| **AS923**          | Asia-Pacific          | Operates at 923 MHz. Covers countries like Japan, Australia, and New Zealand.   |
+| **IN865**          | India                 | Operates at 865 MHz. Dedicated plan for deployments in India.                   |
+| **AU915**          | Australia/New Zealand | Operates at 915 MHz. Preferred for LoRaWAN in Australia and New Zealand.        |
+| **KR920**          | South Korea           | Operates at 920 MHz. Allocated specifically for South Korea.                    |
+| **RU864**          | Russia                | Operates at 864 MHz. Used exclusively within Russia.                            |
 
 Follow TTN’s Gateway setup guide to ensure your gateway is online.
 
@@ -56,11 +63,14 @@ Follow TTN’s Gateway setup guide to ensure your gateway is online.
    - **Handler:** Based on your region.
 3. **Create Application**.
 
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/create-form.png)
 ---
 
 ## **2.3 Setting Up the Payload Formatter**
 
 You **must create a Custom JavaScript Formatter** for Miro Insight’s data.
+
+![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/formater.png)
 
 Paste this decoder into the **Uplink Formatter** in TTN:
 
@@ -368,6 +378,7 @@ Save the formatter.
    - **Username:** From TTN Console
    - **Password:** Generate an API Key and copy it.
 
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
 ---
 
 # **Step 5: Integrating TTN with Blynk**
@@ -376,11 +387,16 @@ Save the formatter.
    - Click **Use Blueprint**.
    - Go to **Developer Zone → Integrations → The Things Stack → Add**.
 2. Choose the **Miromico Miro Insight** template.
+
+![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
+
 3. Fill in:
    - **MQTT Hostname:** (e.g., `eu1.cloud.thethings.network`)
    - **Port:** 8883
    - **Username** and **Password**: From TTN
 4. Click **Connect**.
+
+![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
 
 ---
 
@@ -391,9 +407,13 @@ Save the formatter.
   - Select:
     - **Brand:** Miromico
     - **Model:** Miro Insight
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
+
 - Enter:
   - **DevEUI**, **JoinEUI (AppEUI)**, **AppKey**.
 - Choose the correct region based on your Frequency Plan.
+
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png))
 
 ---
 
@@ -402,9 +422,15 @@ Save the formatter.
 **Automatic onboarding:**
 - When data is received from TTN via MQTT, the device will automatically appear in the Blynk Console.
 
+![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online.png)
+
 **If Manual creation needed:**
 - Go to **Devices → Create Device**.
 - Choose the **Miromico Miro Insight** template.
+
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-in-ttn.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-fill.png)
 
 ---
 
