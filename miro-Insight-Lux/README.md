@@ -362,24 +362,26 @@ function decodeDownlink(input) {
 ```
 
 ## **2.4 Adding the Sensor as an End Device in TTN**
-fixme
-1. In the TTN console, select your application (created in step 2.2) and click **Register End Device**.
-2. Manual setup:
-   - **Brand**: Milesight
-   - **Model**: EM300-ZLD
-   - **Hardware/Firmware Version**: Use the latest version if unsure
-   - **Profile/Region**: Based on the Frequency Plan table above
-
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
-
-3. Enter:
-   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.3
-   - A unique **End Device ID**
-4. Click **Register Device**
-
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png)
 
 > **Important:** Miromico is simple — all settings are preprogrammed unless  manually reconfigured via LoRaWAN MAC commands.
+
+1. Go to https://deveui.miromico.ch/uuid and get cred for add your dev into TTN.
+
+2. In the TTN console, select your application (created in step 2.2) and click **Register End Device**.
+3. Choose **Enter end device specifics manually**:
+   - **Frequency plan**: for your region (see the table below) 
+   - **LoraWAN version**: provide by manufacture. 
+   
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
+
+4. Enter:
+   - **DevEUI** - found in sensor label
+   - **JoinEUI (AppEUI)** - provide by manufacture
+   - **AppKey** - provide by manufacture
+   - A unique **End Device ID**
+5. Click **Register Device**
+
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png)
 
 ## **2.5 Setting Up MQTT Integration**
 
