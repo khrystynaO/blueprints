@@ -78,7 +78,7 @@ Follow TTN’s Gateway setup guide to ensure your gateway is online.
 
 1. Open the created application and, from the left-hand menu, select **Payload Formatters**.
 
-![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/formater.png)
+![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/formatter.png)
 
 2. Select the **Uplink** tab and choose **Custom JavaScript Formatter**.
 3. Paste the following formatter code and click **Save Changes**:
@@ -372,7 +372,7 @@ function decodeDownlink(input) {
    - **Frequency plan**: for your region (see the table below) 
    - **LoraWAN version**: provide by manufacture. 
    
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/end-dev-1.png)
 
 4. Enter:
    - **DevEUI** - found in sensor label
@@ -381,7 +381,7 @@ function decodeDownlink(input) {
    - A unique **End Device ID**
 5. Click **Register Device**
 
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png)
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/end-dev-2.png)
 
 ## **2.5 Setting Up MQTT Integration**
 
@@ -396,7 +396,7 @@ function decodeDownlink(input) {
    - **Username**
    - **Password**: Click **Generate new API key** and copy the generated key. Copy  and keep it secure.
 
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/integarion-mqtt-key.png)
 
 
 # **Step 3: Prepare Blynk side integration**
@@ -406,7 +406,7 @@ function decodeDownlink(input) {
    - Go to **Developer Zone → Integrations → The Things Stack → Add**.
 2. Choose the **Miro Insight Lux** template.
 
-![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
+![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/add.png)
 
 3. Fill in value copied from step 2.5:
    - **MQTT Server** (e.g., `eu1.cloud.thethings.network:8883`)
@@ -414,7 +414,7 @@ function decodeDownlink(input) {
    - **Password**
 4. Click **Connect**.
 
-![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
+![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/connect.png)
 
 
 # **Step 4: Activating the Sensor**
@@ -429,15 +429,16 @@ You can onboard the sensor in two ways:
 1. **Automatic Device Creation – Recommended**
    As soon as the sensor sends data to TTN, it will automatically appear on the Blynk Cloud.
 
-![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online.png)
+![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/dev-online.png)
 
 2. **Manual Device Creation – If Something Goes Wrong**
    - Navigate to **Devices** → **Create Device**, and select the **miro insight lux** template.
    - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name from TTN.
 
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev.png)
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-in-ttn.png)
-![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-fill.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/ttn-dev.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/ttn-dev-in-ttn.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/ttn-dev-fill-1.png)
+![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/ttn-dev-fill.png)
 
 ---
 
@@ -479,9 +480,9 @@ You can view live data and historical trends.
 3. Click **Save**.
 4. In the device's **Info & Metadata**, assign the saved location.
 
-![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.png)
-![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.2.png)
-![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-4.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/location-3.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/location-3.2.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/location-4.png)
 
 
 # **Step 9: Error Handling and Troubleshooting**
