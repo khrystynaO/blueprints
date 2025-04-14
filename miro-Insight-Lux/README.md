@@ -28,18 +28,25 @@ control.
 
 ---
 
-# **Step 2: Registering the Sensor on The Things Network (TTN)**
+# **Step 2: Prepare The Things Network (TTN) for integration**
 
 ## **2.1 Setting Up the LoRaWAN Gateway**
 
-Set up your LoRaWAN Gateway as usual in the TTN Console:
-
-- Register the **Gateway**.
-- Use the correct **Frequency Plan** for your region:
+1. **Log in to the TTN Console:** Visit the [TTN Console](https://console.cloud.thethings.network/).
+2. **Add a Gateway:**
+   - Navigate to **Gateways** > **Add Gateway**.
+   - Enter:
+     - **Gateway EUI** (found on the gateway label)
+     - **Gateway ID** (e.g., `my-lorawan-gateway`)
+     - **Frequency Plan** for your region (see the table below)
+   - Click **Register Gateway**.
+3. **Configure the Gateway:**
+   - Follow the manufacturer's instructions to connect the gateway to TTN.
+   - Ensure the gateway is online and visible in the TTN Console.
 
 ![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/gateway.png)
 
-#### **Frequency Plans**
+**Frequency Plans**
 | **Frequency Plan** | **Region**            | **Description**                                                                 |
 |--------------------|-----------------------|---------------------------------------------------------------------------------|
 | **EU868**          | Europe                | Operates at 868 MHz. Commonly used across the EU for LoRaWAN deployments.       |
@@ -52,27 +59,29 @@ Set up your LoRaWAN Gateway as usual in the TTN Console:
 
 Follow TTN’s Gateway setup guide to ensure your gateway is online.
 
----
-
 ## **2.2 Creating a New Application in TTN**
 
 1. In the TTN Console, navigate to **Applications → Add Application**.
 2. Fill in:
    - **Application ID:** (e.g., `miro-insight-environmental-monitoring`)
    - **Description:** (Optional)
-   - **Handler:** Based on your region.
 3. **Create Application**.
 
 ![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/create-form.png)
----
 
-## **2.3 Setting Up the Payload Formatter**
+> **Note:**
+> To ensure smooth operation, it’s recommended that all devices within a TTN
+> application are of the same sensor type (e.g., miro insight lux). If you’d like > to use different types of sensors, consider creating a separate application for 
+> each sensor type. This helps maintain better compatibility and performance.
 
-You **must create a Custom JavaScript Formatter** for Miro Insight’s data.
+## **2.3 Setting Up the application Payload Formatter**
+
+1. Open the created application and, from the left-hand menu, select **Payload Formatters**.
 
 ![Formater](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/formater.png)
 
-Paste this decoder into the **Uplink Formatter** in TTN:
+2. Select the **Uplink** tab and choose **Custom JavaScript Formatter**.
+3. Paste the following formatter code and click **Save Changes**:
 
 ```javascript
 
@@ -293,7 +302,8 @@ function decodeUplink(input) {
 
 ```
 
-And **Downlink Formatter**:
+4. Select the Downlink tab and choose Custom JavaScript Formatter.
+5. Paste the following formatter code and click Save Changes.
 
 ```javascript
 
@@ -351,82 +361,77 @@ function decodeDownlink(input) {
 
 ```
 
-Save the formatter.
+## **2.4 Adding the Sensor as an End Device in TTN**
+fixme
+1. In the TTN console, select your application (created in step 2.2) and click **Register End Device**.
+2. Manual setup:
+   - **Brand**: Milesight
+   - **Model**: EM300-ZLD
+   - **Hardware/Firmware Version**: Use the latest version if unsure
+   - **Profile/Region**: Based on the Frequency Plan table above
 
----
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
 
-# **Step 3: Activating the Sensor**
+3. Enter:
+   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.3
+   - A unique **End Device ID**
+4. Click **Register Device**
 
-- Use the **magnet** to wake up the sensor.
-- Confirm the LoRaWAN settings:
-  - **DevEUI:** Printed on device label.
-  - **JoinEUI (AppEUI)**: Provided by Miromico.
-  - **AppKey**: Provided by Miromico.
+![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png)
 
-> 📡 **Important:** Miromico is simple — all settings are preprogrammed unless manually reconfigured via LoRaWAN MAC commands.
+> **Important:** Miromico is simple — all settings are preprogrammed unless  manually reconfigured via LoRaWAN MAC commands.
 
----
+## **2.5 Setting Up MQTT Integration**
 
-# **Step 4: Setting Up MQTT Integration in TTN**
-
-1. In the TTN Console:
-   - Open your **Application**.
-   - Go to **Integrations** → **MQTT**.
-2. Configure MQTT details:
-   - **Hostname:** `eu1.cloud.thethings.network` (or region-specific server)
-   - **Port:** 8883 (for secure MQTT)
-   - **Username:** From TTN Console
-   - **Password:** Generate an API Key and copy it.
+1. Open created application in TTN.
+2. Navigate to TTN Integration Settings:
+   - In the TTN Console, open your application and select **Integrations**.
+3. Select MQTT:
+   - Click **MQTT** from the available integration options.
+4. You’ll need these details to set up the MQTT integration in Blynk:
+   - **Server Address**
+   - **Port**
+   - **Username**
+   - **Password**: Click **Generate new API key** and copy the generated key. Copy  and keep it secure.
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
----
 
-# **Step 5: Integrating TTN with Blynk**
+
+# **Step 3: Prepare Blynk side integration**
 
 1. In **Blynk Console**:
    - Click **Use Blueprint**.
    - Go to **Developer Zone → Integrations → The Things Stack → Add**.
-2. Choose the **Miromico Miro Insight** template.
+2. Choose the **Miro Insight Lux** template.
 
 ![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
 
-3. Fill in:
-   - **MQTT Hostname:** (e.g., `eu1.cloud.thethings.network`)
-   - **Port:** 8883
-   - **Username** and **Password**: From TTN
+3. Fill in value copied from step 2.5:
+   - **MQTT Server** (e.g., `eu1.cloud.thethings.network:8883`)
+   - **Username**
+   - **Password**
 4. Click **Connect**.
 
 ![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
 
----
 
-# **Step 6: Adding the Sensor as an End Device in TTN**
+# **Step 4: Activating the Sensor**
 
-- In your TTN Application:
-  - **Register End Device**.
-  - Select:
-    - **Brand:** Miromico
-    - **Model:** Miro Insight
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
+- Use the **magnet** to wake up the sensor and now wait for this sensor connect to gateway.
 
-- Enter:
-  - **DevEUI**, **JoinEUI (AppEUI)**, **AppKey**.
-- Choose the correct region based on your Frequency Plan.
 
-![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png))
+# **Step 5: Onboarding the Sensor to Blynk**
 
----
+You can onboard the sensor in two ways:
 
-# **Step 7: Onboarding the Sensor to Blynk**
-
-**Automatic onboarding:**
-- When data is received from TTN via MQTT, the device will automatically appear in the Blynk Console.
+1. **Automatic Device Creation – Recommended**
+   As soon as the sensor sends data to TTN, it will automatically appear on the Blynk Cloud.
 
 ![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online.png)
 
-**If Manual creation needed:**
-- Go to **Devices → Create Device**.
-- Choose the **Miromico Miro Insight** template.
+2. **Manual Device Creation – If Something Goes Wrong**
+   - Navigate to **Devices** → **Create Device**, and select the **miro insight lux** template.
+   - In the **Info & Metadata** tab, enter the **TheThingsNetwork Device** field using the device name from TTN.
 
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-in-ttn.png)
@@ -434,7 +439,9 @@ Save the formatter.
 
 ---
 
-# **Step 8: Monitoring and Analyzing Data**
+# **Step 6: Monitoring and Analyzing Data**
+
+The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
 
 The **Blynk dashboard** will show:
 
@@ -449,36 +456,42 @@ You can view live data and historical trends.
 
 ---
 
-# **Step 9: Alerts & Automations**
+# **Step 7: Alerts & Automations**
 
-Example automations you can create:
+1. In the Blynk Console, open **Automations**.
+2. Create triggers based on **Device State** or **Sensor Value**.
 
-- If **humidity > 80%**, send notification.
-- If **battery voltage < 2.8V**, send low battery alert.
-- If **hall sensor** detects magnet (value = 1), trigger an event.
-
----
-
-# **Step 10: Adding Location in Blynk**
-
-- In Blynk, go to **Location**.
-- Drag the pin to your sensor’s physical location.
-- Save the changes.
-- Assign the location to the device.
+- Example: If **humidity > 80%**, send notification.
+- Example: If **battery voltage < 2.8V**, send low battery alert.
+- Example: If **hall sensor** detects magnet (value = 1), trigger an event.
 
 ---
 
-# **Troubleshooting**
+# **Step 8: Adding Location in Blynk**
 
-| **Issue**             | **Solution**                                           |
-|-----------------------|---------------------------------------------------------|
-| No Join Request       | Wake up sensor with magnet, check gateway visibility.   |
-| No Uplink Received    | Confirm DevEUI/AppEUI/AppKey match, check coverage.      |
-| Incorrect Payload     | Verify the TTN Payload Formatter code.                  |
+1. Navigate to the **Location** section in Blynk.
+2. Enter the address or drag the map pin to the correct location.
 
----
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-2.png)
+
+3. Click **Save**.
+4. In the device's **Info & Metadata**, assign the saved location.
+
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.2.png)
+![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-4.png)
+
+
+# **Step 9: Error Handling and Troubleshooting**
+
+### **9.1 Common Issues**
+- **Sensor Not Responding**: Check battery orientation and charge. Try a reset.
+- **No Connectivity**: Recheck gateway setup and frequency plan.
+- **Missing Data**: Update your **Payload Formatter** in TTN’s Uplink/Downlink settings.
 
 # **Next Steps**
-- Customize dashboards.
-- Set notification thresholds.
-- Explore historical environmental data trends.
+- Explore the Blynk Web Console and mobile app.
+- Review [Blynk’s Virtual Pins documentation](https://docs.blynk.io/en/blynk.console/templates/datastreams).
+- [Share devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing).
+- Customize the integration for your own use case.
+- Try onboarding the sensor using static tokens.
