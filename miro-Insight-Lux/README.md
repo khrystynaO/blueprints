@@ -8,8 +8,6 @@ step-by-step instructions to set up the sensor, register it with **The Things
 Network (TTN)**, and integrate it with **Blynk IoT** for data visualization and
 control.
 
----
-
 # **Step 1: Unpacking and Initial Setup**
 
 ## **1.1 Required Components**
@@ -25,8 +23,6 @@ control.
 3. **Check Battery:** Pre-installed. No need for manual installation.
 
 > **Note:** Miro Insight devices are preconfigured and activated via **magnet** instead of a physical power button.
-
----
 
 # **Step 2: Prepare The Things Network (TTN) for integration**
 
@@ -440,8 +436,6 @@ You can onboard the sensor in two ways:
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/ttn-dev-fill-1.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/ttn-dev-fill.png)
 
----
-
 # **Step 6: Monitoring and Analyzing Data**
 
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
@@ -457,8 +451,6 @@ The **Blynk dashboard** will show:
 
 You can view live data and historical trends.
 
----
-
 # **Step 7: Alerts & Automations**
 
 1. In the Blynk Console, open **Automations**.
@@ -467,8 +459,6 @@ You can view live data and historical trends.
 - Example: If **humidity > 80%**, send notification.
 - Example: If **battery voltage < 2.8V**, send low battery alert.
 - Example: If **hall sensor** detects magnet (value = 1), trigger an event.
-
----
 
 # **Step 8: Adding Location in Blynk**
 
