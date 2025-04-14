@@ -440,16 +440,7 @@ You can onboard the sensor in two ways:
 
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
 
-The **Blynk dashboard** will show:
-
-| **Field**            | **Description**                  |
-|----------------------|------------------------------------|
-| **Temperature**       | Current temperature (°C)          |
-| **Humidity**          | Current relative humidity (%)     |
-| **Hall Sensor State** | 0 = No magnet, 1 = Magnet detected |
-| **Battery Voltage**   | Current battery voltage (V)       |
-
-You can view live data and historical trends.
+In this dashboard, you can monitor the door status, air quality, temperature, humidity, CO₂ levels, pressure, light intensity, battery voltage, and view historical data. You can also see how many times the door has opened. Additionally, you can change the reporting interval by selecting or entering your desired value in seconds.
 
 # **Step 7: Alerts & Automations**
 
