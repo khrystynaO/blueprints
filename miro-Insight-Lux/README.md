@@ -365,7 +365,7 @@ function decodeDownlink(input) {
 
 > **Important:** Miromico is simple — all settings are preprogrammed unless  manually reconfigured via LoRaWAN MAC commands.
 
-1. Go to https://deveui.miromico.ch/uuid and get cred for add your dev into TTN.
+1. Go to [Miromico LoRaWAN Device Credentials Database](https://deveui.miromico.ch/uuid) and get cred for add your dev into TTN.
 
 2. In the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 3. Choose **Enter end device specifics manually**:
