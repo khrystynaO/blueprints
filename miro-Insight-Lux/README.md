@@ -63,11 +63,11 @@ Follow TTN’s Gateway setup guide to ensure your gateway is online.
    - **Description:** (Optional)
 3. **Create Application**.
 
-![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/create-form.png)
+![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/create-form.png)
 
 > **Note:**
 > To ensure smooth operation, it’s recommended that all devices within a TTN
-> application are of the same sensor type (e.g., miro insight lux). If you’d like > to use different types of sensors, consider creating a separate application for 
+> application are of the same sensor type (e.g., miro insight lux). If you’d like > to use different types of sensors, consider creating a separate application for
 > each sensor type. This helps maintain better compatibility and performance.
 
 ## **2.3 Setting Up the application Payload Formatter**
@@ -365,9 +365,9 @@ function decodeDownlink(input) {
 
 2. In the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 3. Choose **Enter end device specifics manually**:
-   - **Frequency plan**: for your region (see the table below) 
-   - **LoraWAN version**: provide by manufacture. 
-   
+   - **Frequency plan**: for your region (see the table below)
+   - **LoraWAN version**: provide by manufacture.
+
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/end-dev-1.png)
 
 4. Enter:
@@ -488,3 +488,4 @@ You can view live data and historical trends.
 - [Share devices with other users](https://docs.blynk.io/en/blynk.console/devices/device-sharing).
 - Customize the integration for your own use case.
 - Try onboarding the sensor using static tokens.
+
