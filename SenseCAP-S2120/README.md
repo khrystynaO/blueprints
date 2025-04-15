@@ -23,7 +23,7 @@ control.
 
 ---
 
-## **Step 2: Registering the Gateway on The Things Network (TTN)**
+## **Step 2: Prepare The Things Network (TTN) for integration**
 
 ### **2.1 Setting Up the LoRaWAN Gateway**
 1. Log in to the [TTN Console](https://console.cloud.thethings.network/).
@@ -36,7 +36,7 @@ control.
 
 ![Gateway](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/gateway.png)
 
-#### **Frequency Plans**
+**Frequency Plans**
 | **Frequency Plan** | **Region**            | **Description**                                                                 |
 |--------------------|-----------------------|---------------------------------------------------------------------------------|
 | **EU868**          | Europe                | Operates at 868 MHz. Commonly used across the EU for LoRaWAN deployments.       |
@@ -50,13 +50,10 @@ control.
 ---
 
 ### **2.2 Creating a New Application**
-1. **Log in to the TTN Console.**
-2. **Create an Application:**
-   - Navigate to **Applications** > **Add Application**.
-   - Enter:
+1. In the TTN Console, navigate to **Applications → Add Application**.
+2. Fill in:
      - **Application ID**: A unique name (e.g., `weather-monitor`).
      - **Description**: (e.g., `Monitoring environmental weather conditions`).
-     - **Handler**: Select the handler for your region.
    - Click **Create Application**.
 
 ![Create Application](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/create-form.png)
@@ -564,42 +561,7 @@ function decodeDownlink(input) {
 
 ![Finish setup](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/mobile.png)
 
----
-
-### **2.5 Configuring MQTT Integration in TTN**
-1. Open your application in the TTN Console.
-2. Navigate to **Integrations** and select **MQTT**.
-3. Collect the required data for Blynk:
-   - **Server Address**
-   - **Port**
-   - **Username**
-   - **Password**: Click **Generate new API key** and save the key securely.
-
-![TTN integration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/integarion-mqtt-key.png)
-
----
-
-## **Step 3: Integrating TTN with Blynk**
-
-### **3.1 Configuring Blynk Integration via MQTT**
-1. Click **Use Blueprint** at the top of the blueprint page.
-2. Set up MQTT in Blynk:
-   - Go to **Developer Zone** → **Integrations** → **The Things Stack** → **Add**
-   - Choose the template: **SenseCAP-S2120**
-
-![Add](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/add.png)
-
-   - Fill in:
-     - **Hostname**: e.g., `eu1.cloud.thethings.network:8883`
-     - **Username**
-     - **Password**: Use the generated API key.
-   - Click **Connect**
-
-![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/connect.png)
-
----
-
-## **Step 4: Adding the Sensor as an End Device in TTN console**
+### **2.5 Adding the Sensor as an End Device in TTN console**
 
 1. Open the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 2. From the LoRaWAN Device Repository:
@@ -611,15 +573,41 @@ function decodeDownlink(input) {
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/end-dev-1.png)
 
 3. Enter:
-   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.3
+   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.4
    - A unique **End Device ID**
 4. Click **Register Device**
 
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/end-dev-2.png)
 
----
+### **2.6 Configuring MQTT Integration in TTN**
+1. Open your application in the TTN Console.
+2. Navigate to **Integrations** and select **MQTT**.
+3. Collect the required data for Blynk:
+   - **Server Address**
+   - **Port**
+   - **Username**
+   - **Password**: Click **Generate new API key** and save the key securely.
 
-## **Step 5: Onboarding the Sensor to Blynk**
+![TTN integration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/integarion-mqtt-key.png)
+
+## **Step 3: Integrating TTN with Blynk**
+
+1. Click **Use Blueprint** at the top of the blueprint page.
+2. Set up MQTT in Blynk:
+   - Go to **Developer Zone** → **Integrations** → **The Things Stack** → **Add**
+   - Choose the template: **SenseCAP-S2120**
+
+![Add](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/add.png)
+
+   - Fill in value copied from step 2.5:
+     - **Hostname**: e.g., `eu1.cloud.thethings.network:8883`
+     - **Username**
+     - **Password**: Use the generated API key.
+   - Click **Connect**
+
+![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/connect.png)
+
+## **Step 4: Onboarding the Sensor to Blynk**
 
 You can onboard the sensor in two ways:
 
@@ -634,10 +622,7 @@ You can onboard the sensor in two ways:
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev-in-ttn.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/ttn-dev-fill.png)
 
-
----
-
-## **Step 6: Monitoring and Analyzing Data**
+## **Step 5: Monitoring and Analyzing Data**
 
 ### **1. Dashboard Overview**
 The preconfigured dashboard supports both **web** and **mobile** apps.
@@ -673,18 +658,14 @@ The preconfigured dashboard supports both **web** and **mobile** apps.
 | Hardware Version       | V6          | Version string                     |
 | Reboot Device          | V10         | Remote reboot toggle               |
 
----
-
-## **Step 7: Alerts & Automations**
+## **Step 6: Alerts & Automations**
 
 1. In the Blynk Console, open **Automations**.
 2. Create triggers based on **Device State** or **Sensor Value**.
    - Example: `UV Index > 6` → Send notification
    - Example: `Wind Speed > 10 m/s` → Update dashboard label
 
----
-
-## **Step 8: Adding Location in Blynk**
+## **Step 7: Adding Location in Blynk**
 
 1. Navigate to the **Location** section in Blynk.
 2. Enter the address or drag the map pin to the correct location.
@@ -696,16 +677,11 @@ The preconfigured dashboard supports both **web** and **mobile** apps.
 
 ![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/SenseCAPS2120-old/SenseCAP-S2120/Image/location-4.png)
 
----
+## **Step 8: Error Handling and Troubleshooting**
 
-## **Step 9: Error Handling and Troubleshooting**
-
-### **9.1 Common Issues**
 - **Sensor Not Responding**: Check battery orientation and charge. Try a reset.
 - **No Connectivity**: Recheck gateway setup and frequency plan.
 - **Missing Data**: Update your **Payload Formatter** in TTN’s Uplink/Downlink settings.
-
----
 
 ## **Next Steps**
 - Explore the Blynk Web Console and mobile app.
@@ -714,5 +690,4 @@ The preconfigured dashboard supports both **web** and **mobile** apps.
 - Customize the integration for your own use case.
 - Try onboarding the sensor using static tokens.
 
----
 
