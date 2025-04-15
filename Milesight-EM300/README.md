@@ -18,9 +18,10 @@ control.
 2. **Install the Batteries:** Insert the batteries into the sensor, ensuring the correct polarity.
 3. **Power On the Sensor:** Hold the power button for 3 seconds. The LED will confirm activation.
 
-## **Step 2: Registering the Sensor on The Things Network (TTN)**
+## **Step 2: Prepare The Things Network (TTN) for integration**
 
-### **2.1 Setting Up the LoRaWAN Gateway if you don't do this before**
+### **2.1 Setting Up the LoRaWAN Gateway**
+
 1. **Log in to the TTN Console:** Visit the [TTN Console](https://console.cloud.thethings.network/).
 2. **Add a Gateway:**
    - Navigate to **Gateways** > **Add Gateway**.
@@ -35,7 +36,7 @@ control.
 
 ![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/gateway.png)
 
-#### **Frequency Plans**
+**Frequency Plans**
 | **Frequency Plan** | **Region**            | **Description**                                                                 |
 |--------------------|-----------------------|---------------------------------------------------------------------------------|
 | **EU868**          | Europe                | Operates at 868 MHz. Commonly used across the EU for LoRaWAN deployments.       |
@@ -53,7 +54,6 @@ control.
    - Enter:
      - **Application ID**: A unique name (e.g., `water-leak-monitor`).
      - **Description**: (e.g., `Monitoring water leaks in critical areas`).
-     - **Handler**: Select the handler for your region.
    - Click **Create Application**.
 
 ![App](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/create-form.png)
@@ -166,38 +166,7 @@ function readInt16LE(bytes) {
 
 ![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/mobile.png)
 
-### **2.5 Configuring MQTT Integration in TTN**
-1. **Clink to the Use The Blueprint**
-2. **Navigate to TTN Integration Settings**:
-   - In the TTN Console, open your application and select **Integrations**.
-3. **Select MQTT**:
-   - Click **MQTT** from the available integration options.
-4. **You’ll need these details to set up the MQTT integration in Blynk**:
-   - **Server Address**
-   - **Port**
-   - **Username**
-   - **Password**: Click **Generate new API key** and copy the generated key. Keep it secure.
-
-![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
-
-## **Step 3: Integrating TTN with Blynk**
-
-### **3.1 Configuring Blynk Integration via MQTT**
-1. **Click "Use Blueprint"** at the top of the EM300 blueprint page.
-2. **Set Up MQTT in Blynk:**
-   - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **Milesight EM300 ZLD**.
-
-![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
-
-  - Enter the data from **Step 2:**
-     - **Hostname:** MQTT server address with port `1883` or `8883` (e.g., `eu1.cloud.thethings.network:8883`)
-     - **Username**
-     - **Password:** The copied API key
-   - Click **Connect**.
-
-![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
-
-## **Step 4: Adding the Sensor as an End Device in TTN console**
+### **2.5 Adding the Sensor as an End Device in TTN console**
 
 1. Open the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 2. From the LoRaWAN Device Repository:
@@ -209,15 +178,43 @@ function readInt16LE(bytes) {
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-1.png)
 
 3. Enter:
-   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.3
+   - **DevEUI**, **JoinEUI (AppEUI)**, and **AppKey** from Step 2.4
    - A unique **End Device ID**
 4. Click **Register Device**
 
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/end-dev-2.png))
 
+### **2.6 Configuring MQTT Integration in TTN**
+1. **Navigate to TTN Integration Settings**:
+   - In the TTN Console, open your application and select **Integrations**.
+2. **Select MQTT**:
+   - Click **MQTT** from the available integration options.
+3. **You’ll need these details to set up the MQTT integration in Blynk**:
+   - **Server Address**
+   - **Port**
+   - **Username**
+   - **Password**: Click **Generate new API key** and copy the generated key. Copy and keep it secure.
+
+![Key](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/integarion-mqtt-key.png)
+
+## **Step 3: Prepare Blynk side for integration**
+
+1. **Click "Use Blueprint"** at the top of the EM300 blueprint page.
+2. **Set Up MQTT in Blynk:**
+   - Navigate to **Developer Zone** -> **Integrations** -> **The Things Stack** -> **Add**, and choose the template named **Milesight EM300 ZLD**.
+
+![Add intefration](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/add.png)
+
+  - Enter the data from step 2.6:
+     - **Hostname:** MQTT server address with port `1883` or `8883` (e.g., `eu1.cloud.thethings.network:8883`)
+     - **Username**
+     - **Password:** The copied API key
+   - Click **Connect**.
+
+![Connect](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/connect.png)
 
 
-## **Step 5: Onboarding the Sensor to Blynk**
+## **Step 4: Onboarding the Sensor to Blynk**
 
 You can onboard the sensor in two ways:
 
@@ -234,9 +231,9 @@ You can onboard the sensor in two ways:
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-in-ttn.png)
 ![TTN-dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/ttn-dev-fill.png)
 
-## **Step 6: Monitoring and Analyzing Data**
+## **Step 5: Monitoring and Analyzing Data**
 
-### **Dashboard Overview**
+**Dashboard Overview**
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
 
 At the top of the dashboard, users can view the device name, online status, and last known location, with options to add location tags for better organization. A green **Online** indicator confirms active connectivity. If water is detected, a red alert banner appears and remains visible until the condition is resolved. Beneath the alert, the **Water Status History** bar provides a timeline, with green indicating dry periods and red marking water detection events.
@@ -247,14 +244,14 @@ Regularly checking the device’s connection, battery status, and water detectio
 
 ![dev online](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/dev-online-2.png)
 
-## **Step 7: Alerts & Automations**
+## **Step 6: Alerts & Automations**
 
 1. In the Blynk Console, open **Automations**.
 2. Create triggers based on **Device State** or **Sensor Value**.
    - Example: `water == 1` → Send notification
    - Example: `Temperature < 10` → Update dashboard label
 
-## **Step 8: Adding Location in Blynk**
+## **Step 7: Adding Location in Blynk**
 
 1. Navigate to the **Location** section in Blynk.
 2. Enter the address or drag the map pin to the correct location.
@@ -268,9 +265,8 @@ Regularly checking the device’s connection, battery status, and water detectio
 ![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-3.2.png)
 ![Location](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/Milesight/Milesight-EM300/Images/location-4.png)
 
-## **Step 9: Error Handling and Troubleshooting**
+## **Step 8: Error Handling and Troubleshooting**
 
-### **9.1 Common Issues**
 - **Sensor Not Responding**: Check battery orientation and charge. Try a reset.
 - **No Connectivity**: Recheck gateway setup and frequency plan.
 - **Missing Data**: Update your **Payload Formatter** in TTN’s Uplink/Downlink settings.
