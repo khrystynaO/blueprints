@@ -1,11 +1,11 @@
 # **Miromico Miro Insight - Environmental and Hall Sensor Blueprint Guide**
 
-The **Miromico Miro Insight** is a compact battery-powered LoRaWAN device
-equipped with a **temperature sensor**, **humidity sensor**, and **hall
-sensor**. It’s designed for real-time environmental monitoring and magnetic
-field detection, transmitting data over LoRaWAN networks. This guide provides
-step-by-step instructions to set up the sensor, register it with **The Things
-Network (TTN)**, and integrate it with **Blynk IoT** for data visualization and
+The Miromico miro Insight Lux is a compact battery-powered batteryless LoRaWAN
+device equipped with a temperature sensor, humidity sensor, and hall sensor.
+It’s designed for real-time environmental monitoring and magnetic field
+detection, transmitting data over LoRaWAN networks. This guide provides
+step-by-step instructions to set up the sensor, register it with The Things
+Network (TTN), and integrate it with Blynk IoT for data visualization and
 control.
 
 # **Step 1: Unpacking and Initial Setup**
