@@ -57,7 +57,7 @@ Follow TTN’s Gateway setup guide to ensure your gateway is online.
 
 ## **2.2 Creating a New Application in TTN**
 
-1. In the TTN Console, navigate to **Applications → Add Application**.
+1. In the [TTN Console](https://console.cloud.thethings.network/) navigate to **Applications → Add Application**.
 2. Fill in:
    - **Application ID:** (e.g., `miro-insight-environmental-monitoring`)
    - **Description:** (Optional)
@@ -315,26 +315,26 @@ function encodeDownlink(input) {
   const commandInput = input.data ? input.data : input;
 
   try {
-    if (commandInput.name === "reporting_iterval") {   // fixed small typo here too
+    if (commandInput.name === "reporting_interval") {
 
-      const measurementInterval = 300; // only user input
+      const measurementInterval = commandInput.value; // only user input
+      if (measurementInterval !== 0) {
+        // Hardcoded values
+        const sendCycle = 0;        // Send after 1 measurement
+        const flagsByte = 0x28;     // No confirmation, LED off, ADR on, VOC off, Report interval on
+        const retransmissions = 0;  // 3 retransmissions
 
-      // Hardcoded values
-      const sendCycle = 0;        // Send after 1 measurement
-      const flagsByte = 0x28;     // No confirmation, LED off, ADR on, VOC off, Report interval on
-      const retransmissions = 0;  // 3 retransmissions
+        // Build the packet
+        output.bytes.push(0x06);  // Length
+        output.bytes.push(0x87);  // Type
 
-      // Build the packet
-      output.bytes.push(0x06);  // Length
-      output.bytes.push(0x87);  // Type
+        output.bytes.push(measurementInterval & 0xFF);            // Measurement interval LSB
+        output.bytes.push((measurementInterval >> 8) & 0xFF);     // Measurement interval MSB
 
-      output.bytes.push(measurementInterval & 0xFF);            // Measurement interval LSB
-      output.bytes.push((measurementInterval >> 8) & 0xFF);     // Measurement interval MSB
-
-      output.bytes.push(sendCycle);                             // Send cycle (hardcoded)
-      output.bytes.push(flagsByte);                             // Flags (hardcoded)
-      output.bytes.push(retransmissions & 0x0F);                // Retransmissions (hardcoded)
-
+        output.bytes.push(sendCycle);                             // Send cycle (hardcoded)
+        output.bytes.push(flagsByte);                             // Flags (hardcoded)
+        output.bytes.push(retransmissions & 0x0F);                // Retransmissions (hardcoded)
+      }
     } else {
       output.errors.push("Unsupported command: " + JSON.stringify(commandInput));
     }
@@ -371,13 +371,15 @@ function decodeDownlink(input) {
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/end-dev-1.png)
 
 4. Enter:
-   - **DevEUI** - found in sensor label
+   - **DevEUI** - provide by manufacture
    - **JoinEUI (AppEUI)** - provide by manufacture
    - **AppKey** - provide by manufacture
    - A unique **End Device ID**
 5. Click **Register Device**
 
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/end-dev-2.png)
+
+> You can find the keys and DevEUI by following the URL or scanning the QR code to access the web page. Enter the code provided on the box, and you will be able to download the keys and other information
 
 ## **2.5 Setting Up MQTT Integration**
 
