@@ -22,7 +22,7 @@ control.
    - The LED should blink to confirm the device is active.
 3. **Check Battery:** Pre-installed. No need for manual installation.
 
-> **Note:** Miro Insight devices are preconfigured and activated via **magnet** instead of a physical power button.
+> **Note:** Miro Insight devices are preconfigured and activated via **magnet** instead of a physical power button. [miro Insight Lux Quickstart](https://www.youtube.com/watch?v=UtzS1Sdv6ms).
 
 # **Step 2: Prepare The Things Network (TTN) for integration**
 
