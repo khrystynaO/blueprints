@@ -188,7 +188,7 @@ Follow the [Blues Twilio SMS Guide](https://dev.blues.io/guides-and-tutorials/tw
 1. **Click "Use Blueprint"** at the top of this Multi-Connectivity IoT Starter blueprint page
 2. The **Multi-Connectivity IoT Starter** will be automatically added to your Blynk account
 
-![Use Blueprint Button]()
+![Use Blueprint Button](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/use-bp.png)
 
 #### **6.1.2 Template Overview**
 The pre-built template includes:
