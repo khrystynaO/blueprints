@@ -1,6 +1,6 @@
-# **Blues Notecard - Three Fridge Problem Blueprint Guide**
+# **Multi-Connectivity IoT Starter with Blues Notecard**
 
-The **Three Fridge Problem** demonstrates the versatility of **Blues Notecard** technology by building identical refrigerator monitoring devices that work across **Cellular**, **Wi-Fi**, and **LoRa** networks using the same firmware. This comprehensive monitoring system tracks temperature, battery voltage, barometric pressure, cellular signal strength, and door status with automatic alerts and bi-directional communication through **Blynk IoT**.
+A single firmware, three-connectivity-type demo — Cellular, Wi-Fi, and LoRaWAN — powered by Blues Notecard and fully integrated with Blynk IoT. Includes a real-world setup with identical units deployed in the lab, in the field, and on the move. Tracks temperature, voltage, pressure, door status, and signal strength — with alerts and bi-directional control. Perfect for testing or deploying multi-network IoT solutions with zero backend setup.
 
 ## **Step 1: Understanding the Hardware Architecture**
 
@@ -22,15 +22,16 @@ The **Three Fridge Problem** demonstrates the versatility of **Blues Notecard** 
 3. **Position the main device** externally for optimal connectivity
 4. **Ensure proper antenna placement** based on the Notecard type being used
 
-![Hardware Setup](https://hackster.imgix.net/uploads/attachments/1791057/hardware_assembly_fDrW3fnGOD.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+The main carrier/development board is the Notecarrier F (1). It has a slot for a Feather-compatible host (in this case the STM32-based Blues Swan) (2). The Notecarrier's power source is a small LiPo battery (3). The Notecard (4) is what can be swapped out for Cellular, Wi-Fi, or LoRa.
+
+![Hardware Setup]()
 
 ## **Step 2: Setting Up Blues Notehub**
 
 ### **2.1 Creating Your Notehub Project**
 1. **Sign up for Notehub** at [notehub.io](https://notehub.io/)
 2. **Create a New Project**:
-   - Project Name: `Three Fridge Monitor`
-   - Description: `Multi-radio refrigerator monitoring system`
+   - Project Name: `Multi-Connectivity IoT Starter`
    - Note the **Product UID** - you'll need this for device configuration
 
 ![Notehub Project](https://hackster.imgix.net/uploads/attachments/1791058/notehub_project_create_Ah7xB9mKjP.png?auto=compress%2Cformat&w=740&h=555&fit=max)
@@ -179,12 +180,11 @@ Follow the [Blues Twilio SMS Guide](https://dev.blues.io/guides-and-tutorials/tw
 
 ## **Step 6: Blynk Integration Setup**
 
-### **6.1 Using the Pre-Built Three Fridge Blueprint Template**
+### **6.1 Using the Pre-Built Multi-Connectivity IoT Starter Template**
 
 #### **6.1.1 Access the Blueprint Template**
-1. **Click "Use Blueprint"** at the top of this Three Fridge Problem blueprint page
-2. **Sign in to Blynk** (or create a free account at [blynk.io](https://blynk.io/))
-3. The **Three Fridge Monitor template** will be automatically added to your Blynk account
+1. **Click "Use Blueprint"** at the top of this Multi-Connectivity IoT Starter blueprint page
+2. The **Multi-Connectivity IoT Starter** will be automatically added to your Blynk account
 
 ![Use Blueprint Button](https://hackster.imgix.net/uploads/attachments/1791064/use_blueprint_button_M7nK8qTpVw.png?auto=compress%2Cformat&w=740&h=555&fit=max)
 
@@ -229,7 +229,7 @@ The pre-built template includes:
 
    **Data Mapping:**
    - The integration will automatically map Blues Products with Blynk Templates
-   - Select your **Three Fridge Monitor** template for data mapping
+   - Select your **Multi-Connectivity IoT Starter** template for data mapping
 
 ![Blues Integration Setup](https://hackster.imgix.net/uploads/attachments/1791066/blues_integration_setup_N8fH6dKmTx.png?auto=compress%2Cformat&w=740&h=555&fit=max)
 
@@ -245,7 +245,7 @@ The pre-built template includes:
 Once the Blues integration is connected, configure the data mapping:
 
 1. **In the Data Mapping section**, you'll see your Notehub products
-2. **Map your product** to the **Three Fridge Monitor** template
+2. **Map your product** to the **Multi-Connectivity IoT Starter** template
 3. **The mapping will automatically handle**:
    - Device creation from Notehub device names
    - Data routing from Notes to Blynk datastreams
@@ -284,7 +284,7 @@ If automatic creation doesn't work, you can manually create devices:
 
 1. **Navigate to Devices** in Blynk Console
 2. **Click "New Device"**
-3. **Select "From Template"** → **"Three Fridge Monitor"**
+3. **Select "From Template"** → **"Multi-Connectivity IoT Starter"**
 4. **Enter device details**:
    - **Device Name**: Match your Notehub device name exactly
    - **Auth Token**: Will be auto-generated
@@ -431,16 +431,16 @@ Set up additional automations for:
 - **Data retention**: Configure appropriate data retention policies in Notehub
 
 ## **Next Steps**
-- **Explore Blues ecosystem**: Try satellite connectivity with Notecard Satellite
-- **Advanced routing**: Set up multi-cloud data routing from Notehub
-- **Custom integrations**: Build custom applications using the Notehub API
-- **Scale deployment**: Use Blues fleet management for multiple device deployment
-- **Add sensors**: Integrate additional sensors for comprehensive monitoring
+
+- [Explore automations](https://docs.blynk.io/en/concepts/automations): set up triggers, alerts, and workflows without writing code
+- [Mass provision devices with Static Tokens](https://docs.blynk.io/en/hardware-guides/blues#mass-device-provisioning-with-static-tokens)
+- Scale your deployment with [organizations](https://docs.blynk.io/en/concepts/organizations), and role-based access
+- Customize [web](https://docs.blynk.io/en/blynk.console/templates/dashboard) and [mobile](https://docs.blynk.io/en/blynk.apps/constructor) dashboards to match your specific use case and user roles
+- Try satellite connectivity with [Notecard Satellite](https://blynk.io/product/blues-starnote-for-skylo-starter-kit).
 
 ## **Resources and Documentation**
 - [Blues Developer Documentation](https://dev.blues.io/)
 - [Notecard API Reference](https://dev.blues.io/api-reference/notecard-api/introduction/)
 - [Blynk Blues Integration Guide](https://docs.blynk.io/en/hardware-guides/blues)
 - [Complete Project Source Code](https://gist.github.com/rdlauer/bc3e2a9becd20e863a5a41b92b87374b)
-- [Blues Community Forum](https://discuss.blues.io/)
 
