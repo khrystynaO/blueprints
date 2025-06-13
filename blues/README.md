@@ -24,7 +24,7 @@ A single firmware, three-connectivity-type demo — Cellular, Wi-Fi, and LoRaWAN
 
 The main carrier/development board is the Notecarrier F (1). It has a slot for a Feather-compatible host (in this case the STM32-based Blues Swan) (2). The Notecarrier's power source is a small LiPo battery (3). The Notecard (4) is what can be swapped out for Cellular, Wi-Fi, or LoRa.
 
-![Hardware Setup]()
+![Hardware Setup](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/hw-setup.png)
 
 ## **Step 2: Setting Up Blues Notehub**
 
@@ -34,7 +34,7 @@ The main carrier/development board is the Notecarrier F (1). It has a slot for a
    - Project Name: `Multi-Connectivity IoT Starter`
    - Note the **Product UID** - you'll need this for device configuration
 
-![Notehub Project](https://hackster.imgix.net/uploads/attachments/1791058/notehub_project_create_Ah7xB9mKjP.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Notehub Project](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/nodehub.png)
 
 ### **2.2 Getting Notehub API Credentials for Blynk Integration**
 You'll need these credentials later for the Blynk integration:
@@ -46,7 +46,9 @@ You'll need these credentials later for the Blynk integration:
    - **Copy the secret immediately** (it won't be displayed again)
    - Store it securely for the Blynk integration
 
-![Notehub API Access](https://hackster.imgix.net/uploads/attachments/1791068/notehub_api_access_K8mN5dLpRx.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Notehub API Access](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/key.png)
+![Notehub API Access](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/key-2.png)
+
 
 ### **2.3 Understanding Note Templates**
 Note templates optimize data transmission, especially for LoRa which is bandwidth-constrained. Two templates are required:
@@ -71,12 +73,12 @@ Note templates optimize data transmission, especially for LoRa which is bandwidt
 }
 ```
 
-![Note Templates](https://hackster.imgix.net/uploads/attachments/1791059/note_templates_config_X2vB8kLmNz.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Notehub Template](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/event-aler.png)
 
 ## **Step 3: Firmware Configuration**
 
 ### **3.1 Download and Setup**
-1. **Download the complete firmware** from the [GitHub Gist](https://gist.github.com/rdlauer/bc3e2a9becd20e863a5a41b92b87374b)
+1. **Download the complete firmware** from the (https://gist.github.com/rdlauer/bc3e2a9becd20e863a5a41b92b87374b)
 2. **Install required libraries**:
    - `note-arduino` SDK
    - `SparkFun BMP581 Arduino Library`
@@ -186,7 +188,7 @@ Follow the [Blues Twilio SMS Guide](https://dev.blues.io/guides-and-tutorials/tw
 1. **Click "Use Blueprint"** at the top of this Multi-Connectivity IoT Starter blueprint page
 2. The **Multi-Connectivity IoT Starter** will be automatically added to your Blynk account
 
-![Use Blueprint Button](https://hackster.imgix.net/uploads/attachments/1791064/use_blueprint_button_M7nK8qTpVw.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Use Blueprint Button]()
 
 #### **6.1.2 Template Overview**
 The pre-built template includes:
@@ -209,7 +211,7 @@ The pre-built template includes:
 - Historical charts for trends
 - Bi-directional sync frequency slider
 
-![Blynk Template Overview](https://hackster.imgix.net/uploads/attachments/1791065/blynk_template_overview_P4vR9mKjLs.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Blynk Template Overview]()
 
 ### **6.2 Set Up Blues Integration in Blynk**
 1. **Navigate to Integrations** in your Blynk Console
@@ -231,7 +233,7 @@ The pre-built template includes:
    - The integration will automatically map Blues Products with Blynk Templates
    - Select your **Multi-Connectivity IoT Starter** template for data mapping
 
-![Blues Integration Setup](https://hackster.imgix.net/uploads/attachments/1791066/blues_integration_setup_N8fH6dKmTx.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Blues Integration Setup]()
 
 5. **Click "Connect"** to establish the integration
 6. **Verify Connection**: The status should show "Connected" with a green indicator
@@ -251,7 +253,7 @@ Once the Blues integration is connected, configure the data mapping:
    - Data routing from Notes to Blynk datastreams
    - Bi-directional communication for remote configuration
 
-![Data Mapping](https://hackster.imgix.net/uploads/attachments/1791069/blues_data_mapping_T7wP3vKnMj.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Data Mapping]()
 
 ### **6.4 Verify Integration**
 1. **Check Integration Status**: Should show "Connected"
@@ -277,7 +279,7 @@ With the Blues integration properly configured, devices will be automatically cr
    - `LoRa Fridge`
 3. **All datastreams** are automatically populated with sensor data
 
-![Automatic Device Creation](https://hackster.imgix.net/uploads/attachments/1791067/blynk_auto_devices_R6nL9dKfTm.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Automatic Device Creation]()
 
 ### **7.2 Manual Device Creation (If Needed)**
 If automatic creation doesn't work, you can manually create devices:
@@ -311,7 +313,7 @@ The pre-built dashboard provides comprehensive monitoring capabilities:
 - **Time range selectors** for historical charts
 - **Device selection** to switch between multiple fridges
 
-![Blynk Dashboard Overview](https://hackster.imgix.net/uploads/attachments/1791061/blynk_dashboard_overview_T8wP2xVnMj.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Blynk Dashboard Overview]()
 
 ## **Step 8: Bi-Directional Communication**
 
@@ -361,7 +363,7 @@ Set unique device names in Notehub for easy identification:
 - `Wi-Fi Fridge`
 - `LoRa Fridge`
 
-![Device Management](https://hackster.imgix.net/uploads/attachments/1791062/notehub_devices_list_K5dB3vGhRx.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+![Device Management]()
 
 ### **9.2 Testing Connectivity**
 1. **Cellular Device**: Verify cellular connection and signal strength reporting
@@ -387,8 +389,6 @@ Monitor key metrics in Blynk:
 - **Temperature trend analysis**
 - **Battery discharge patterns**
 - **Connectivity reliability** across different radio types
-
-![Data Analytics](https://hackster.imgix.net/uploads/attachments/1791063/blynk_analytics_charts_V9mH6sLpCn.png?auto=compress%2Cformat&w=740&h=555&fit=max)
 
 ### **10.3 Maintenance Alerts**
 Set up additional automations for:
