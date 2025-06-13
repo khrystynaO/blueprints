@@ -78,7 +78,7 @@ Note templates optimize data transmission, especially for LoRa which is bandwidt
 ## **Step 3: Firmware Configuration**
 
 ### **3.1 Download and Setup**
-1. **Download the complete firmware** from the (https://gist.github.com/rdlauer/bc3e2a9becd20e863a5a41b92b87374b)
+1. [**Download the complete firmware**](https://github.com/khrystynaO/blueprints/tree/khrystynaO/feature/blues/blues/Firmware)
 2. **Install required libraries**:
    - `note-arduino` SDK
    - `SparkFun BMP581 Arduino Library`
