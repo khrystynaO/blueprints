@@ -73,7 +73,7 @@ Note templates optimize data transmission, especially for LoRa which is bandwidt
 }
 ```
 
-![Notehub Template](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/event-aler.png)
+![Notehub Template](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/event-alert.png)
 
 ## **Step 3: Firmware Configuration**
 
@@ -211,7 +211,7 @@ The pre-built template includes:
 - Historical charts for trends
 - Bi-directional sync frequency slider
 
-![Blynk Template Overview]()
+![Blynk Template Overview](https://blueprint-assets.nyc3.cdn.digitaloceanspaces.com/blues/screenshot-2.png)
 
 ### **6.2 Set Up Blues Integration in Blynk**
 1. **Navigate to Integrations** in your Blynk Console
@@ -233,10 +233,13 @@ The pre-built template includes:
    - The integration will automatically map Blues Products with Blynk Templates
    - Select your **Multi-Connectivity IoT Starter** template for data mapping
 
-![Blues Integration Setup]()
+![Blues Integration Setup](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/integration.png)
+![Blues Integration Setup](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/integration-2.png)
 
 5. **Click "Connect"** to establish the integration
 6. **Verify Connection**: The status should show "Connected" with a green indicator
+
+![Blues Integration Setup](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/integration-3.png)
 
 > **Note**: If you see "Broken" status, double-check that:
 > - Your Client ID and Client Secret are correct
@@ -253,7 +256,7 @@ Once the Blues integration is connected, configure the data mapping:
    - Data routing from Notes to Blynk datastreams
    - Bi-directional communication for remote configuration
 
-![Data Mapping]()
+![Data Mapping](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/data-mapping.png)
 
 ### **6.4 Verify Integration**
 1. **Check Integration Status**: Should show "Connected"
@@ -279,7 +282,7 @@ With the Blues integration properly configured, devices will be automatically cr
    - `LoRa Fridge`
 3. **All datastreams** are automatically populated with sensor data
 
-![Automatic Device Creation]()
+![Automatic Device Creation](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/blues/blues/Images/devices.png)
 
 ### **7.2 Manual Device Creation (If Needed)**
 If automatic creation doesn't work, you can manually create devices:
@@ -313,7 +316,8 @@ The pre-built dashboard provides comprehensive monitoring capabilities:
 - **Time range selectors** for historical charts
 - **Device selection** to switch between multiple fridges
 
-![Blynk Dashboard Overview]()
+![Blynk Dashboard Overview](https://blueprint-assets.nyc3.cdn.digitaloceanspaces.com/blues/screenshot-2.png)
+![Blynk Dashboard Overview](https://blueprint-assets.nyc3.cdn.digitaloceanspaces.com/blues/screenshot-3.png)
 
 ## **Step 8: Bi-Directional Communication**
 
@@ -362,8 +366,6 @@ Set unique device names in Notehub for easy identification:
 - `Cellular Fridge`
 - `Wi-Fi Fridge`
 - `LoRa Fridge`
-
-![Device Management]()
 
 ### **9.2 Testing Connectivity**
 1. **Cellular Device**: Verify cellular connection and signal strength reporting
