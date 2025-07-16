@@ -1,7 +1,7 @@
-# **Miromico Miro Insight - Environmental and Hall Sensor Blueprint Guide**
+# **Miromico Miro Insight - Environmental Sensor Blueprint Guide**
 
 The Miromico miro Insight Lux is a compact battery-powered batteryless LoRaWAN
-device equipped with a temperature sensor, humidity sensor, and hall sensor.
+device equipped with a temperature sensor and humidity sensor.
 It’s designed for real-time environmental monitoring and magnetic field
 detection, transmitting data over LoRaWAN networks. This guide provides
 step-by-step instructions to set up the sensor, register it with The Things
@@ -442,7 +442,7 @@ You can onboard the sensor in two ways:
 
 The dashboard is preconfigured, providing an intuitive interface for real-time monitoring. Both web and mobile dashboards offer the same functionality.
 
-In this dashboard, you can monitor the door status, air quality, temperature, humidity, CO₂ levels, pressure, light intensity, battery voltage, and view historical data. You can also see how many times the door has opened. Additionally, you can change the reporting interval by selecting or entering your desired value in seconds.
+In this dashboard, you can monitor the air quality, temperature, humidity, CO₂ levels, pressure, light intensity, battery voltage, and view historical data. Additionally, you can change the reporting interval by selecting or entering your desired value in seconds.
 
 # **Step 7: Alerts & Automations**
 
@@ -451,7 +451,6 @@ In this dashboard, you can monitor the door status, air quality, temperature, hu
 
 - Example: If **humidity > 80%**, send notification.
 - Example: If **battery voltage < 2.8V**, send low battery alert.
-- Example: If **hall sensor** detects magnet (value = 1), trigger an event.
 
 # **Step 8: Adding Location in Blynk**
 
