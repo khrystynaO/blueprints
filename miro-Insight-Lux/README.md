@@ -444,6 +444,10 @@ The dashboard is preconfigured, providing an intuitive interface for real-time m
 
 In this dashboard, you can monitor the air quality, temperature, humidity, CO₂ levels, pressure, light intensity, battery voltage, and view historical data. Additionally, you can change the reporting interval by selecting or entering your desired value in seconds.
 
+In the case of Miromico devices, there are many configuration variants. For example, some devices may not send IAQ data, while others may include a Hall sensor or different sensor sets. This formatter is designed to support all such variations.
+
+You can also customize the dashboard to match your specific use case.
+
 # **Step 7: Alerts & Automations**
 
 1. In the Blynk Console, open **Automations**.
