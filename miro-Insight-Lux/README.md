@@ -366,14 +366,14 @@ function decodeDownlink(input) {
 2. In the TTN console, select your application (created in step 2.2) and click **Register End Device**.
 3. Choose **Enter end device specifics manually**:
    - **Frequency plan**: for your region (see the table below)
-   - **LoraWAN version**: provide by manufacture.
+   - **LoraWAN version**: provided by the manufacture.
 
 ![End dev](https://raw.githubusercontent.com/khrystynaO/blueprints/refs/heads/khrystynaO/feature/miromico/miro-Insight-Lux/Images/end-dev-1.png)
 
 4. Enter:
-   - **DevEUI** - provide by manufacture
-   - **JoinEUI (AppEUI)** - provide by manufacture
-   - **AppKey** - provide by manufacture
+   - **DevEUI** - provided by the manufacture
+   - **JoinEUI (AppEUI)** - provided by the manufacture
+   - **AppKey** - provided by the manufacture
    - A unique **End Device ID**
 5. Click **Register Device**
 
